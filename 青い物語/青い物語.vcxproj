@@ -139,11 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="customer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="conioex.h" />
+    <ClInclude Include="customer.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="map.h" />
   </ItemGroup>

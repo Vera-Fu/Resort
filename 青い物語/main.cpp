@@ -73,17 +73,17 @@ void main(void)
 
 void Init(void)
 {
-
+	InitMap();
 }
 
 void Uninit(void)
 {
-
+	UnInitMap();
 }
 
 void Update(void)
 {
-
+	UpdateMap();
 }
 
 void Draw(void)

@@ -6,6 +6,8 @@
 //=================================================
 
 #include "map.h"
+
+#define CONIOEX
 #include "conioex.h"
 
 #define MAPWIDTH_MAX 100
@@ -48,18 +50,6 @@ static unsigned char g_sandmap_data[] = {
 
 void InitMap(void)
 {
-}
-
-void UnInitMap(void)
-{
-}
-
-void UpdateMap(void)
-{
-}
-
-void DrawMap(void)
-{
 	textattr(0xFF);	
 	for (int i = 1; i < MAPWIDTH_MAX; i++){
 		gotoxy(i, MAPHEIGHT_MAX);
@@ -100,4 +90,17 @@ void DrawMap(void)
 			printf(" ");
 		}
 	}
+}
+
+void UnInitMap(void)
+{
+}
+
+void UpdateMap(void)
+{
+}
+
+void DrawMap(void)
+{
+	
 }
