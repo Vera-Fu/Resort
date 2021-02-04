@@ -4,11 +4,11 @@
 // author:**** ****	Date:2021/**/**
 //=================================================
 #include "main.h"
-//#include "player.h"
-////#include "map.h"
+#include "map.h"
+
+#define CONIOEX
 #include "conioex.h"
-//#include "enemy.h"
-//#include "bullet.h"
+
 
 void Init(void);
 void Uninit(void);
@@ -88,7 +88,7 @@ void Update(void)
 
 void Draw(void)
 {
-
+	DrawMap();
 }
 
 #ifdef _DEBUG
@@ -98,7 +98,7 @@ void DispFPS(void) {
 
 	// 色設定
 	textcolor; LIGHTCYAN;
-
+	textattr(0x0F);
 	gotoxy(1, 1);	//表示位置設定
 	printf("FPS:%d", g_nCountFPS);
 
