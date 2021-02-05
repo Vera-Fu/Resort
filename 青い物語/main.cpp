@@ -6,7 +6,6 @@
 #include "main.h"
 #include "map.h"
 
-#define CONIOEX
 #include "conioex.h"
 
 
