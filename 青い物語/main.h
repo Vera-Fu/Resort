@@ -4,8 +4,8 @@
 #include <stdio.h>
 
 typedef struct {
-	float x;
-	float y;
-}FLOAT2;
+	int x;
+	int y;
+}INT2;
 
 #endif

@@ -5,6 +5,8 @@
 //=================================================
 #include "main.h"
 #include "map.h"
+#include "building.h"
+#include "choose.h"
 
 #include "conioex.h"
 
@@ -73,21 +75,29 @@ void main(void)
 void Init(void)
 {
 	InitMap();
+	InitBuilding();
+	InitChoose();
 }
 
 void Uninit(void)
-{
+{	
 	UnInitMap();
+	UnInitBuilding();
+	UnInitChoose();
 }
 
 void Update(void)
 {
 	UpdateMap();
+	UpdateBuilding();
+	UpdateChoose();
 }
 
 void Draw(void)
 {
 	DrawMap();
+	DrawBuilding();
+	DrawChoose();
 }
 
 #ifdef _DEBUG
@@ -100,6 +110,11 @@ void DispFPS(void) {
 	textattr(0x0F);
 	gotoxy(1, 1);	//表示位置設定
 	printf("FPS:%d", g_nCountFPS);
+	// index
+	textcolor; LIGHTCYAN;
+	textattr(0x0F);
+	gotoxy(1, 2);	//表示位置設定
+	printf("index:%d", GetChoose());
 
 	//　色設定もとに戻す
 	textcolor; WHITE;

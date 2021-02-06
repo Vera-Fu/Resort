@@ -140,18 +140,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="building.cpp" />
+    <ClCompile Include="choose.cpp" />
     <ClCompile Include="customer.cpp" />
     <ClCompile Include="level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
+    <ClCompile Include="road.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="building.h" />
+    <ClInclude Include="choose.h" />
     <ClInclude Include="conioex.h" />
     <ClInclude Include="customer.h" />
     <ClInclude Include="level.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="map.h" />
+    <ClInclude Include="road.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
