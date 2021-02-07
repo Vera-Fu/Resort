@@ -1,13 +1,14 @@
-#include "menu.h"
+ï»¿#include "menu.h"
 
 #define CONIOEX
 #include "conioex.h"
 
-int g_index0 = 0;	//ÖµµÈÓÚ1Ê±£¬»æÖÆµÚÒ»¸ö²Ëµ¥£»ÖµµÈÓÚ2Ê±£¬»æÖÆµÚ¶ş¸ö²Ëµ¥,ÖµµÈÓÚ3Ê±£¬»æÖÆµÚÈı¸ö²Ëµ¥
-int g_index1 = 0;	//¿ØÖÆµÚÒ»¸ö²Ëµ¥µÄ»æÖÆ
+int g_index0 = 0;	//å€¼ç­‰äº1æ—¶ï¼Œç»˜åˆ¶ç¬¬ä¸€ä¸ªèœå•ï¼›å€¼ç­‰äº2æ—¶ï¼Œç»˜åˆ¶ç¬¬äºŒä¸ªèœå•,å€¼ç­‰äº3æ—¶ï¼Œç»˜åˆ¶ç¬¬ä¸‰ä¸ªèœå•
+int g_index1 = 0;	//æ§åˆ¶ç¬¬ä¸€ä¸ªèœå•çš„ç»˜åˆ¶
 int g_index2 = 0;
 int g_index3 = 0;
-bool g_isPush = false;
+
+bool clear = true;
 
 enum Menu0
 {
@@ -29,32 +30,40 @@ enum Menu2
 	NO
 };
 
+MENU g_menu;
+
 void InitMenu(void)
 {
 	textattr(0x0F);
 	gotoxy(110, 1);
 	//highvideo();
-	printf("©³");
+	printf("â”");
 	for (int i = 0; i < 25; i++) {
-		printf("©¥");
+		printf("â”");
 	}
 	gotoxy(135, 1);
-	printf("©·");	
+	printf("â”“");	
 	for (int i = 1; i < 20; i++) {
 		gotoxy(110, 1 + i);
-		printf("©§");
+		printf("â”ƒ");
 	}
 	for (int i = 1; i < 20; i++) {
 		gotoxy(135, 1 + i);
-		printf("©§");
+		printf("â”ƒ");
 	}
 	gotoxy(110, 21);
-	printf("©»");
+	printf("â”—");
 	for (int i = 0; i < 25; i++) {
-		printf("©¥");
+		printf("â”");
 	}
 	gotoxy(135, 21);
-	printf("©¿");
+	printf("â”›");
+
+	g_menu.pos.x = 115;
+	g_menu.pos.y = 5;
+	g_menu.oldpos.x = 115;
+	g_menu.oldpos.y = 5;
+	g_menu.isPush = false;
 }
 
 void UnInitMenu(void)
@@ -63,176 +72,208 @@ void UnInitMenu(void)
 
 void UpdateMenu(void)
 {
-	//²Ëµ¥1µÄ´¦Àí
+	g_menu.oldpos.y = g_menu.pos.y;
+	//èœå•1çš„å¤„ç†
 	if (g_index0 == MENU1)
 	{
 		if (inport(PK_UP)) {
-			if (!g_isPush)
+			if (!g_menu.isPush)
 			{
-				g_isPush = true;
+				g_menu.isPush = true;
 				g_index1--;
+				g_menu.pos.y -= 5;
 				if (g_index1 < BUILD) {
+					g_menu.pos.y = 15;
 					g_index1 = TITLE;
 				}
 			}
 		}
 		else if (inport(PK_DOWN)) {
-			if (!g_isPush)
-			{
-				g_isPush = true;
+			if (!g_menu.isPush) {
+				g_menu.isPush = true;
 				g_index1++;
+				g_menu.pos.y += 5;
 				if (g_index1 > TITLE) {
+					g_menu.pos.y = 5;
 					g_index1 = BUILD;
 				}
 			}
 		}
 		else if (inport(PK_ENTER)) {
-			if (!g_isPush)
-			{
-				g_isPush = true;
-				if (g_index0 == MENU1)
-				{
+			if (!g_menu.isPush) {
+				g_menu.isPush = true;
+				if (g_index1 != BUILD) {
+					clear = true;
+					g_menu.pos.y = 10;
+					g_index2 = YES;
 					g_index0 = MENU2;
+				}
+				else {
+					clear = true;
+					g_menu.pos.y = 3;
+					g_index3 = BUILDING_TYPE_SPA;
+					g_index0 = MENU3;
 				}
 			}
 
 		}
 		else {
-			g_isPush = false;
+			g_menu.isPush = false;
 		}
 	}
 
-	//²Ëµ¥2µÄ´¦Àí
+	//èœå•2çš„å¤„ç†
 	if (g_index0 == MENU2)
 	{
 		if (inport(PK_UP)) {
-			if (!g_isPush)
-			{
-				g_isPush = true;
+			if (!g_menu.isPush) {
+				g_menu.isPush = true;
 				g_index2--;
+				g_menu.pos.y -= 5;
 				if (g_index2 < YES) {
+					g_menu.pos.y = 15;
 					g_index2 = NO;
 				}
 			}
 		}
 		else if (inport(PK_DOWN)) {
-			if (!g_isPush)
-			{
-				g_isPush = true;
+			if (!g_menu.isPush) {
+				g_menu.isPush = true;
 				g_index2++;
+				g_menu.pos.y += 5;
 				if (g_index2 > NO) {
+					g_menu.pos.y = 10;
 					g_index2 = YES;
 				}
 			}
 		}
 		else if (inport(PK_ENTER)) {
-			if (!g_isPush)
-			{
-				g_isPush = true;
-				if (g_index0 == MENU2 && g_index2 == NO)
-				{
-					g_index0 = MENU1;
+			if (!g_menu.isPush) {
+				g_menu.isPush = true;
+				if (g_index2 == NO) {
+					clear = true;
+					g_menu.pos.y = 5;
+					g_index1 = BUILD;
+					g_index0 = MENU1;					
 				}
 			}
-
 		}
 		else {
-			g_isPush = false;
+			g_menu.isPush = false;
 		}
 	}
 	
+	//èœå•3çš„å¤„ç†
+	if (g_index0 == MENU3)
+	{
+		if (inport(PK_UP)) {
+			if (!g_menu.isPush) {
+				g_menu.isPush = true;
+				g_index3--;
+				g_menu.pos.y -= 2;							
+				if (g_index3 == BACK - 1) {
+					g_menu.pos.y = 15;
+				}
+				if (g_index3 < BUILDING_TYPE_SPA) {
+					g_menu.pos.y = 19;
+					g_index3 = BACK;
+				}
+			}
+		}
+		else if (inport(PK_DOWN)) {
+			if (!g_menu.isPush) {
+				g_menu.isPush = true;
+				g_index3++;
+				g_menu.pos.y += 2;
+				if (g_index3 == BACK) {
+					g_menu.pos.y = 19;
+				}
+				if (g_index3 > BACK) {
+					g_menu.pos.y = 3;
+					g_index3 = BUILDING_TYPE_SPA;
+				}
+			}
+		}
+		else if (inport(PK_ENTER)) {
+			if (!g_menu.isPush) {
+				g_menu.isPush = true;
+				if (g_index3 == BACK) {
+					clear = true;
+					g_menu.pos.y = 5;
+					g_index1 = BUILD;
+					g_index0 = MENU1;
+				}
+			}
+		}
+		else {
+			g_menu.isPush = false;
+		}
+	}
 }
 
 void DrawMenu(void)
 {
-	if (g_index0 == MENU1)
-	{
-		switch (g_index1)
-		{
-		case BUILD:
-			gotoxy(119, 5);
-			printf("        ");
-			textattr(0x70);
-			gotoxy(121, 5);
-			printf("½¨Ôì");
+	if (clear == true) {
+		for (int i = 0; i <= 17; i++) {
 			textattr(0x0F);
-			gotoxy(121, 10);
-			printf("²ğ³ı");
-			gotoxy(119, 15);
-			printf("»Øµ½±êÌâ");
-			break;
-		case REMOVE:
-			gotoxy(119, 5);
-			printf("        ");
-			textattr(0x0F);
-			gotoxy(121, 5);
-			printf("½¨Ôì");			
-			textattr(0x70);
-			gotoxy(121, 10);
-			printf("²ğ³ı");
-			textattr(0x0F);
-			gotoxy(119, 15);
-			printf("»Øµ½±êÌâ");
-			break;
-		case TITLE:
-			gotoxy(119, 5);
-			printf("        ");
-			textattr(0x0F);
-			gotoxy(121, 5);
-			printf("½¨Ôì");
-			gotoxy(121, 10);
-			printf("²ğ³ı");
-			textattr(0x70);
-			gotoxy(119, 15);
-			printf("»Øµ½±êÌâ");
-			textattr(0x0F);
-			break;
-		default:
-			break;
+			gotoxy(115, 2 + i);
+			printf("                    ");
 		}
+		clear = false;
 	}
-	if (g_index0 == MENU2)
-	{
-		switch (g_index2)
-		{
-		case YES:
-			gotoxy(119, 15);
-			printf("        ");
-			textattr(0x0F);
-			gotoxy(119, 5);			
-			printf("È·¶¨Âğ£¿");			
-			textattr(0x70);
-			gotoxy(121, 10);
-			printf("È·¶¨");
-			textattr(0x0F);
-			gotoxy(121, 15);
-			printf("È¡Ïû");
-			break;
-		case NO:
-			gotoxy(119, 15);
-			printf("        ");
-			textattr(0x0F);			
-			gotoxy(119, 5);
-			printf("È·¶¨Âğ£¿");			
-			gotoxy(121, 10);
-			printf("È·¶¨");
-			textattr(0x70);
-			gotoxy(121, 15);
-			printf("È¡Ïû");
-			textattr(0x0F);
-			break;
-		default:
-			break;
-		}
+	
+	if (g_index0 == MENU1) {
+		textattr(0x0F);
+		/*gotoxy(115, 15);
+		printf("  ");
+		gotoxy(119, 5);
+		printf("        ");*/
+		gotoxy(121, 5);
+		printf("å»ºé€ ");		
+		gotoxy(121, 10);
+		printf("æ‹†é™¤");
+		gotoxy(119, 15);
+		printf("å›åˆ°æ ‡é¢˜");
 	}
+	if (g_index0 == MENU2) {
+		/*gotoxy(119, 15);
+		printf("        ");*/
+		textattr(0x0F);
+		gotoxy(119, 5);
+		printf("ç¡®å®šå—ï¼Ÿ");
+		gotoxy(121, 10);
+		printf("ç¡®å®š");
+		gotoxy(121, 15);
+		printf("å–æ¶ˆ");	
+	}
+	if (g_index0 == MENU3) {
+		textattr(0x0F);
+		gotoxy(121, 3);
+		printf("æ¸©æ³‰");
+		gotoxy(120, 5);
+		printf("ä¾¿åˆ©åº—");
+		gotoxy(121, 7);
+		printf("é¥­åº—");
+		gotoxy(120, 9);
+		printf("æŒ‰æ‘©åº—");
+		gotoxy(120, 11);
+		printf("å¡æ‹‰OK");
+		gotoxy(120, 13);
+		printf("æ£‹ç‰Œå®¤");
+		gotoxy(120, 15);
+		printf("ç‰¹äº§åº—");
+		gotoxy(121, 19);
+		printf("è¿”å›");
 
-}
-
-void SetMenu(int posx, int posy)
-{
+	}
+	gotoxy(g_menu.oldpos.x, g_menu.oldpos.y);
+	printf("  ");
+	gotoxy(g_menu.pos.x, g_menu.pos.y);
+	printf("â—†");
 }
 
 int GetMenu()
 {
 	return 0;
 }
+
