@@ -12,7 +12,7 @@ void InitBuilding(void)
 	for (int i = 0; i < MAX_BUILDING; i++) {
 		g_building[i].pos.x = 0;
 		g_building[i].pos.y = 0;
-		g_building[i].type = 0;
+		g_building[i].type = BUILDING_TYPE_NONE;
 	}
 	SetBuilding(25, 15);
 	SetBuilding(35, 15);
@@ -32,33 +32,22 @@ void UpdateBuilding(void)
 void DrawBuilding(void)
 {
 	for (int i = 0; i < MAX_BUILDING; i++) {
-		if (g_building[i].type != 0)
+		if (g_building[i].type != BUILDING_TYPE_NONE)
 		{
 			gotoxy(g_building[i].pos.x, g_building[i].pos.y);
 			switch (g_building[i].type)
 			{
 			case 1:
-				textattr(0x0C);
+				textattr(0x08);
 				printf("¨¡ö¨Ž");
 				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 1);
-				textattr(0x77);
+				textattr(0x88);
 				printf("      ");
 				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 2);
 				printf("      ");
 				gotoxy(g_building[i].pos.x + 2, g_building[i].pos.y + 2);
-				textattr(0xFF);
-				printf("  ");
-
-				/*textattr(0x0C);
-				printf("¨¨Ž");
-				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 1);
 				textattr(0x77);
-				printf("    ");
-				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 2);
-				printf("    ");
-				gotoxy(g_building[i].pos.x + 1, g_building[i].pos.y + 2);
-				textattr(0xFF);
-				printf("  ");*/
+				printf("  ");
 			default:
 				break;
 			}
@@ -70,11 +59,11 @@ void SetBuilding(int posx, int posy)
 {
 	int index = 0;
 	for (int i = 0; i < MAX_BUILDING; i++) {
-		if (g_building[i].type == 0)
+		if (g_building[i].type == BUILDING_TYPE_NONE)
 		{
 			g_building[i].pos.x = posx;
 			g_building[i].pos.y = posy;
-			g_building[i].type = 1;
+			g_building[i].type = BUILDING_TYPE_NULL;
 			g_building[i].index = index;
 			MAX_INDEX = index;
 			break;

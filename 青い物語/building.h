@@ -15,6 +15,19 @@
 
 #define MAX_BUILDING 10
 
+enum Building
+{
+	BUILDING_TYPE_NONE,		//没有此建筑位
+	BUILDING_TYPE_NULL,		//空地
+	BUILDING_TYPE_SPA,
+	BUILDING_TYPE_CONVENIENCE,
+	BUILDING_TYPE_RESTAURANT,
+	BUILDING_TYPE_MASSAGE,
+	BUILDING_TYPE_SING,
+	BUILDING_TYPE_POKER,
+	BUILDING_TYPE_STORE
+};
+
 void InitBuilding(void);
 void UnInitBuilding(void);
 void UpdateBuilding(void);

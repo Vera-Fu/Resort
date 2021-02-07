@@ -16,7 +16,7 @@ void InitChoose(void)
 	g_choose.index = 0;
 	g_choose.isPush = false;
 
-	SetChoose(g_buliding->pos.x + 1, g_buliding->pos.y - 1);
+	SetChoose(g_buliding->pos.x + 2, g_buliding->pos.y - 1);
 }
 
 void UnInitChoose(void)
@@ -37,7 +37,7 @@ void UpdateChoose(void)
 			if (g_choose.index < GetMaxIndex())
 			{
 				g_choose.index++;
-				SetChoose((g_buliding + g_choose.index)->pos.x + 1, (g_buliding + g_choose.index)->pos.y - 1);
+				SetChoose((g_buliding + g_choose.index)->pos.x + 2, (g_buliding + g_choose.index)->pos.y - 1);
 			}
 		}	
 	} else if (inport(PK_LEFT)) {
@@ -47,10 +47,11 @@ void UpdateChoose(void)
 			if (g_choose.index > 0)
 			{				
 				g_choose.index--;
-				SetChoose((g_buliding + g_choose.index)->pos.x + 1, (g_buliding + g_choose.index)->pos.y - 1);
+				SetChoose((g_buliding + g_choose.index)->pos.x + 2, (g_buliding + g_choose.index)->pos.y - 1);
 			}
 		}		
-	} else {
+	} 
+	else {
 		g_choose.isPush = false;
 	}
 }
@@ -71,7 +72,7 @@ void SetChoose(int posx, int posy)
 	g_choose.pos.y = posy;
 }
 
-int GetChoose()
+CHOOSE GetChoose()
 {
-	return g_choose.index;
+	return g_choose;
 }
