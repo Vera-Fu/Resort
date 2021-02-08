@@ -1,8 +1,10 @@
 ﻿//=================================================
-// [アクションサンプル]
+// [リゾートのワナ]
 // main.cpp
-// author:**** ****	Date:2021/**/**
+// author:fuyizhi
+// Date:2021/02/04
 //=================================================
+
 #include "main.h"
 #include "map.h"
 #include "building.h"
@@ -19,8 +21,6 @@ void Draw(void);
 void DispFPS(void);
 
 int g_nCountFPS;				// FPSカウンタ
-
-
 
 void main(void)
 {
@@ -123,7 +123,7 @@ void DispFPS(void) {
 	printf("build_index:%d", (GetBuilding() + GetChoose().index)->index);
 	// build_type
 	gotoxy(1, 4);	//表示位置設定
-	printf("build_index:%d", (GetBuilding() + GetChoose().index)->type);
+	printf("build_type:%d", (GetBuilding() + GetChoose().index)->type);
 
 	//　色設定もとに戻す
 	textcolor; WHITE;

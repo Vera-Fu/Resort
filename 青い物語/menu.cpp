@@ -1,4 +1,11 @@
-﻿#include "menu.h"
+﻿//=================================================
+// [リゾートのワナ]
+// menu.cpp
+// author:fuyizhi
+// Date:2021/02/08
+//=================================================
+
+#include "menu.h"
 
 #define CONIOEX
 #include "conioex.h"
@@ -10,6 +17,9 @@ int g_index3 = 0;
 
 int buildSound = opensound((char*)"sound\\build.mp3");
 int removeSound = opensound((char*)"sound\\remove.mp3");
+int buttonSound = opensound((char*)"sound\\button.mp3");
+int buttonpushSound = opensound((char*)"sound\\buttonpush.mp3");
+
 
 bool clear = true;
 
@@ -24,6 +34,7 @@ enum Menu1
 {
 	BUILD,
 	REMOVE,
+	START,
 	TITLE
 };
 
@@ -63,9 +74,9 @@ void InitMenu(void)
 	printf("┛");
 
 	g_menu.pos.x = 115;
-	g_menu.pos.y = 5;
+	g_menu.pos.y = 3;
 	g_menu.oldpos.x = 115;
-	g_menu.oldpos.y = 5;
+	g_menu.oldpos.y = 3;
 	g_menu.isPush = false;
 }
 
@@ -82,28 +93,31 @@ void UpdateMenu(void)
 		if (inport(PK_UP)) {
 			if (!g_menu.isPush)
 			{
+				playsound(buttonSound, 0);
 				g_menu.isPush = true;
 				g_index1--;
 				g_menu.pos.y -= 5;
 				if (g_index1 < BUILD) {
-					g_menu.pos.y = 15;
+					g_menu.pos.y = 18;
 					g_index1 = TITLE;
 				}
 			}
 		}
 		else if (inport(PK_DOWN)) {
 			if (!g_menu.isPush) {
+				playsound(buttonSound, 0);
 				g_menu.isPush = true;
 				g_index1++;
 				g_menu.pos.y += 5;
 				if (g_index1 > TITLE) {
-					g_menu.pos.y = 5;
+					g_menu.pos.y = 3;
 					g_index1 = BUILD;
 				}
 			}
 		}
 		else if (inport(PK_ENTER)) {
 			if (!g_menu.isPush) {
+				playsound(buttonpushSound, 0);
 				g_menu.isPush = true;
 				switch (g_index1)
 				{
@@ -131,6 +145,12 @@ void UpdateMenu(void)
 						g_index0 = MENU2;
 					}						
 					break;
+				case START:
+					clear = true;
+					g_menu.pos.y = 10;
+					g_index2 = YES;
+					g_index0 = MENU2;
+					break;
 				case TITLE:
 					clear = true;
 					g_menu.pos.y = 10;
@@ -153,6 +173,7 @@ void UpdateMenu(void)
 	{
 		if (inport(PK_UP)) {
 			if (!g_menu.isPush) {
+				playsound(buttonSound, 0);
 				g_menu.isPush = true;
 				g_index2--;
 				g_menu.pos.y -= 5;
@@ -164,6 +185,7 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_DOWN)) {
 			if (!g_menu.isPush) {
+				playsound(buttonSound, 0);
 				g_menu.isPush = true;
 				g_index2++;
 				g_menu.pos.y += 5;
@@ -175,6 +197,7 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_ENTER)) {
 			if (!g_menu.isPush) {
+				playsound(buttonpushSound, 0);
 				g_menu.isPush = true;
 				switch (g_index1)
 				{
@@ -186,16 +209,17 @@ void UpdateMenu(void)
 						gotoxy(118, 23);
 						printf("拆除成功！");
 					}
-					clear = true;
-					g_menu.pos.y = 5;
-					g_index1 = BUILD;
-					g_index0 = MENU1;
+
 					break;
 				case TITLE:
 					break;
 				default:
 					break;
 				}
+				clear = true;
+				g_menu.pos.y = 3;
+				g_index1 = BUILD;
+				g_index0 = MENU1;
 			}
 		}
 		else {
@@ -208,6 +232,7 @@ void UpdateMenu(void)
 	{
 		if (inport(PK_UP)) {
 			if (!g_menu.isPush) {
+				playsound(buttonSound, 0);
 				g_menu.isPush = true;
 				g_index3--;
 				g_menu.pos.y -= 2;							
@@ -222,6 +247,7 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_DOWN)) {
 			if (!g_menu.isPush) {
+				playsound(buttonSound, 0);
 				g_menu.isPush = true;
 				g_index3++;
 				g_menu.pos.y += 2;
@@ -236,6 +262,7 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_ENTER)) {
 			if (!g_menu.isPush) {
+				playsound(buttonpushSound, 0);
 				g_menu.isPush = true;
 				switch (g_index3) {
 				case BUILDING_TYPE_SPA:
@@ -268,7 +295,7 @@ void UpdateMenu(void)
 					playsound(buildSound, 0);
 				}
 				clear = true;
-				g_menu.pos.y = 5;
+				g_menu.pos.y = 3;
 				g_index1 = BUILD;
 				g_index0 = MENU1;
 				
@@ -291,31 +318,29 @@ void DrawMenu(void)
 		clear = false;
 	}
 	
-	if (g_index0 == MENU1) {
+	switch (g_index0)
+	{
+	case MENU1:
 		textattr(0x0F);
-		/*gotoxy(115, 15);
-		printf("  ");
-		gotoxy(119, 5);
-		printf("        ");*/
-		gotoxy(121, 5);
-		printf("建造");		
-		gotoxy(121, 10);
+		gotoxy(121, 3);
+		printf("建造");
+		gotoxy(121, 8);
 		printf("拆除");
-		gotoxy(119, 15);
+		gotoxy(119, 13);
+		printf("开始关卡");
+		gotoxy(119, 18);
 		printf("回到标题");
-	}
-	if (g_index0 == MENU2) {
-		/*gotoxy(119, 15);
-		printf("        ");*/
+		break;
+	case MENU2:
 		textattr(0x0F);
 		gotoxy(119, 5);
 		printf("确定吗？");
 		gotoxy(121, 10);
 		printf("确定");
 		gotoxy(121, 15);
-		printf("取消");	
-	}
-	if (g_index0 == MENU3) {
+		printf("取消");
+		break;
+	case MENU3:
 		textattr(0x0F);
 		gotoxy(121, 3);
 		printf("温泉");
@@ -333,7 +358,9 @@ void DrawMenu(void)
 		printf("特产店");
 		gotoxy(121, 19);
 		printf("返回");
-
+		break;
+	default:
+		break;
 	}
 	gotoxy(g_menu.oldpos.x, g_menu.oldpos.y);
 	printf("  ");

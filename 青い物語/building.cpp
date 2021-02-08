@@ -1,3 +1,10 @@
+//=================================================
+// [¥ê¥¾©`¥È¤Î¥ï¥Ê]
+// building.cpp
+// author:fuyizhi
+// Date:2021/02/08
+//=================================================
+
 #include "building.h"
 
 #define CONIOEX
@@ -14,10 +21,10 @@ void InitBuilding(void)
 		g_building[i].pos.y = 0;
 		g_building[i].type = BUILDING_TYPE_NONE;
 	}
-	SetBuilding(25, 15);
-	SetBuilding(35, 15);
+	SetBuilding(25, 5);
+	/*SetBuilding(35, 15);
 	SetBuilding(35, 20);
-	SetBuilding(50, 20);
+	SetBuilding(50, 20);*/
 }
 
 void UnInitBuilding(void)
@@ -136,6 +143,9 @@ void DrawBuilding(void)
 			default:
 				break;
 			}
+			textattr(0xFF);
+			gotoxy(g_building[i].pos.x + 1, g_building[i].pos.y + 3);
+			printf("    ");
 		}		
 	}
 }
