@@ -20,11 +20,12 @@ void InitBuilding(void)
 		g_building[i].pos.x = 0;
 		g_building[i].pos.y = 0;
 		g_building[i].type = BUILDING_TYPE_NONE;
+		g_building[i].isRemoveable = true;
 	}
-	SetBuilding(25, 5);
-	/*SetBuilding(35, 15);
-	SetBuilding(35, 20);
-	SetBuilding(50, 20);*/
+	SetBuilding(25, 5, BUILDING_TYPE_NULL, true);
+	SetBuilding(35, 15, BUILDING_TYPE_NULL, true);
+	SetBuilding(35, 20, BUILDING_TYPE_SPA, false);
+	SetBuilding(50, 20, BUILDING_TYPE_STORE, false);
 }
 
 void UnInitBuilding(void)
@@ -150,7 +151,7 @@ void DrawBuilding(void)
 	}
 }
 
-void SetBuilding(int posx, int posy)
+void SetBuilding(int posx, int posy, int type, bool isremoveable)
 {
 	int index = 0;
 	for (int i = 0; i < MAX_BUILDING; i++) {
@@ -158,8 +159,9 @@ void SetBuilding(int posx, int posy)
 		{
 			g_building[i].pos.x = posx;
 			g_building[i].pos.y = posy;
-			g_building[i].type = BUILDING_TYPE_NULL;
+			g_building[i].type = type;
 			g_building[i].index = index;
+			g_building[i].isRemoveable = isremoveable;
 			MAX_INDEX = index;
 			break;
 		}

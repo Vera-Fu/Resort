@@ -124,6 +124,12 @@ void DispFPS(void) {
 	// build_type
 	gotoxy(1, 4);	//表示位置設定
 	printf("build_type:%d", (GetBuilding() + GetChoose().index)->type);
+	if (!(GetBuilding() + GetChoose().index)->isRemoveable) {
+		printf(" (不可拆除)");
+	} else
+	{
+		printf("           ");
+	}
 
 	//　色設定もとに戻す
 	textcolor; WHITE;

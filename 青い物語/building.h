@@ -32,7 +32,7 @@ void UnInitBuilding(void);
 void UpdateBuilding(void);
 void DrawBuilding(void);
 
-void SetBuilding(int posx, int posy);
+void SetBuilding(int posx, int posy, int type, bool isremoveable);
 
 int GetMaxIndex(void);
 
@@ -41,6 +41,8 @@ typedef struct {
 
 	int type;		//建筑物的类型
 	int index;		//建筑物的索引
+
+	bool isRemoveable;
 }BUILDING;
 
 BUILDING* GetBuilding(void);

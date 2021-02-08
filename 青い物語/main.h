@@ -15,4 +15,9 @@ typedef struct {
 	int y;
 }INT2;
 
+typedef struct {
+	float x;
+	float y;
+}FLOAT2;
+
 #endif

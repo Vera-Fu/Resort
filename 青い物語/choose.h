@@ -8,8 +8,8 @@
 #ifndef CHOOSE_H_
 #define CHOOSE_H_
 
-#include "building.h"
 #include "main.h"
+#include "building.h"
 
 void InitChoose(void);
 void UnInitChoose(void);
