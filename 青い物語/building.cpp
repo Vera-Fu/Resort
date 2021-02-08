@@ -37,7 +37,7 @@ void DrawBuilding(void)
 			gotoxy(g_building[i].pos.x, g_building[i].pos.y);
 			switch (g_building[i].type)
 			{
-			case 1:
+			case BUILDING_TYPE_NULL:
 				textattr(0x08);
 				printf("®ç°ˆ®é");
 				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 1);
@@ -48,6 +48,91 @@ void DrawBuilding(void)
 				gotoxy(g_building[i].pos.x + 2, g_building[i].pos.y + 2);
 				textattr(0x77);
 				printf("  ");
+				break;
+			case BUILDING_TYPE_SPA:
+				textattr(0x0C);
+				printf("®ç°ˆ®é");
+				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 1);
+				textattr(0x44);
+				printf("      ");
+				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 2);
+				printf("      ");
+				gotoxy(g_building[i].pos.x + 2, g_building[i].pos.y + 2);
+				textattr(0xFF);
+				printf("  ");
+				break;
+			case BUILDING_TYPE_CONVENIENCE:
+				textattr(0x0F);
+				printf("®ç°ˆ®é");
+				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 1);
+				textattr(0x77);
+				printf("      ");
+				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 2);
+				printf("      ");
+				gotoxy(g_building[i].pos.x + 2, g_building[i].pos.y + 2);
+				textattr(0xFF);
+				printf("  ");
+				break;
+			case BUILDING_TYPE_RESTAURANT:
+				textattr(0x0F);
+				printf("®ç°ˆ®é");
+				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 1);
+				textattr(0xEE);
+				printf("      ");
+				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 2);
+				printf("      ");
+				gotoxy(g_building[i].pos.x + 2, g_building[i].pos.y + 2);
+				textattr(0xFF);
+				printf("  ");
+				break;
+			case BUILDING_TYPE_MASSAGE:
+				textattr(0x0C);
+				printf("®ç°ˆ®é");
+				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 1);
+				textattr(0x66);
+				printf("      ");
+				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 2);
+				printf("      ");
+				gotoxy(g_building[i].pos.x + 2, g_building[i].pos.y + 2);
+				textattr(0xFF);
+				printf("  ");
+				break;
+			case BUILDING_TYPE_SING:
+				textattr(0x0C);
+				printf("®ç°ˆ®é");
+				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 1);
+				textattr(0xDD);
+				printf("      ");
+				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 2);
+				printf("      ");
+				gotoxy(g_building[i].pos.x + 2, g_building[i].pos.y + 2);
+				textattr(0xFF);
+				printf("  ");
+				break;
+			case BUILDING_TYPE_POKER:
+				textattr(0x04);
+				printf("®ç°ˆ®é");
+				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 1);
+				textattr(0x55);
+				printf("      ");
+				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 2);
+				printf("      ");
+				gotoxy(g_building[i].pos.x + 2, g_building[i].pos.y + 2);
+				textattr(0xFF);
+				printf("  ");
+				break;
+			case BUILDING_TYPE_STORE:
+				textattr(0x07);
+				printf("®ç°ˆ®é");
+				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 1);
+				textattr(0x22);
+				printf("      ");
+				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 2);
+				printf("      ");
+				gotoxy(g_building[i].pos.x + 2, g_building[i].pos.y + 2);
+				textattr(0xFF);
+				printf("  ");
+				break;
 			default:
 				break;
 			}

@@ -121,6 +121,9 @@ void DispFPS(void) {
 	// build_index
 	gotoxy(1, 3);	//表示位置設定
 	printf("build_index:%d", (GetBuilding() + GetChoose().index)->index);
+	// build_type
+	gotoxy(1, 4);	//表示位置設定
+	printf("build_index:%d", (GetBuilding() + GetChoose().index)->type);
 
 	//　色設定もとに戻す
 	textcolor; WHITE;

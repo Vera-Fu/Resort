@@ -8,6 +8,9 @@ int g_index1 = 0;	//控制第一个菜单的绘制
 int g_index2 = 0;
 int g_index3 = 0;
 
+int buildSound = opensound((char*)"sound\\build.mp3");
+int removeSound = opensound((char*)"sound\\remove.mp3");
+
 bool clear = true;
 
 enum Menu0
@@ -102,17 +105,40 @@ void UpdateMenu(void)
 		else if (inport(PK_ENTER)) {
 			if (!g_menu.isPush) {
 				g_menu.isPush = true;
-				if (g_index1 != BUILD) {
+				switch (g_index1)
+				{
+				case BUILD:
+					if ((GetBuilding() + GetChoose().index)->type != BUILDING_TYPE_NULL) {
+						gotoxy(118, 23);
+						printf("已有建筑！");
+					}
+					else {
+						clear = true;
+						g_menu.pos.y = 3;
+						g_index3 = BUILDING_TYPE_SPA;
+						g_index0 = MENU3;
+					}
+					break;
+				case REMOVE:
+					if ((GetBuilding() + GetChoose().index)->type == BUILDING_TYPE_NULL) {
+						gotoxy(118, 23);
+						printf("这是空地！");
+					}
+					else {
+						clear = true;
+						g_menu.pos.y = 10;
+						g_index2 = YES;
+						g_index0 = MENU2;
+					}						
+					break;
+				case TITLE:
 					clear = true;
 					g_menu.pos.y = 10;
 					g_index2 = YES;
 					g_index0 = MENU2;
-				}
-				else {
-					clear = true;
-					g_menu.pos.y = 3;
-					g_index3 = BUILDING_TYPE_SPA;
-					g_index0 = MENU3;
+					break;
+				default:
+					break;
 				}
 			}
 
@@ -150,11 +176,25 @@ void UpdateMenu(void)
 		else if (inport(PK_ENTER)) {
 			if (!g_menu.isPush) {
 				g_menu.isPush = true;
-				if (g_index2 == NO) {
+				switch (g_index1)
+				{
+				case REMOVE:
+					if (g_index2 == YES)
+					{
+						(GetBuilding() + GetChoose().index)->type = BUILDING_TYPE_NULL;
+						playsound(removeSound, 0);
+						gotoxy(118, 23);
+						printf("拆除成功！");
+					}
 					clear = true;
 					g_menu.pos.y = 5;
 					g_index1 = BUILD;
-					g_index0 = MENU1;					
+					g_index0 = MENU1;
+					break;
+				case TITLE:
+					break;
+				default:
+					break;
 				}
 			}
 		}
@@ -197,12 +237,41 @@ void UpdateMenu(void)
 		else if (inport(PK_ENTER)) {
 			if (!g_menu.isPush) {
 				g_menu.isPush = true;
-				if (g_index3 == BACK) {
-					clear = true;
-					g_menu.pos.y = 5;
-					g_index1 = BUILD;
-					g_index0 = MENU1;
+				switch (g_index3) {
+				case BUILDING_TYPE_SPA:
+					(GetBuilding() + GetChoose().index)->type = BUILDING_TYPE_SPA;
+					break;
+				case BUILDING_TYPE_CONVENIENCE:
+					(GetBuilding() + GetChoose().index)->type = BUILDING_TYPE_CONVENIENCE;
+					break;
+				case BUILDING_TYPE_RESTAURANT:
+					(GetBuilding() + GetChoose().index)->type = BUILDING_TYPE_RESTAURANT;
+					break;
+				case BUILDING_TYPE_MASSAGE:
+					(GetBuilding() + GetChoose().index)->type = BUILDING_TYPE_MASSAGE;
+					break;
+				case BUILDING_TYPE_SING:
+					(GetBuilding() + GetChoose().index)->type = BUILDING_TYPE_SING;
+					break;
+				case BUILDING_TYPE_POKER:
+					(GetBuilding() + GetChoose().index)->type = BUILDING_TYPE_POKER;
+					break;
+				case BUILDING_TYPE_STORE:
+					(GetBuilding() + GetChoose().index)->type = BUILDING_TYPE_STORE;
+					break;
+				case BACK:
+					break;
+				default:
+					break;
 				}
+				if (g_index3 != BACK) {
+					playsound(buildSound, 0);
+				}
+				clear = true;
+				g_menu.pos.y = 5;
+				g_index1 = BUILD;
+				g_index0 = MENU1;
+				
 			}
 		}
 		else {
