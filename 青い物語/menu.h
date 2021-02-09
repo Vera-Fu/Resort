@@ -24,5 +24,27 @@ typedef struct {
 	bool isPush;	//用于控制按键，使其落下时只执行一次
 }MENU;
 
+
+enum Menu0
+{
+	MENU1,
+	MENU2,
+	MENU3
+};
+
+enum Menu1
+{
+	BUILD,
+	REMOVE,
+	START,
+	TITLE
+};
+
+enum Menu2
+{
+	YES,
+	NO
+};
+
 #endif // !MENU_H_
 

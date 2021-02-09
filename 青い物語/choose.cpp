@@ -14,6 +14,8 @@ CHOOSE g_choose;
 
 BUILDING* g_buliding = GetBuilding();
 
+int choosebuttonSound = opensound((char*)"sound\\button02.mp3");
+
 void InitChoose(void)
 {
 	g_choose.pos.x = 0;
@@ -43,6 +45,7 @@ void UpdateChoose(void)
 			g_choose.isPush = true;
 			if (g_choose.index < GetMaxIndex())
 			{
+				playsound(choosebuttonSound, 0);
 				g_choose.index++;
 				SetChoose((g_buliding + g_choose.index)->pos.x + 2, (g_buliding + g_choose.index)->pos.y - 1);
 			}
@@ -52,7 +55,8 @@ void UpdateChoose(void)
 		{
 			g_choose.isPush = true;
 			if (g_choose.index > 0)
-			{				
+			{	
+				playsound(choosebuttonSound, 0);
 				g_choose.index--;
 				SetChoose((g_buliding + g_choose.index)->pos.x + 2, (g_buliding + g_choose.index)->pos.y - 1);
 			}

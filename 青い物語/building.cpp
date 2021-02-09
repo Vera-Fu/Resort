@@ -10,6 +10,7 @@
 #define CONIOEX
 #include "conioex.h"
 
+
 BUILDING g_building[MAX_BUILDING];
 
 static int MAX_INDEX;
@@ -22,10 +23,10 @@ void InitBuilding(void)
 		g_building[i].type = BUILDING_TYPE_NONE;
 		g_building[i].isRemoveable = true;
 	}
-	SetBuilding(25, 5, BUILDING_TYPE_NULL, true);
-	SetBuilding(35, 15, BUILDING_TYPE_NULL, true);
+	SetBuilding(25, 13, BUILDING_TYPE_NULL, true);
+	/*SetBuilding(35, 15, BUILDING_TYPE_NULL, true);
 	SetBuilding(35, 20, BUILDING_TYPE_SPA, false);
-	SetBuilding(50, 20, BUILDING_TYPE_STORE, false);
+	SetBuilding(50, 20, BUILDING_TYPE_STORE, false);*/
 }
 
 void UnInitBuilding(void)

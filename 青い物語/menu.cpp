@@ -17,32 +17,11 @@ int g_index3 = 0;
 
 int buildSound = opensound((char*)"sound\\build.mp3");
 int removeSound = opensound((char*)"sound\\remove.mp3");
-int buttonSound = opensound((char*)"sound\\button.mp3");
+int menubuttonSound = opensound((char*)"sound\\button01.mp3");
 int buttonpushSound = opensound((char*)"sound\\buttonpush.mp3");
 
 
 bool clear = true;
-
-enum Menu0
-{
-	MENU1,
-	MENU2,
-	MENU3
-};
-
-enum Menu1
-{
-	BUILD,
-	REMOVE,
-	START,
-	TITLE
-};
-
-enum Menu2
-{
-	YES,
-	NO
-};
 
 MENU g_menu;
 
@@ -93,7 +72,7 @@ void UpdateMenu(void)
 		if (inport(PK_UP)) {
 			if (!g_menu.isPush)
 			{
-				playsound(buttonSound, 0);
+				playsound(menubuttonSound, 0);
 				g_menu.isPush = true;
 				g_index1--;
 				g_menu.pos.y -= 5;
@@ -105,7 +84,7 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_DOWN)) {
 			if (!g_menu.isPush) {
-				playsound(buttonSound, 0);
+				playsound(menubuttonSound, 0);
 				g_menu.isPush = true;
 				g_index1++;
 				g_menu.pos.y += 5;
@@ -161,7 +140,7 @@ void UpdateMenu(void)
 	{
 		if (inport(PK_UP)) {
 			if (!g_menu.isPush) {
-				playsound(buttonSound, 0);
+				playsound(menubuttonSound, 0);
 				g_menu.isPush = true;
 				g_index2--;
 				g_menu.pos.y -= 5;
@@ -173,7 +152,7 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_DOWN)) {
 			if (!g_menu.isPush) {
-				playsound(buttonSound, 0);
+				playsound(menubuttonSound, 0);
 				g_menu.isPush = true;
 				g_index2++;
 				g_menu.pos.y += 5;
@@ -231,7 +210,7 @@ void UpdateMenu(void)
 	{
 		if (inport(PK_UP)) {
 			if (!g_menu.isPush) {
-				playsound(buttonSound, 0);
+				playsound(menubuttonSound, 0);
 				g_menu.isPush = true;
 				g_index3--;
 				g_menu.pos.y -= 2;							
@@ -246,7 +225,7 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_DOWN)) {
 			if (!g_menu.isPush) {
-				playsound(buttonSound, 0);
+				playsound(menubuttonSound, 0);
 				g_menu.isPush = true;
 				g_index3++;
 				g_menu.pos.y += 2;

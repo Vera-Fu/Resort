@@ -10,6 +10,8 @@
 #include "building.h"
 #include "choose.h"
 #include "menu.h"
+#include "road.h"
+#include "customer.h"
 
 #include "conioex.h"
 
@@ -79,6 +81,8 @@ void Init(void)
 	InitBuilding();
 	InitChoose();
 	InitMenu();
+	InitRoad();
+	InitCustomer();
 }
 
 void Uninit(void)
@@ -87,6 +91,8 @@ void Uninit(void)
 	UnInitBuilding();
 	UnInitChoose();
 	UnInitMenu();
+	UnInitRoad();
+	UnInitCustomer();
 }
 
 void Update(void)
@@ -95,6 +101,8 @@ void Update(void)
 	UpdateBuilding();
 	UpdateChoose();
 	UpdateMenu();
+	UpdateRoad();
+	UpdateCustomer();
 }
 
 void Draw(void)
@@ -103,6 +111,8 @@ void Draw(void)
 	DrawBuilding();
 	DrawChoose();
 	DrawMenu();
+	DrawRoad();
+	DrawCustomer();
 }
 
 #ifdef _DEBUG
