@@ -1,3 +1,10 @@
+//=================================================
+// [リゾートのワナ]
+// customer.cpp
+// author:fuyizhi
+// Date:2021/02/09
+//=================================================
+
 #include "customer.h"
 
 #define CONIOEX
@@ -7,8 +14,10 @@ CUSTOMER g_customer;
 
 void InitCustomer(void)
 {
-	g_customer.pos.x = ROAD_START0_X + 2;
-	g_customer.pos.y = ROAD_START0_Y - 1;
+	float g_startCustomerX = GetHotel().pos.x + 2;
+	float g_startCustomerY = GetHotel().pos.y + 5;
+	g_customer.pos.x = g_startCustomerX;
+	g_customer.pos.y = g_startCustomerY;
 	g_customer.oldpos.x = g_customer.pos.x;
 	g_customer.oldpos.y = g_customer.pos.y;
 }
@@ -19,6 +28,16 @@ void UnInitCustomer(void)
 
 void UpdateCustomer(void)
 {
+	//1フレーム前の位置を保存
+	g_customer.oldpos.x = g_customer.pos.x;
+	g_customer.oldpos.y = g_customer.pos.y;
+
+	//位置の更新
+	if (g_customer.pos.x < 80) {
+		g_customer.pos.x += SPEED;
+	}	
+	//g_customer.pos.y += SPEED;
+
 }
 
 void DrawCustomer(void)

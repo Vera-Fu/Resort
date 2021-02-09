@@ -10,9 +10,7 @@
 #define CONIOEX
 #include "conioex.h"
 
-#define MAPWIDTH_MAX 100
-#define MAPHEIGHT_MAX 40
-
+HOTEL g_hotel;
 
 static unsigned char g_sandmap_data[] = {
 	0, 0 ,0, 0, 0, 1, 1, 1, 1, 1,
@@ -70,32 +68,33 @@ void InitMap(void)
 		printf(" ");
 	}
 
+	SetHotel(5, 11);
+
 	//ÂÃ¹ÝÖ÷Ìå
 	textattr(0x44);
-	for (int i = 11; i < 17; i++){
-		gotoxy(5, i);
+	for (int i = g_hotel.pos.y; i < g_hotel.pos.y + 6; i++){
+		gotoxy(g_hotel.pos.x, i);
 		for (int j = 0; j < 7; j++) {
 			printf(" ");
 		}
 	}
 	//ÂÃ¹Ý´°»§
 	textattr(0x33);
-	gotoxy(6, 12);
+	gotoxy(g_hotel.pos.x + 1, g_hotel.pos.y + 1);
 	printf("  ");
-	gotoxy(9, 12);
+	gotoxy(g_hotel.pos.x + 4, g_hotel.pos.y + 1);
 	printf("  ");
-	gotoxy(6, 14);
+	gotoxy(g_hotel.pos.x + 1, g_hotel.pos.y + 3);
 	printf("  ");
-	gotoxy(9, 14);
+	gotoxy(g_hotel.pos.x + 4, g_hotel.pos.y + 3);
 	printf("  ");
 
 	//ÂÃ¹Ý´óÃÅ
 	textattr(0xFF);
-	gotoxy(7, 16);
+	gotoxy(g_hotel.pos.x + 2, g_hotel.pos.y + 5);
 	printf("   ");
 	
-	//É³Ì²
-	
+	//É³Ì²	
 	for (int i = 80; i < 90; i++) {
 		for (int j = 1; j < MAPHEIGHT_MAX; j++) {
 			gotoxy(i, j);
@@ -143,4 +142,15 @@ void UpdateMap(void)
 void DrawMap(void)
 {
 	
+}
+
+void SetHotel(int x, int y)
+{
+	g_hotel.pos.x = x;
+	g_hotel.pos.y = y;
+}
+
+HOTEL GetHotel(void)
+{
+	return g_hotel;
 }

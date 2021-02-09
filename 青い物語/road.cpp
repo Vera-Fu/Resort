@@ -12,8 +12,12 @@
 
 ROAD g_road[MAX_ROAD];
 
+
+
 void InitRoad(void)
 {
+	int g_startRoadX = GetHotel().pos.x;
+	int g_startRoadY = GetHotel().pos.y + 6;
 	for (int i = 0; i < MAX_ROAD; i++) {
 		g_road[i].start_pos.x = 0;
 		g_road[i].start_pos.y = 0;
@@ -22,7 +26,7 @@ void InitRoad(void)
 		g_road[i].way = 0;
 		g_road[i].isUse = false;
 	}
-	SetRoad(ROAD_START0_X, ROAD_START0_Y, 80, 20, MOVERIGHT);
+	SetRoad(g_startRoadX, g_startRoadY, 80, 20, MOVERIGHT);
 }
 
 void UnInitRoad(void)
@@ -72,4 +76,9 @@ void SetRoad(int startposx, int startposy, int endposx, int endposy, int way)
 			break;
 		}
 	}
+}
+
+ROAD* GetRoad(void)
+{
+	return g_road;
 }

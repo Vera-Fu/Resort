@@ -9,11 +9,9 @@
 #define ROAD_H_
 
 #include "main.h"
+#include "map.h"
 
 #define MAX_ROAD 10
-
-#define ROAD_START0_X 5
-#define ROAD_START0_Y 17
 
 void InitRoad(void);
 void UnInitRoad(void);
@@ -35,6 +33,8 @@ enum WAY {
 	MOVELEFT,
 	MOVERIGHT
 };
+
+ROAD* GetRoad(void);
 
 #endif // !ROAD_H_
 
