@@ -17,7 +17,7 @@ void InitRoad(void);
 void UnInitRoad(void);
 void UpdateRoad(void);
 void DrawRoad(void);
-void SetRoad(int startposx, int startposy, int endposx, int endposy, int way);
+void SetRoad(int end, int way);		//因为第二条路的startpos总是固定的，所以只需知晓道路的方向和终点即可绘制路线
 
 typedef struct {
 	INT2 start_pos;
@@ -31,7 +31,8 @@ enum WAY {
 	MOVEUP,
 	MOVEDOWN,
 	MOVELEFT,
-	MOVERIGHT
+	MOVERIGHT,
+	NONE
 };
 
 ROAD* GetRoad(void);

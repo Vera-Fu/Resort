@@ -12,6 +12,8 @@
 
 CUSTOMER g_customer;
 
+int index = 0;
+
 void InitCustomer(void)
 {
 	float g_startCustomerX = GetHotel().pos.x + 2;
@@ -33,12 +35,48 @@ void UpdateCustomer(void)
 	g_customer.oldpos.y = g_customer.pos.y;
 
 	//Î»ÖÃ¤Î¸üÐÂ
-	if (g_customer.pos.x < 80) {
-		g_customer.pos.x += SPEED;
-	}	
-	//g_customer.pos.y += SPEED;
-
+	switch ((GetRoad() + index)->way)
+	{
+	case MOVEUP:
+		if (g_customer.pos.y > (GetRoad() + index)->end_pos.y + 1) {
+			g_customer.pos.y -= SPEED;
+		}
+		else {
+			index++;
+		}
+		break;
+	case MOVEDOWN:
+		if (g_customer.pos.y < (GetRoad() + index)->end_pos.y - 4) {
+			g_customer.pos.y += SPEED;
+		}
+		else {
+			index++;
+		}
+		break;
+	case MOVELEFT:
+		if (g_customer.pos.x > (GetRoad() + index)->end_pos.x + 2) {
+			g_customer.pos.x -= SPEED;
+		}
+		else {
+			index++;
+		}
+		break;
+	case MOVERIGHT:
+		if (g_customer.pos.x < (GetRoad() + index)->end_pos.x - 2) {
+			g_customer.pos.x += SPEED;
+		}
+		else {
+			index++;
+		}
+		break;
+	case NONE:
+		break;
+	default:
+		break;
+	}
 }
+//g_customer.pos.y += SPEED;	
+
 
 void DrawCustomer(void)
 {

@@ -13,7 +13,7 @@
 #include "building.h"
 #include "map.h"
 
-#define SPEED 0.2
+#define SPEED 0.3
 
 void InitCustomer(void);
 void UnInitCustomer(void);

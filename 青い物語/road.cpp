@@ -23,10 +23,21 @@ void InitRoad(void)
 		g_road[i].start_pos.y = 0;
 		g_road[i].end_pos.x = 0;
 		g_road[i].end_pos.y = 0;
-		g_road[i].way = 0;
+		g_road[i].way = NONE;
 		g_road[i].isUse = false;
 	}
-	SetRoad(g_startRoadX, g_startRoadY, 80, 20, MOVERIGHT);
+	SetRoad(80, MOVERIGHT);
+	SetRoad(25, MOVEDOWN);
+	
+	SetRoad(50, MOVELEFT);
+	
+	SetRoad(5, MOVEUP);
+	SetRoad(20, MOVELEFT);
+	SetRoad(30, MOVEDOWN);
+	SetRoad(80, MOVERIGHT);
+	SetRoad(5, MOVEUP);
+
+	
 }
 
 void UnInitRoad(void)
@@ -41,38 +52,123 @@ void DrawRoad(void)
 {
 	for (int i = 0; i < MAX_ROAD; i++) {
 		if (g_road[i].isUse == true) {
-			if(g_road[i].way == MOVERIGHT || g_road[i].way == MOVEDOWN)
-			for (int x = g_road[i].start_pos.x; x < g_road[i].end_pos.x; x++) {
-				for (int y = g_road[i].start_pos.y; y < g_road[i].end_pos.y; y++) {					
-					textattr(0xFF);
-					gotoxy(x, y);
-					printf(" ");
-				}
-			}
-			if (g_road[i].way == MOVELEFT || g_road[i].way == MOVEUP)
-				for (int x = g_road[i].start_pos.x; x > g_road[i].end_pos.x; x--) {
-					for (int y = g_road[i].start_pos.y; y > g_road[i].end_pos.y; y--) {
-						textattr(0xFF);
+			textattr(0xFF);
+			switch (g_road[i].way)
+			{
+			case MOVEUP:
+				for (int x = g_road[i].start_pos.x; x < g_road[i].end_pos.x; x++) {
+					for (int y = g_road[i].start_pos.y; y > g_road[i].end_pos.y; y--) {						
 						gotoxy(x, y);
 						printf(" ");
 					}
 				}
+				break;
+			case MOVEDOWN:
+				for (int x = g_road[i].start_pos.x; x < g_road[i].end_pos.x; x++) {
+					for (int y = g_road[i].start_pos.y; y < g_road[i].end_pos.y; y++) {
+						gotoxy(x, y);
+						printf(" ");
+					}
+				}
+				break;
+			case MOVELEFT:
+				for (int x = g_road[i].start_pos.x; x > g_road[i].end_pos.x; x--) {
+					for (int y = g_road[i].start_pos.y; y < g_road[i].end_pos.y; y++) {
+						gotoxy(x, y);
+						printf(" ");
+					}
+				}
+				break;
+			case MOVERIGHT:
+				for (int x = g_road[i].start_pos.x; x < g_road[i].end_pos.x; x++) {
+					for (int y = g_road[i].start_pos.y; y < g_road[i].end_pos.y; y++) {
+						gotoxy(x, y);
+						printf(" ");
+					}
+				}
+				break;
+			default:
+				break;
+			}				
 			g_road[i].isUse = false;
 		}
 	}
 
 }
 
-void SetRoad(int startposx, int startposy, int endposx, int endposy, int way)
+
+//从上一条道路的结尾开始延伸其他的道路
+void SetRoad(int end,  int way)
 {
+	int g_startRoadX = GetHotel().pos.x;
+	int g_startRoadY = GetHotel().pos.y + 6;
 	for (int i = 0; i < MAX_ROAD; i++) {
-		if (!g_road->isUse) {
-			g_road->start_pos.x = startposx;
-			g_road->start_pos.y = startposy;
-			g_road->end_pos.x = endposx;
-			g_road->end_pos.y = endposy;
-			g_road->way = way;
-			g_road->isUse = true;
+		if ((g_road + i)->way == NONE) {
+			(g_road + i)->way = way;
+			(g_road + i)->isUse = true;
+			if (i == 0) {
+				(g_road + i)->start_pos.x = g_startRoadX;
+				(g_road + i)->start_pos.y = g_startRoadY;
+				(g_road + i)->end_pos.x = end;
+				(g_road + i)->end_pos.y = g_startRoadY + 3;
+			}
+			else {
+				switch ((g_road + i)->way)
+				{
+				case MOVEUP:
+					if ((g_road + i - 1)->way == MOVERIGHT) {
+						(g_road + i)->start_pos.x = (g_road + i - 1)->end_pos.x - 3;
+						(g_road + i)->end_pos.x = (g_road + i - 1)->end_pos.x;
+												
+					}
+					if ((g_road + i - 1)->way == MOVELEFT) {
+						(g_road + i)->start_pos.x = (g_road + i - 1)->end_pos.x + 1;
+						(g_road + i)->end_pos.x = (g_road + i - 1)->end_pos.x + 4;
+					}
+					(g_road + i)->start_pos.y = (g_road + i - 1)->end_pos.y - 4;
+					(g_road + i)->end_pos.y = end;
+					break;
+				case MOVEDOWN:
+					if ((g_road + i - 1)->way == MOVERIGHT) {
+						(g_road + i)->start_pos.x = (g_road + i - 1)->end_pos.x - 3;
+						(g_road + i)->end_pos.x = (g_road + i - 1)->end_pos.x;
+
+					}
+					if ((g_road + i - 1)->way == MOVELEFT) {
+						(g_road + i)->start_pos.x = (g_road + i - 1)->end_pos.x + 1;
+						(g_road + i)->end_pos.x = (g_road + i - 1)->end_pos.x + 4;
+					}
+					(g_road + i)->start_pos.y = (g_road + i - 1)->end_pos.y;
+					(g_road + i)->end_pos.y = end;
+					break;
+				case MOVELEFT:
+					if ((g_road + i - 1)->way == MOVEUP) {
+						(g_road + i)->start_pos.y = (g_road + i - 1)->end_pos.y + 1;
+						(g_road + i)->end_pos.y = (g_road + i - 1)->end_pos.y + 4;
+					}
+					if ((g_road + i - 1)->way == MOVEDOWN) {
+						(g_road + i)->start_pos.y = (g_road + i - 1)->end_pos.y - 3;
+						(g_road + i)->end_pos.y = (g_road + i - 1)->end_pos.y;
+					}
+					(g_road + i)->start_pos.x = (g_road + i - 1)->end_pos.x - 4;
+					(g_road + i)->end_pos.x = end;
+					break;
+				case MOVERIGHT:
+					if ((g_road + i - 1)->way == MOVEUP) {
+						(g_road + i)->start_pos.y = (g_road + i - 1)->end_pos.y + 1;
+						(g_road + i)->end_pos.y = (g_road + i - 1)->end_pos.y + 4;
+					}
+					if ((g_road + i - 1)->way == MOVEDOWN) {
+						(g_road + i)->start_pos.y = (g_road + i - 1)->end_pos.y - 3;
+						(g_road + i)->end_pos.y = (g_road + i - 1)->end_pos.y;
+					}
+					(g_road + i)->start_pos.x = (g_road + i - 1)->end_pos.x;
+					(g_road + i)->end_pos.x = end;
+					break;
+				default:
+					break;
+				}				
+			}		
 			break;
 		}
 	}
