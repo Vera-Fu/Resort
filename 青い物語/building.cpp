@@ -22,10 +22,14 @@ void InitBuilding(void)
 		g_building[i].pos.y = 0;
 		g_building[i].type = BUILDING_TYPE_NONE;
 		g_building[i].isRemoveable = true;
+
+		g_building[i].buff = NOTHING;
+		g_building[i].debuff = NOTHING;
+		g_building[i].money = 0;
 	}
 	SetBuilding(25, 13, BUILDING_TYPE_NULL, true);
-	/*SetBuilding(35, 15, BUILDING_TYPE_NULL, true);
-	SetBuilding(35, 20, BUILDING_TYPE_SPA, false);
+	SetBuilding(35, 13, BUILDING_TYPE_NULL, true);
+	/*SetBuilding(35, 20, BUILDING_TYPE_SPA, false);
 	SetBuilding(50, 20, BUILDING_TYPE_STORE, false);*/
 }
 
@@ -35,7 +39,56 @@ void UnInitBuilding(void)
 
 void UpdateBuilding(void)
 {
-
+	for (int i = 0; i < MAX_BUILDING; i++)
+	{
+		switch (g_building[i].type) {
+		case BUILDING_TYPE_NULL:
+			g_building[i].debuff = NOTHING;
+			g_building[i].buff = NOTHING;
+			g_building[i].money = 0;
+			break;
+		case BUILDING_TYPE_SPA:
+			g_building[i].debuff = HUNGRY;
+			g_building[i].buff = TIRED;
+			g_building[i].money = 500;
+			break;
+		case BUILDING_TYPE_CONVENIENCE:
+			g_building[i].debuff = NOTHING;
+			g_building[i].buff = THIRST;
+			g_building[i].money = 500;
+			break;
+		case BUILDING_TYPE_RESTAURANT:
+			g_building[i].debuff = NOTHING;
+			g_building[i].buff = HUNGRY;
+			g_building[i].money = 500;
+			break;
+		case BUILDING_TYPE_MASSAGE:
+			g_building[i].debuff = NOTHING;
+			g_building[i].buff = TIRED;
+			g_building[i].money = 500;
+			break;
+		case BUILDING_TYPE_SING:
+			g_building[i].debuff = THIRST;
+			g_building[i].buff = BORING;
+			g_building[i].money = 500;
+			break;
+		case BUILDING_TYPE_POKER:
+			g_building[i].debuff = NOTHING;
+			g_building[i].buff = BORING;
+			g_building[i].money = 500;
+			break;
+		case BUILDING_TYPE_STORE:
+			g_building[i].debuff = NOTHING;
+			g_building[i].buff = NOTHING;
+			g_building[i].money = 500;
+			break;
+		case BACK:
+			break;
+		default:
+			break;
+		}
+	}
+	
 }
 
 void DrawBuilding(void)
@@ -145,6 +198,7 @@ void DrawBuilding(void)
 			default:
 				break;
 			}
+			//´óÃÅ»æÖÆ
 			textattr(0xFF);
 			gotoxy(g_building[i].pos.x + 1, g_building[i].pos.y + 3);
 			printf("    ");
