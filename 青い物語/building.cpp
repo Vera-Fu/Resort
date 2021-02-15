@@ -27,8 +27,9 @@ void InitBuilding(void)
 		g_building[i].debuff = NOTHING;
 		g_building[i].money = 0;
 	}
-	SetBuilding(25, 13, BUILDING_TYPE_NULL, true);
-	SetBuilding(35, 13, BUILDING_TYPE_NULL, true);
+
+	/*SetBuilding(25, 13, BUILDING_TYPE_NULL, true);
+	SetBuilding(35, 13, BUILDING_TYPE_NULL, true);*/
 	/*SetBuilding(35, 20, BUILDING_TYPE_SPA, false);
 	SetBuilding(50, 20, BUILDING_TYPE_STORE, false);*/
 }
@@ -206,7 +207,7 @@ void DrawBuilding(void)
 	}
 }
 
-void SetBuilding(int posx, int posy, int type, bool isremoveable)
+void SetBuilding(int posx, int posy, int type)
 {
 	int index = 0;
 	for (int i = 0; i < MAX_BUILDING; i++) {
@@ -216,7 +217,15 @@ void SetBuilding(int posx, int posy, int type, bool isremoveable)
 			g_building[i].pos.y = posy;
 			g_building[i].type = type;
 			g_building[i].index = index;
-			g_building[i].isRemoveable = isremoveable;
+
+			if (g_building[i].type == BUILDING_TYPE_NULL) {
+				g_building[i].isRemoveable = true;
+			}
+			else
+			{
+				g_building[i].isRemoveable = false;
+			}
+			
 			MAX_INDEX = index;
 			break;
 		}

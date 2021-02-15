@@ -8,7 +8,8 @@
 #ifndef MENU_H_
 #define MENU_H_
 
-#include"choose.h"
+#include "choose.h"
+#include "customer.h"
 
 void InitMenu(void);
 void UnInitMenu(void);

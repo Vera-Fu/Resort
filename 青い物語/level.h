@@ -10,6 +10,7 @@
 
 #include "building.h"
 #include "road.h"
+#include "customer.h"
 
 void InitLevel(void);
 void UnInitLevel(void);

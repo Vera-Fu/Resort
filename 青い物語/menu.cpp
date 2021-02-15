@@ -11,9 +11,9 @@
 #include "conioex.h"
 
 int g_index0 = 0;	//值等于1时，绘制第一个菜单；值等于2时，绘制第二个菜单,值等于3时，绘制第三个菜单
-int g_index1 = 0;	//控制第一个菜单的绘制
-int g_index2 = 0;
-int g_index3 = 0;
+int g_index1 = 0;	//第一个菜单的选项索引
+int g_index2 = 0;	//第二个菜单的选项索引
+int g_index3 = 0;	//第三个菜单的选项索引
 
 int buildSound = opensound((char*)"sound\\build.mp3");
 int removeSound = opensound((char*)"sound\\remove.mp3");
@@ -166,11 +166,10 @@ void UpdateMenu(void)
 			if (!g_menu.isPush) {
 				playsound(buttonpushSound, 0);
 				g_menu.isPush = true;
-				switch (g_index1)
-				{
-				case REMOVE:
-					if (g_index2 == YES)
+				if (g_index2 == YES) {
+					switch (g_index1)
 					{
+					case REMOVE:
 						if ((GetBuilding() + GetChoose().index)->type == BUILDING_TYPE_NULL) {
 							gotoxy(118, 23);
 							printf("这是空地！");
@@ -179,21 +178,23 @@ void UpdateMenu(void)
 							gotoxy(118, 23);
 							printf("不可拆除！");
 						}
-						
+
 						else {
 							(GetBuilding() + GetChoose().index)->type = BUILDING_TYPE_NULL;
 							playsound(removeSound, 0);
 							gotoxy(118, 23);
 							printf("拆除成功！");
-						}												
+						}
+						break;
+					case START:
+						GetCustomer()->isMoving = true;
+						break;
+					case TITLE:
+						break;
+					default:
+						break;
 					}
-
-					break;
-				case TITLE:
-					break;
-				default:
-					break;
-				}
+				}				
 				clear = true;
 				g_menu.pos.y = 3;
 				g_index1 = BUILD;

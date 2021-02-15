@@ -12,6 +12,7 @@
 #include "menu.h"
 #include "road.h"
 #include "customer.h"
+#include "level.h"
 
 #include "conioex.h"
 
@@ -79,40 +80,44 @@ void Init(void)
 {
 	InitMap();
 	InitBuilding();
-	InitChoose();
 	InitMenu();
 	InitRoad();
 	InitCustomer();
+	InitLevel();
+	InitChoose();
 }
 
 void Uninit(void)
 {	
 	UnInitMap();
 	UnInitBuilding();
-	UnInitChoose();
 	UnInitMenu();
 	UnInitRoad();
 	UnInitCustomer();
+	UnInitLevel();
+	UnInitChoose();
 }
 
 void Update(void)
 {
 	UpdateMap();
 	UpdateBuilding();
-	UpdateChoose();
 	UpdateMenu();
 	UpdateRoad();
 	UpdateCustomer();
+	UpdateLevel();
+	UpdateChoose();
 }
 
 void Draw(void)
 {
 	DrawMap();
 	DrawBuilding();
-	DrawChoose();
 	DrawMenu();
 	DrawRoad();
 	DrawCustomer();
+	DrawLevel();
+	DrawChoose();
 }
 
 #ifdef _DEBUG

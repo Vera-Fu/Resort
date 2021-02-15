@@ -18,7 +18,7 @@ void UnInitBuilding(void);
 void UpdateBuilding(void);
 void DrawBuilding(void);
 
-void SetBuilding(int posx, int posy, int type, bool isremoveable);
+void SetBuilding(int posx, int posy, int type);
 
 int GetMaxIndex(void);
 
