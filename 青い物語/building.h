@@ -13,6 +13,14 @@
 
 #define MAX_BUILDING 10
 
+#define BUILDING_MONEY_SPA 1000
+#define BUILDING_MONEY_CONVENIENCE 500
+#define BUILDING_MONEY_RESTAURANT 1000
+#define BUILDING_MONEY_MASSAGE 1000
+#define BUILDING_MONEY_SING 500
+#define BUILDING_MONEY_POKER 500
+#define BUILDING_MONEY_STORE 500
+
 void InitBuilding(void);
 void UnInitBuilding(void);
 void UpdateBuilding(void);

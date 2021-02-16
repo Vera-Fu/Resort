@@ -51,37 +51,37 @@ void UpdateBuilding(void)
 		case BUILDING_TYPE_SPA:
 			g_building[i].debuff = HUNGRY;
 			g_building[i].buff = TIRED;
-			g_building[i].money = 500;
+			g_building[i].money = BUILDING_MONEY_SPA;
 			break;
 		case BUILDING_TYPE_CONVENIENCE:
 			g_building[i].debuff = NOTHING;
 			g_building[i].buff = THIRST;
-			g_building[i].money = 500;
+			g_building[i].money = BUILDING_MONEY_CONVENIENCE;
 			break;
 		case BUILDING_TYPE_RESTAURANT:
 			g_building[i].debuff = NOTHING;
 			g_building[i].buff = HUNGRY;
-			g_building[i].money = 500;
+			g_building[i].money = BUILDING_MONEY_RESTAURANT;
 			break;
 		case BUILDING_TYPE_MASSAGE:
 			g_building[i].debuff = NOTHING;
 			g_building[i].buff = TIRED;
-			g_building[i].money = 500;
+			g_building[i].money = BUILDING_MONEY_MASSAGE;
 			break;
 		case BUILDING_TYPE_SING:
 			g_building[i].debuff = THIRST;
 			g_building[i].buff = BORING;
-			g_building[i].money = 500;
+			g_building[i].money = BUILDING_MONEY_SING;
 			break;
 		case BUILDING_TYPE_POKER:
 			g_building[i].debuff = NOTHING;
 			g_building[i].buff = BORING;
-			g_building[i].money = 500;
+			g_building[i].money = BUILDING_MONEY_POKER;
 			break;
 		case BUILDING_TYPE_STORE:
 			g_building[i].debuff = NOTHING;
 			g_building[i].buff = NOTHING;
-			g_building[i].money = 500;
+			g_building[i].money = BUILDING_MONEY_STORE;
 			break;
 		case BACK:
 			break;
@@ -205,6 +205,9 @@ void DrawBuilding(void)
 			printf("    ");
 		}		
 	}
+
+
+
 }
 
 void SetBuilding(int posx, int posy, int type)

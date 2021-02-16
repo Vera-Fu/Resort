@@ -20,7 +20,6 @@ int removeSound = opensound((char*)"sound\\remove.mp3");
 int menubuttonSound = opensound((char*)"sound\\button01.mp3");
 int buttonpushSound = opensound((char*)"sound\\buttonpush.mp3");
 
-
 bool clear = true;
 
 MENU g_menu;
@@ -28,8 +27,8 @@ MENU g_menu;
 void InitMenu(void)
 {
 	textattr(0x0F);
+	//菜单界面
 	gotoxy(110, 1);
-	//highvideo();
 	printf("┏");
 	for (int i = 0; i < 25; i++) {
 		printf("━");
@@ -52,6 +51,54 @@ void InitMenu(void)
 	gotoxy(135, 21);
 	printf("┛");
 
+	//弹幕和建筑属性界面
+	gotoxy(105, 22);
+	printf("┏");
+	for (int i = 0; i < 35; i++) {
+		printf("━");
+	}
+	gotoxy(140, 22);
+	printf("┓");
+	for (int i = 1; i < 8; i++) {
+		gotoxy(105, 22 + i);
+		printf("┃");
+	}
+	for (int i = 1; i < 8; i++) {
+		gotoxy(140, 22 + i);
+		printf("┃");
+	}
+	gotoxy(105, 30);
+	printf("┗");
+	for (int i = 0; i < 35; i++) {
+		printf("━");
+	}
+	gotoxy(140, 30);
+	printf("┛");
+
+	//顾客详情界面
+	gotoxy(105, 31);
+	printf("┏");
+	for (int i = 0; i < 35; i++) {
+		printf("━");
+	}
+	gotoxy(140, 31);
+	printf("┓");
+	for (int i = 1; i < 8; i++) {
+		gotoxy(105, 31 + i);
+		printf("┃");
+	}
+	for (int i = 1; i < 8; i++) {
+		gotoxy(140, 31 + i);
+		printf("┃");
+	}
+	gotoxy(105, 39);
+	printf("┗");
+	for (int i = 0; i < 35; i++) {
+		printf("━");
+	}
+	gotoxy(140, 39);
+	printf("┛");
+
 	g_menu.pos.x = 115;
 	g_menu.pos.y = 3;
 	g_menu.oldpos.x = 115;
@@ -70,8 +117,8 @@ void UpdateMenu(void)
 	if (g_index0 == MENU1)
 	{
 		if (inport(PK_UP)) {
-			if (!g_menu.isPush)
-			{
+			if (!g_menu.isPush) {
+				clearMenu();
 				playsound(menubuttonSound, 0);
 				g_menu.isPush = true;
 				g_index1--;
@@ -84,6 +131,7 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_DOWN)) {
 			if (!g_menu.isPush) {
+				clearMenu();
 				playsound(menubuttonSound, 0);
 				g_menu.isPush = true;
 				g_index1++;
@@ -96,6 +144,7 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_ENTER)) {
 			if (!g_menu.isPush) {
+				clearMenu();
 				playsound(buttonpushSound, 0);
 				g_menu.isPush = true;
 				switch (g_index1)
@@ -140,6 +189,7 @@ void UpdateMenu(void)
 	{
 		if (inport(PK_UP)) {
 			if (!g_menu.isPush) {
+				clearMenu();
 				playsound(menubuttonSound, 0);
 				g_menu.isPush = true;
 				g_index2--;
@@ -152,6 +202,7 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_DOWN)) {
 			if (!g_menu.isPush) {
+				clearMenu();
 				playsound(menubuttonSound, 0);
 				g_menu.isPush = true;
 				g_index2++;
@@ -164,6 +215,7 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_ENTER)) {
 			if (!g_menu.isPush) {
+				clearMenu();
 				playsound(buttonpushSound, 0);
 				g_menu.isPush = true;
 				if (g_index2 == YES) {
@@ -211,6 +263,7 @@ void UpdateMenu(void)
 	{
 		if (inport(PK_UP)) {
 			if (!g_menu.isPush) {
+				clearMenu();
 				playsound(menubuttonSound, 0);
 				g_menu.isPush = true;
 				g_index3--;
@@ -226,6 +279,7 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_DOWN)) {
 			if (!g_menu.isPush) {
+				clearMenu();
 				playsound(menubuttonSound, 0);
 				g_menu.isPush = true;
 				g_index3++;
@@ -241,6 +295,7 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_ENTER)) {
 			if (!g_menu.isPush) {
+				clearMenu();
 				playsound(buttonpushSound, 0);
 				g_menu.isPush = true;
 				if ((GetBuilding() + GetChoose().index)->type != BUILDING_TYPE_NULL) {
@@ -289,6 +344,8 @@ void UpdateMenu(void)
 		else {
 			g_menu.isPush = false;
 		}
+		
+		
 	}
 }
 
@@ -351,10 +408,111 @@ void DrawMenu(void)
 	printf("  ");
 	gotoxy(g_menu.pos.x, g_menu.pos.y);
 	printf("◆");
+
+	//不可拆除的绘制
+	/*if (!(GetBuilding() + GetChoose().index)->isRemoveable) {
+		printf(" (不可拆除)");
+	}
+	else
+	{
+		printf("           ");
+	}*/
+
+	//显示当前光标所指的建筑的属性
+	if (g_index0 == MENU3)
+	{
+		gotoxy(108, 24);
+		switch (g_index3)
+		{
+		case BUILDING_TYPE_SPA:
+			printf("建筑名称: 温泉");
+			gotoxy(108, 26);
+			printf("建筑收费: ￥%d", BUILDING_MONEY_SPA);
+			gotoxy(108, 28);
+			printf("建筑描述: ");
+			break;
+		case BUILDING_TYPE_CONVENIENCE:
+			printf("建筑名称: 便利店");
+			gotoxy(108, 26);
+			printf("建筑收费: ￥%d", BUILDING_MONEY_CONVENIENCE);
+			gotoxy(108, 28);
+			printf("建筑描述: ");
+			break;
+		case BUILDING_TYPE_RESTAURANT:
+			printf("建筑名称: 餐馆");
+			gotoxy(108, 26);
+			printf("建筑收费: ￥%d", BUILDING_MONEY_RESTAURANT);
+			gotoxy(108, 28);
+			printf("建筑描述: ");
+			break;
+		case BUILDING_TYPE_MASSAGE:
+			printf("建筑名称: 按摩店");
+			gotoxy(108, 26);
+			printf("建筑收费: ￥%d", BUILDING_MONEY_MASSAGE);
+			gotoxy(108, 28);
+			printf("建筑描述: ");
+			break;
+		case BUILDING_TYPE_SING:
+			printf("建筑名称: 卡拉OK");
+			gotoxy(108, 26);
+			printf("建筑收费: ￥%d", BUILDING_MONEY_SING);
+			gotoxy(108, 28);
+			printf("建筑描述: ");
+			break;
+		case BUILDING_TYPE_POKER:
+			printf("建筑名称: 棋牌室");
+			gotoxy(108, 26);
+			printf("建筑收费: ￥%d", BUILDING_MONEY_POKER);
+			gotoxy(108, 28);
+			printf("建筑描述: ");
+			break;
+		case BUILDING_TYPE_STORE:
+			printf("建筑名称: 特产店");
+			gotoxy(108, 26);
+			printf("建筑收费: ￥%d", BUILDING_MONEY_STORE);
+			gotoxy(108, 28);
+			printf("建筑描述: ");
+			break;
+		default:
+			break;
+		}
+	}
+
 }
 
-int GetMenu()
+void clearMenu(void)
 {
-	return 0;
+	gotoxy(105, 22);
+	printf("┏");
+	for (int i = 0; i < 35; i++) {
+		printf("━");
+	}
+	gotoxy(140, 22);
+	printf("┓");
+	for (int i = 1; i < 8; i++) {
+		gotoxy(105, 22 + i);
+		printf("┃");
+	}
+	for (int i = 1; i < 8; i++) {
+		gotoxy(140, 22 + i);
+		printf("┃");
+	}
+	gotoxy(105, 30);
+	printf("┗");
+	for (int i = 0; i < 35; i++) {
+		printf("━");
+	}
+	gotoxy(140, 30);
+	printf("┛");
+
+	for (int i = 0; i < 6; i++)
+	{
+		for (int j = 0; j < 31; j++)
+		{
+			gotoxy(106 + j, 23 + i);
+			printf(" ");
+		}
+	}
 }
+
 

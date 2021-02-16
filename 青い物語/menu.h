@@ -15,6 +15,7 @@ void InitMenu(void);
 void UnInitMenu(void);
 void UpdateMenu(void);
 void DrawMenu(void);
+void clearMenu(void);
 
 int GetMenu();
 

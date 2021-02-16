@@ -128,8 +128,6 @@ void UpdateCustomer(void)
 							g_customer.pos.x -= 1;
 						}
 						GoInto();
-						msleep(2000);
-						playsound(money, 0);
 						g_customer.status[j] = (GetBuilding() + i)->debuff;
 						g_customer.money -= (GetBuilding() + i)->money;	
 						if ((GetBuilding() + i)->type == BUILDING_TYPE_STORE) {
@@ -140,9 +138,6 @@ void UpdateCustomer(void)
 				g_customer.speed = SPEED;
 			}
 			
-						
-			gotoxy(118, 26);
-			printf("index=%d", (GetBuilding() + i)->type);
 		}
 	}
 
@@ -169,13 +164,34 @@ void DrawCustomer(void)
 	printf("▼");
 	textattr(0x0F);
 
-	//----------------
-	gotoxy(118, 27);
-	printf("money=%d", g_customer.money);
-	gotoxy(118, 28);
-	printf("status0=%d", g_customer.status[0]);
-	gotoxy(118, 29);
-	printf("status1=%d", g_customer.status[1]);
+	//顾客状态的显示
+	gotoxy(108, 33);
+	printf("顾客");
+	gotoxy(108, 35);
+	printf("顾客所持有的金钱: ￥%d", g_customer.money);
+	gotoxy(108, 37);
+	printf("顾客状态: ");
+	for (int i = 0; i < MAX_STATUS; i++)
+	{
+		switch (g_customer.status[i])
+		{
+		case HUNGRY:
+			printf("饥饿 ");
+			break;
+		case BORING:
+			printf("无聊 ");
+			break;
+		case TIRED:
+			printf("疲劳 ");
+			break;
+		case THIRST:
+			printf("口渴 ");
+			break;
+		default:
+			break;
+		}
+	}
+	
 }
 
 void SetCustomer(int money, int status0, int status1, int status2, int status3)
@@ -206,4 +222,11 @@ void GoInto(void)
 	printf("  ");
 
 	textattr(0x0F);
+
+	msleep(2000);
+	playsound(money, 0);
+	gotoxy(108, 35);
+	printf("顾客所持有的金钱: ￥         ");
+	gotoxy(108, 37);
+	printf("顾客状态:                    ");
 }
