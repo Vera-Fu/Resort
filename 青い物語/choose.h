@@ -15,6 +15,7 @@ void InitChoose(void);
 void UnInitChoose(void);
 void UpdateChoose(void);
 void DrawChoose(void);
+void clearMenu(void);
 
 void SetChoose(int posx, int posy);
 
@@ -25,6 +26,7 @@ typedef struct {
 
 	bool isPush;	//用于控制按键，使其落下时只执行一次
 	int index;		//保存目前所指的建筑索引
+	int isShow;
 }CHOOSE;
 
 CHOOSE GetChoose();

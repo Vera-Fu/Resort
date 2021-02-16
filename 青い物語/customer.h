@@ -12,6 +12,7 @@
 #include "road.h"
 #include "building.h"
 #include "map.h"
+#include "menu.h"
 
 #define SPEED 0.35
 #define MAX_STATUS 4
@@ -22,6 +23,7 @@ void UpdateCustomer(void);
 void DrawCustomer(void);
 void SetCustomer(int money, int status0 = NOTHING,int status1 = NOTHING, int status2 = NOTHING, int status3 = NOTHING);
 void GoInto(void);
+void clearLog(void);
 
 typedef struct {
 	FLOAT2 pos;
@@ -33,6 +35,8 @@ typedef struct {
 
 	bool isGoInto;
 	bool isMoving;
+	bool isBuy;
+	bool isEnd;
 }CUSTOMER;
 
 CUSTOMER* GetCustomer(void);

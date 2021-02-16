@@ -19,11 +19,11 @@ void InitLevel(void)
 
 	//SetHotel(5, 11);
 	SetRoad(80, MOVERIGHT);
-	SetBuilding(25, 13, BUILDING_TYPE_NULL);
+	SetBuilding(25, 13, BUILDING_TYPE_SPA);
 	SetBuilding(35, 13, BUILDING_TYPE_NULL);
-	SetBuilding(45, 13, BUILDING_TYPE_SPA);
+	SetBuilding(45, 13, BUILDING_TYPE_NULL);
 	SetBuilding(55, 13, BUILDING_TYPE_NULL);
-	SetCustomer(2000, HUNGRY, BORING);
+	SetCustomer(2000, HUNGRY, TIRED);
 }
 
 void UnInitLevel(void)

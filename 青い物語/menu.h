@@ -11,13 +11,18 @@
 #include "choose.h"
 #include "customer.h"
 
+#define logx 118
+#define logy 24
+
 void InitMenu(void);
 void UnInitMenu(void);
 void UpdateMenu(void);
 void DrawMenu(void);
+void clearLog(void);
 void clearMenu(void);
 
-int GetMenu();
+
+//int GetMenu();
 
 typedef struct {
 	INT2 pos;
@@ -31,7 +36,8 @@ enum Menu0
 {
 	MENU1,
 	MENU2,
-	MENU3
+	MENU3,
+	CLEAR
 };
 
 enum Menu1

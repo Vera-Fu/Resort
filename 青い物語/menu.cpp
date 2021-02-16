@@ -3,6 +3,7 @@
 // menu.cpp
 // author:fuyizhi
 // Date:2021/02/08
+// 注:在清除菜单的部分，不小心用了两种不同的实现方式来进行清除，一种是全局布尔变量，一种是函数(2021.2.16更新：已统一为使用函数)
 //=================================================
 
 #include "menu.h"
@@ -20,7 +21,7 @@ int removeSound = opensound((char*)"sound\\remove.mp3");
 int menubuttonSound = opensound((char*)"sound\\button01.mp3");
 int buttonpushSound = opensound((char*)"sound\\buttonpush.mp3");
 
-bool clear = true;
+//bool clearMenu();
 
 MENU g_menu;
 
@@ -118,7 +119,7 @@ void UpdateMenu(void)
 	{
 		if (inport(PK_UP)) {
 			if (!g_menu.isPush) {
-				clearMenu();
+				clearLog();
 				playsound(menubuttonSound, 0);
 				g_menu.isPush = true;
 				g_index1--;
@@ -131,7 +132,7 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_DOWN)) {
 			if (!g_menu.isPush) {
-				clearMenu();
+				clearLog();
 				playsound(menubuttonSound, 0);
 				g_menu.isPush = true;
 				g_index1++;
@@ -144,31 +145,31 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_ENTER)) {
 			if (!g_menu.isPush) {
-				clearMenu();
+				clearLog();
 				playsound(buttonpushSound, 0);
 				g_menu.isPush = true;
 				switch (g_index1)
 				{
 				case BUILD:
-					clear = true;
+					clearMenu();
 					g_menu.pos.y = 3;
 					g_index3 = BUILDING_TYPE_SPA;
 					g_index0 = MENU3;
 					break;
 				case REMOVE:
-					clear = true;
+					clearMenu();
 					g_menu.pos.y = 10;
 					g_index2 = YES;
 					g_index0 = MENU2;
 					break;
 				case START:
-					clear = true;
+					clearMenu();
 					g_menu.pos.y = 10;
 					g_index2 = YES;
 					g_index0 = MENU2;
 					break;
 				case TITLE:
-					clear = true;
+					clearMenu();
 					g_menu.pos.y = 10;
 					g_index2 = YES;
 					g_index0 = MENU2;
@@ -189,7 +190,7 @@ void UpdateMenu(void)
 	{
 		if (inport(PK_UP)) {
 			if (!g_menu.isPush) {
-				clearMenu();
+				clearLog();
 				playsound(menubuttonSound, 0);
 				g_menu.isPush = true;
 				g_index2--;
@@ -202,7 +203,7 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_DOWN)) {
 			if (!g_menu.isPush) {
-				clearMenu();
+				clearLog();
 				playsound(menubuttonSound, 0);
 				g_menu.isPush = true;
 				g_index2++;
@@ -215,7 +216,7 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_ENTER)) {
 			if (!g_menu.isPush) {
-				clearMenu();
+				clearLog();
 				playsound(buttonpushSound, 0);
 				g_menu.isPush = true;
 				if (g_index2 == YES) {
@@ -223,34 +224,42 @@ void UpdateMenu(void)
 					{
 					case REMOVE:
 						if ((GetBuilding() + GetChoose().index)->type == BUILDING_TYPE_NULL) {
-							gotoxy(118, 23);
+							gotoxy(logx, logy);
 							printf("这是空地！");
 						}
 						else if (!(GetBuilding() + GetChoose().index)->isRemoveable) {
-							gotoxy(118, 23);
+							gotoxy(logx, logy);
 							printf("不可拆除！");
 						}
 
 						else {
 							(GetBuilding() + GetChoose().index)->type = BUILDING_TYPE_NULL;
 							playsound(removeSound, 0);
-							gotoxy(118, 23);
+							gotoxy(logx, logy);
 							printf("拆除成功！");
 						}
 						break;
 					case START:
 						GetCustomer()->isMoving = true;
+						gotoxy(g_menu.oldpos.x, g_menu.oldpos.y);
+						printf("  ");
+						g_index0 = CLEAR;
+						clearMenu();
+						//GetChoose().isShow = true;
 						break;
 					case TITLE:
 						break;
 					default:
 						break;
 					}
-				}				
-				clear = true;
-				g_menu.pos.y = 3;
-				g_index1 = BUILD;
-				g_index0 = MENU1;
+				}
+				if (g_index0 != CLEAR)
+				{
+					clearMenu();
+					g_menu.pos.y = 3;
+					g_index1 = BUILD;
+					g_index0 = MENU1;
+				}	
 			}
 		}
 		else {
@@ -263,7 +272,7 @@ void UpdateMenu(void)
 	{
 		if (inport(PK_UP)) {
 			if (!g_menu.isPush) {
-				clearMenu();
+				clearLog();
 				playsound(menubuttonSound, 0);
 				g_menu.isPush = true;
 				g_index3--;
@@ -279,7 +288,7 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_DOWN)) {
 			if (!g_menu.isPush) {
-				clearMenu();
+				clearLog();
 				playsound(menubuttonSound, 0);
 				g_menu.isPush = true;
 				g_index3++;
@@ -295,11 +304,11 @@ void UpdateMenu(void)
 		}
 		else if (inport(PK_ENTER)) {
 			if (!g_menu.isPush) {
-				clearMenu();
+				clearLog();
 				playsound(buttonpushSound, 0);
 				g_menu.isPush = true;
 				if ((GetBuilding() + GetChoose().index)->type != BUILDING_TYPE_NULL) {
-					gotoxy(118, 23);
+					gotoxy(logx, logy);
 					printf("已有建筑！");
 				}
 				else {
@@ -334,7 +343,7 @@ void UpdateMenu(void)
 						playsound(buildSound, 0);
 					}
 				}				
-				clear = true;
+				clearMenu();
 				g_menu.pos.y = 3;
 				g_index1 = BUILD;
 				g_index0 = MENU1;
@@ -351,14 +360,14 @@ void UpdateMenu(void)
 
 void DrawMenu(void)
 {
-	if (clear == true) {
+	/*if (clear = true) {
 		for (int i = 0; i <= 17; i++) {
 			textattr(0x0F);
 			gotoxy(115, 2 + i);
 			printf("                    ");
 		}
 		clear = false;
-	}
+	}*/
 	
 	switch (g_index0)
 	{
@@ -404,10 +413,15 @@ void DrawMenu(void)
 	default:
 		break;
 	}
-	gotoxy(g_menu.oldpos.x, g_menu.oldpos.y);
-	printf("  ");
-	gotoxy(g_menu.pos.x, g_menu.pos.y);
-	printf("◆");
+
+	if (g_index0 != CLEAR)
+	{
+		gotoxy(g_menu.oldpos.x, g_menu.oldpos.y);
+		printf("  ");
+		gotoxy(g_menu.pos.x, g_menu.pos.y);
+		printf("◆");
+	}
+	
 
 	//不可拆除的绘制
 	/*if (!(GetBuilding() + GetChoose().index)->isRemoveable) {
@@ -480,31 +494,8 @@ void DrawMenu(void)
 
 }
 
-void clearMenu(void)
+void clearLog(void)
 {
-	gotoxy(105, 22);
-	printf("┏");
-	for (int i = 0; i < 35; i++) {
-		printf("━");
-	}
-	gotoxy(140, 22);
-	printf("┓");
-	for (int i = 1; i < 8; i++) {
-		gotoxy(105, 22 + i);
-		printf("┃");
-	}
-	for (int i = 1; i < 8; i++) {
-		gotoxy(140, 22 + i);
-		printf("┃");
-	}
-	gotoxy(105, 30);
-	printf("┗");
-	for (int i = 0; i < 35; i++) {
-		printf("━");
-	}
-	gotoxy(140, 30);
-	printf("┛");
-
 	for (int i = 0; i < 6; i++)
 	{
 		for (int j = 0; j < 31; j++)
@@ -514,5 +505,4 @@ void clearMenu(void)
 		}
 	}
 }
-
 

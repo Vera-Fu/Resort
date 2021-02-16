@@ -32,6 +32,8 @@ void InitCustomer(void)
 
 	g_customer.isGoInto = true;
 	g_customer.isMoving = false;
+	g_customer.isBuy = false;
+	g_customer.isEnd = false;
 	
 	//SetCustomer(2000, HUNGRY);
 }
@@ -83,6 +85,7 @@ void UpdateCustomer(void)
 			}
 			break;
 		case NONE:
+			g_customer.isEnd = true;
 			break;
 		default:
 			break;
@@ -96,8 +99,59 @@ void UpdateCustomer(void)
 			for (int j = 0; j < MAX_STATUS; j++)
 			{
 				//用于判断该建筑是否会给顾客继续追加身上已有的状态，如果会，则不进入
-				if (g_customer.status[i] == (GetBuilding() + i)->debuff && g_customer.status[i] != NOTHING)
+				if (g_customer.status[j] == (GetBuilding() + i)->debuff && g_customer.status[j] != NOTHING)
 				{
+					switch ((GetBuilding() + i)->debuff)
+					{
+					case HUNGRY:
+						gotoxy(logx, logy);
+						printf("肚子好饿.");
+						msleep(750);
+						printf(".");
+						msleep(750);
+						printf(".");
+						msleep(500);
+						clearLog();
+						break;
+					case BORING:
+						gotoxy(logx, logy);
+						printf("好无聊.");
+						msleep(750);
+						printf(".");
+						msleep(750);
+						printf(".");
+						msleep(500);
+						clearLog();
+						break;
+					case TIRED:
+						gotoxy(logx, logy);
+						printf("好累.");
+						msleep(750);
+						printf(".");
+						msleep(750);
+						printf(".");
+						msleep(500);
+						clearLog();
+						break;
+					case THIRST:
+						gotoxy(logx, logy);
+						printf("口好渴.");
+						msleep(750);
+						printf(".");
+						msleep(750);
+						printf(".");
+						msleep(500);
+						clearLog();
+						break;
+					default:
+						break;
+					}
+					if ((GetRoad() + index)->way == MOVERIGHT) {
+						g_customer.pos.x += 1;
+					}
+					if ((GetRoad() + index)->way == MOVELEFT) {
+						g_customer.pos.x -= 1;
+					}
 					g_customer.isGoInto = false;
 					g_customer.speed = SPEED;
 					break;
@@ -110,14 +164,38 @@ void UpdateCustomer(void)
 					g_customer.isGoInto = true;
 				}	
 				if (j == MAX_STATUS - 1) {
+					if ((GetRoad() + index)->way == MOVERIGHT) {
+						g_customer.pos.x += 1;
+					}
+					if ((GetRoad() + index)->way == MOVELEFT) {
+						g_customer.pos.x -= 1;
+					}
 					g_customer.speed = SPEED;
 				}
 			}
 			//判断是否进入该建筑
-			if (g_customer.isGoInto && (GetBuilding() + i)->type != BUILDING_TYPE_NULL ) {
+			if (g_customer.isGoInto && (GetBuilding() + i)->type != BUILDING_TYPE_NULL) {
 				g_customer.speed = 0;
 				for (int j = 0; j < MAX_STATUS; j++)
 				{
+					if ((GetBuilding() + i)->type == BUILDING_TYPE_STORE && g_customer.isBuy == true)
+					{
+						gotoxy(logx, logy);
+						printf("已经买过了.");
+						msleep(750);
+						printf(".");
+						msleep(750);
+						printf(".");
+						msleep(500);
+						clearLog();
+						if ((GetRoad() + index)->way == MOVERIGHT) {
+							g_customer.pos.x += 1;
+						}
+						if ((GetRoad() + index)->way == MOVELEFT) {
+							g_customer.pos.x -= 1;
+						}
+						break;
+					}
 					//状态和金钱处理
 					if (g_customer.status[j] == (GetBuilding() + i)->buff && g_customer.money >= (GetBuilding() + i)->money) {
 						msleep(1000);
@@ -131,6 +209,7 @@ void UpdateCustomer(void)
 						g_customer.status[j] = (GetBuilding() + i)->debuff;
 						g_customer.money -= (GetBuilding() + i)->money;	
 						if ((GetBuilding() + i)->type == BUILDING_TYPE_STORE) {
+							g_customer.isBuy = true;
 							break;
 						}
 					}
@@ -191,7 +270,33 @@ void DrawCustomer(void)
 			break;
 		}
 	}
-	
+
+	//结算界面绘制
+	/*if (g_customer.isEnd)
+	{	
+		
+	}
+	gotoxy(64, 17);
+	printf("┏");
+	for (int i = 0; i < 16; i++)
+	{
+		printf("━");
+	}
+	printf("┓");
+	for (int i = 1; i < 6; i++) {
+		gotoxy(64, 18 + i);
+		printf("┃");
+	}
+	for (int i = 1; i < 8; i++) {
+		gotoxy(80, 18 + i);
+		printf("┃");
+	}
+	gotoxy(64, 23);
+	printf("┗");
+	for (int i = 0; i < 16; i++) {
+		printf("━");
+	}
+	printf("┛");*/
 }
 
 void SetCustomer(int money, int status0, int status1, int status2, int status3)
