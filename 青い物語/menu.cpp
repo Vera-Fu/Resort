@@ -223,17 +223,17 @@ void UpdateMenu(void)
 					switch (g_index1)
 					{
 					case REMOVE:
-						if ((GetBuilding() + GetChoose().index)->type == BUILDING_TYPE_NULL) {
+						if ((GetBuilding() + GetChoose()->index)->type == BUILDING_TYPE_NULL) {
 							gotoxy(logx, logy);
 							printf("这是空地！");
 						}
-						else if (!(GetBuilding() + GetChoose().index)->isRemoveable) {
+						else if (!(GetBuilding() + GetChoose()->index)->isRemoveable) {
 							gotoxy(logx, logy);
 							printf("不可拆除！");
 						}
 
 						else {
-							(GetBuilding() + GetChoose().index)->type = BUILDING_TYPE_NULL;
+							(GetBuilding() + GetChoose()->index)->type = BUILDING_TYPE_NULL;
 							playsound(removeSound, 0);
 							gotoxy(logx, logy);
 							printf("拆除成功！");
@@ -245,7 +245,8 @@ void UpdateMenu(void)
 						printf("  ");
 						g_index0 = CLEAR;
 						clearMenu();
-						//GetChoose().isShow = true;
+						GetChoose()->isStart = true;
+						GetChoose()->isShow = true;
 						break;
 					case TITLE:
 						break;
@@ -307,32 +308,32 @@ void UpdateMenu(void)
 				clearLog();
 				playsound(buttonpushSound, 0);
 				g_menu.isPush = true;
-				if ((GetBuilding() + GetChoose().index)->type != BUILDING_TYPE_NULL) {
+				if ((GetBuilding() + GetChoose()->index)->type != BUILDING_TYPE_NULL) {
 					gotoxy(logx, logy);
 					printf("已有建筑！");
 				}
 				else {
 					switch (g_index3) {
 					case BUILDING_TYPE_SPA:
-						(GetBuilding() + GetChoose().index)->type = BUILDING_TYPE_SPA;
-						break;
-					case BUILDING_TYPE_CONVENIENCE:
-						(GetBuilding() + GetChoose().index)->type = BUILDING_TYPE_CONVENIENCE;
-						break;
-					case BUILDING_TYPE_RESTAURANT:
-						(GetBuilding() + GetChoose().index)->type = BUILDING_TYPE_RESTAURANT;
+						(GetBuilding() + GetChoose()->index)->type = BUILDING_TYPE_SPA;
+						break;						
+					case BUILDING_TYPE_CONVENIENCE:	
+						(GetBuilding() + GetChoose()->index)->type = BUILDING_TYPE_CONVENIENCE;
+						break;						
+					case BUILDING_TYPE_RESTAURANT:	
+						(GetBuilding() + GetChoose()->index)->type = BUILDING_TYPE_RESTAURANT;
 						break;
 					case BUILDING_TYPE_MASSAGE:
-						(GetBuilding() + GetChoose().index)->type = BUILDING_TYPE_MASSAGE;
+						(GetBuilding() + GetChoose()->index)->type = BUILDING_TYPE_MASSAGE;
 						break;
 					case BUILDING_TYPE_SING:
-						(GetBuilding() + GetChoose().index)->type = BUILDING_TYPE_SING;
+						(GetBuilding() + GetChoose()->index)->type = BUILDING_TYPE_SING;
 						break;
 					case BUILDING_TYPE_POKER:
-						(GetBuilding() + GetChoose().index)->type = BUILDING_TYPE_POKER;
+						(GetBuilding() + GetChoose()->index)->type = BUILDING_TYPE_POKER;
 						break;
 					case BUILDING_TYPE_STORE:
-						(GetBuilding() + GetChoose().index)->type = BUILDING_TYPE_STORE;
+						(GetBuilding() + GetChoose()->index)->type = BUILDING_TYPE_STORE;
 						break;
 					case BACK:
 						break;
@@ -435,6 +436,7 @@ void DrawMenu(void)
 	//显示当前光标所指的建筑的属性
 	if (g_index0 == MENU3)
 	{
+		textattr(0x0F);
 		gotoxy(108, 24);
 		switch (g_index3)
 		{
@@ -496,6 +498,7 @@ void DrawMenu(void)
 
 void clearLog(void)
 {
+	textattr(0x00);
 	for (int i = 0; i < 6; i++)
 	{
 		for (int j = 0; j < 31; j++)

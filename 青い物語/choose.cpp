@@ -24,6 +24,7 @@ void InitChoose(void)
 	g_choose.oldpos.y = g_choose.pos.y;
 	g_choose.index = 0;
 	g_choose.isPush = false;
+	g_choose.isStart = false;
 	g_choose.isShow = false;
 
 	SetChoose(g_buliding->pos.x + 2, g_buliding->pos.y - 1);
@@ -50,6 +51,11 @@ void UpdateChoose(void)
 				g_choose.index++;
 				SetChoose((g_buliding + g_choose.index)->pos.x + 2, (g_buliding + g_choose.index)->pos.y - 1);
 			}
+			if (g_choose.isStart)
+			{
+				clearMenu();
+				g_choose.isShow = true;
+			}
 		}	
 	} else if (inport(PK_LEFT)) {
 		if (!g_choose.isPush)
@@ -59,6 +65,11 @@ void UpdateChoose(void)
 				playsound(choosebuttonSound, 0);
 				g_choose.index--;
 				SetChoose((g_buliding + g_choose.index)->pos.x + 2, (g_buliding + g_choose.index)->pos.y - 1);
+			}
+			if (g_choose.isStart)
+			{
+				clearMenu();
+				g_choose.isShow = true;
 			}
 		}		
 	} 
@@ -84,6 +95,69 @@ void DrawChoose(void)
 		gotoxy(g_choose.pos.x - 4, g_choose.pos.y - 1);
 		printf("(不可拆除)");
 	}
+
+	//当开始关卡后，显示光标所指的建筑的信息
+	if (g_choose.isStart && g_choose.isShow)
+	{
+		gotoxy(112, 3);
+		switch ((g_buliding + g_choose.index)->type)
+		{
+		case BUILDING_TYPE_SPA:
+			printf("建筑名称: 温泉");
+			gotoxy(112, 5);
+			printf("建筑收费: ￥%d", BUILDING_MONEY_SPA);
+			gotoxy(112, 7);
+			printf("建筑描述: ");
+			break;
+		case BUILDING_TYPE_CONVENIENCE:
+			printf("建筑名称: 便利店");
+			gotoxy(112, 5);
+			printf("建筑收费: ￥%d", BUILDING_MONEY_CONVENIENCE);
+			gotoxy(112, 7);
+			printf("建筑描述: ");
+			break;
+		case BUILDING_TYPE_RESTAURANT:
+			printf("建筑名称: 餐馆");
+			gotoxy(112, 5);
+			printf("建筑收费: ￥%d", BUILDING_MONEY_RESTAURANT);
+			gotoxy(112, 7);
+			printf("建筑描述: ");
+			break;
+		case BUILDING_TYPE_MASSAGE:
+			printf("建筑名称: 按摩店");
+			gotoxy(112, 5);
+			printf("建筑收费: ￥%d", BUILDING_MONEY_MASSAGE);
+			gotoxy(112, 7);
+			printf("建筑描述: ");
+			break;
+		case BUILDING_TYPE_SING:
+			printf("建筑名称: 卡拉OK");
+			gotoxy(112, 5);
+			printf("建筑收费: ￥%d", BUILDING_MONEY_SING);
+			gotoxy(112, 7);
+			printf("建筑描述: ");
+			break;
+		case BUILDING_TYPE_POKER:
+			printf("建筑名称: 棋牌室");
+			gotoxy(112, 5);
+			printf("建筑收费: ￥%d", BUILDING_MONEY_POKER);
+			gotoxy(112, 7);
+			printf("建筑描述: ");
+			break;
+		case BUILDING_TYPE_STORE:
+			printf("建筑名称: 特产店");
+			gotoxy(112, 5);
+			printf("建筑收费: ￥%d", BUILDING_MONEY_STORE);
+			gotoxy(112, 7);
+			printf("建筑描述: ");
+			break;
+		default:
+			/*clearMenu();*/
+			
+			break;
+		}
+		g_choose.isShow = false;
+	}
 }
 
 void SetChoose(int posx, int posy)
@@ -92,16 +166,16 @@ void SetChoose(int posx, int posy)
 	g_choose.pos.y = posy;
 }
 
-CHOOSE GetChoose()
+CHOOSE* GetChoose()
 {
-	return g_choose;
+	return &g_choose;
 }
 
 void clearMenu(void)
 {
 	for (int i = 0; i <= 17; i++) {
 		textattr(0x0F);
-		gotoxy(115, 2 + i);
-		printf("                    ");
+		gotoxy(112, 2 + i);
+		printf("                       ");
 	}
 }

@@ -25,11 +25,14 @@ typedef struct {
 	INT2 oldpos;
 
 	bool isPush;	//用于控制按键，使其落下时只执行一次
+	bool isStart;	//判断是否已开始关卡
+	bool isShow;	//控制绘制只绘制一次
 	int index;		//保存目前所指的建筑索引
-	int isShow;
+	
+
 }CHOOSE;
 
-CHOOSE GetChoose();
+CHOOSE* GetChoose();
 
 #endif // !CHOOSE_H_
 

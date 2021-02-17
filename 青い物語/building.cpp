@@ -10,7 +10,6 @@
 #define CONIOEX
 #include "conioex.h"
 
-
 BUILDING g_building[MAX_BUILDING];
 
 static int MAX_INDEX;

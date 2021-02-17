@@ -13,6 +13,7 @@
 #include "road.h"
 #include "customer.h"
 #include "level.h"
+#include "score.h"
 
 #include "conioex.h"
 
@@ -85,6 +86,7 @@ void Init(void)
 	InitCustomer();
 	InitLevel();
 	InitChoose();
+	InitScore();
 }
 
 void Uninit(void)
@@ -96,6 +98,7 @@ void Uninit(void)
 	UnInitCustomer();
 	UnInitLevel();
 	UnInitChoose();
+	UnInitScore();
 }
 
 void Update(void)
@@ -107,6 +110,7 @@ void Update(void)
 	UpdateCustomer();
 	UpdateLevel();
 	UpdateChoose();
+	UpdateScore();
 }
 
 void Draw(void)
@@ -118,6 +122,7 @@ void Draw(void)
 	DrawCustomer();
 	DrawLevel();
 	DrawChoose();
+	DrawScore();
 }
 
 #ifdef _DEBUG
@@ -132,13 +137,13 @@ void DispFPS(void) {
 	printf("FPS:%d", g_nCountFPS);
 	// index
 	gotoxy(1, 2);	//表示位置設定
-	printf("index:%d", GetChoose().index);
+	printf("index:%d", GetChoose()->index);
 	// build_index
 	gotoxy(1, 3);	//表示位置設定
-	printf("build_index:%d", (GetBuilding() + GetChoose().index)->index);
+	printf("build_index:%d", (GetBuilding() + GetChoose()->index)->index);
 	// build_type
 	gotoxy(1, 4);	//表示位置設定
-	printf("build_type:%d", (GetBuilding() + GetChoose().index)->type);
+	printf("build_type:%d", (GetBuilding() + GetChoose()->index)->type);
 	
 
 	//　色設定もとに戻す

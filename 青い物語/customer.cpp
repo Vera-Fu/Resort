@@ -84,13 +84,20 @@ void UpdateCustomer(void)
 				index++;
 			}
 			break;
-		case NONE:
+		/*case NONE:
 			g_customer.isEnd = true;
-			break;
+			break;*/
 		default:
 			break;
 		}
-	}	
+	}
+	
+	//判断顾客是否已经走到尽头
+	if (g_customer.pos.x >= 80) {
+		g_customer.isEnd = true;
+	}
+
+	textattr(0x0F);
 	for (int i = 0; i < MAX_BUILDING; i++)
 	{
 		//用于碰撞检测
@@ -198,7 +205,7 @@ void UpdateCustomer(void)
 					}
 					//状态和金钱处理
 					if (g_customer.status[j] == (GetBuilding() + i)->buff && g_customer.money >= (GetBuilding() + i)->money) {
-						msleep(1000);
+						msleep(500);
 						if ((GetRoad() + index)->way == MOVERIGHT) {
 							g_customer.pos.x += 1;
 						}
@@ -328,7 +335,7 @@ void GoInto(void)
 
 	textattr(0x0F);
 
-	msleep(2000);
+	msleep(1500);
 	playsound(money, 0);
 	gotoxy(108, 35);
 	printf("顾客所持有的金钱: ￥         ");
