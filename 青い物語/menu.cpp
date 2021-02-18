@@ -11,17 +11,17 @@
 #define CONIOEX
 #include "conioex.h"
 
-int g_index0 = 0;	//值等于1时，绘制第一个菜单；值等于2时，绘制第二个菜单,值等于3时，绘制第三个菜单
-int g_index1 = 0;	//第一个菜单的选项索引
-int g_index2 = 0;	//第二个菜单的选项索引
-int g_index3 = 0;	//第三个菜单的选项索引
+int g_index0;	//值等于1时，绘制第一个菜单；值等于2时，绘制第二个菜单,值等于3时，绘制第三个菜单
+int g_index1;	//第一个菜单的选项索引
+int g_index2;	//第二个菜单的选项索引
+int g_index3;	//第三个菜单的选项索引
 
 bool isBuildingshow;
 
-int buildSound = opensound((char*)"sound\\build.mp3");
-int removeSound = opensound((char*)"sound\\remove.mp3");
-int menubuttonSound = opensound((char*)"sound\\button01.mp3");
-int buttonpushSound = opensound((char*)"sound\\buttonpush.mp3");
+static int buildSound;
+static int removeSound;
+static int menubuttonSound;
+static int buttonpushSound;
 
 //bool clearMenu();
 
@@ -29,6 +29,14 @@ MENU g_menu;
 
 void InitMenu(void)
 {
+	g_index0 = 0;
+	g_index1 = 0;
+	g_index2 = 0;
+	g_index3 = 0;
+	buildSound = opensound((char*)"sound\\build.mp3");
+	removeSound = opensound((char*)"sound\\remove.mp3");
+	menubuttonSound = opensound((char*)"sound\\button01.mp3");
+	buttonpushSound = opensound((char*)"sound\\buttonpush.mp3");
 	isBuildingshow = false;
 	textattr(0x0F);
 	//菜单界面
@@ -253,6 +261,11 @@ void UpdateMenu(void)
 						GetChoose()->isShow = true;
 						break;
 					case TITLE:
+						closesound(menubuttonSound);
+						closesound(buttonpushSound);
+						closesound(removeSound);
+						closesound(buildSound);
+						SetScene(TITLESCENE);
 						break;
 					default:
 						break;

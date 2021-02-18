@@ -1,4 +1,4 @@
-#include "title.h"
+ï»¿#include "title.h"
 
 #define CONIOEX
 #include "conioex.h"
@@ -17,9 +17,18 @@ static unsigned char g_title_data[] = {
 	0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,
 };
 
+int g_index = STARTGAME;
+bool isPush;
+
+static int menubuttonSound;
+static int buttonpushSound;
+
 void InitTitle(void)
 {
-	//ÓÎÏ·±êÌâ»æÖÆ
+	menubuttonSound = opensound((char*)"sound\\button01.mp3");
+	buttonpushSound = opensound((char*)"sound\\buttonpush.mp3");
+	isPush = false;
+	//æ¸¸æˆæ ‡é¢˜ç»˜åˆ¶
 	for (int i = 23; i < 123; i++) {
 		for (int j = 5; j < 16; j++) {
 			gotoxy(i, j);
@@ -39,37 +48,37 @@ void InitTitle(void)
 
 	textattr(0x0F);
 	gotoxy(55, 25);
-	printf("©³");
+	printf("â”");
 	for (int i = 0; i < 35; i++) {
-		printf("©¥");
+		printf("â”");
 	}
 	gotoxy(90, 25);
-	printf("©·");
+	printf("â”“");
 	for (int i = 1; i < 8; i++) {
 		gotoxy(55, 25 + i);
-		printf("©§");
+		printf("â”ƒ");
 	}
 	for (int i = 1; i < 8; i++) {
 		gotoxy(90, 25 + i);
-		printf("©§");
+		printf("â”ƒ");
 	}
 	gotoxy(55, 33);
-	printf("©»");
+	printf("â”—");
 	for (int i = 0; i < 35; i++) {
-		printf("©¥");
+		printf("â”");
 	}
 	gotoxy(90, 33);
-	printf("©¿");
+	printf("â”›");
 
-	//¿ªÊ¼ÓÎÏ·Óë½áÊøÓÎÏ·
+	//å¼€å§‹æ¸¸æˆä¸ç»“æŸæ¸¸æˆ
 	gotoxy(69, 27);
-	printf("¿ªÊ¼ÓÎÏ·");
+	printf("å¼€å§‹æ¸¸æˆ");
 	gotoxy(69, 31);
-	printf("½áÊøÓÎÏ·");
+	printf("ç»“æŸæ¸¸æˆ");
 
 	gotoxy(15, 21);
 	textattr(0x08);
-	printf("¨¡ö¨");
+	printf("â—¢â– â—£");
 	gotoxy(15, 22);
 	textattr(0x88);
 	printf("      ");
@@ -81,7 +90,7 @@ void InitTitle(void)
 
 	gotoxy(30, 35);
 	textattr(0x0C);
-	printf("¨¡ö¨");
+	printf("â—¢â– â—£");
 	gotoxy(30, 36);
 	textattr(0x44);
 	printf("      ");
@@ -93,7 +102,7 @@ void InitTitle(void)
 
 	gotoxy(45, 21);
 	textattr(0x0F);
-	printf("¨¡ö¨");
+	printf("â—¢â– â—£");
 	gotoxy(45, 22);
 	textattr(0xEE);
 	printf("      ");
@@ -105,7 +114,7 @@ void InitTitle(void)
 
 	gotoxy(60, 35);
 	textattr(0x0C);
-	printf("¨¡ö¨");
+	printf("â—¢â– â—£");
 	gotoxy(60, 36);
 	textattr(0xDD);
 	printf("      ");
@@ -117,7 +126,7 @@ void InitTitle(void)
 
 	gotoxy(75, 21);
 	textattr(0x04);
-	printf("¨¡ö¨");
+	printf("â—¢â– â—£");
 	gotoxy(75, 22);
 	textattr(0x55);
 	printf("      ");
@@ -129,7 +138,7 @@ void InitTitle(void)
 
 	gotoxy(90, 35);
 	textattr(0x07);
-	printf("¨¡ö¨");
+	printf("â—¢â– â—£");
 	gotoxy(90, 36);
 	textattr(0x23);
 	printf("      ");
@@ -141,7 +150,7 @@ void InitTitle(void)
 
 	gotoxy(105, 21);
 	textattr(0x0C);
-	printf("¨¡ö¨");
+	printf("â—¢â– â—£");
 	gotoxy(105, 22);
 	textattr(0x66);
 	printf("      ");
@@ -153,7 +162,7 @@ void InitTitle(void)
 
 	gotoxy(121, 35);
 	textattr(0x0F);
-	printf("¨¡ö¨");
+	printf("â—¢â– â—£");
 	gotoxy(121, 36);
 	textattr(0x77);
 	printf("      ");
@@ -166,12 +175,76 @@ void InitTitle(void)
 
 void UnInitTitle(void)
 {
+	closesound(menubuttonSound);
+	closesound(buttonpushSound);
 }
 
 void UpdateTitle(void)
 {
+	if (inport(PK_UP) || inport(PK_DOWN)) {
+		if (!isPush)
+		{
+			playsound(menubuttonSound, 0);
+			isPush = true;		
+			if (g_index == STARTGAME) {
+				g_index = ENDGAME;
+			}
+			else {
+				g_index = STARTGAME;
+			}
+		}
+	}
+	else {
+		isPush = false;
+	}
+	if (inport(PK_ENTER)) {
+		playsound(buttonpushSound, 0);
+		msleep(500);
+		switch (g_index)
+		{
+		case STARTGAME:
+			SetScene(GAMESCENE);
+			break;
+		case ENDGAME:
+			SetScene(ENDSCENE);
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 void DrawTitle(void)
 {
+	textattr(0x0F);
+	switch (g_index)
+	{
+	case STARTGAME:
+		gotoxy(67, 31);
+		printf("  ");
+		gotoxy(77, 31);
+		printf("  ");
+		gotoxy(67, 27);
+		printf("â—†");
+		gotoxy(77, 27);
+		printf("â—†");
+
+		break;
+	case ENDGAME:
+		gotoxy(67, 27);
+		printf("  ");
+		gotoxy(77, 27);
+		printf("  ");
+		gotoxy(67, 31);
+		printf("â—†");
+		gotoxy(77, 31);
+		printf("â—†");
+		break;
+	default:
+		break;
+	}
+	
+
+	
+
 }

@@ -15,6 +15,8 @@
 #include "level.h"
 #include "score.h"
 
+#include "scene.h"
+
 #include "title.h"
 
 #include "conioex.h"
@@ -44,34 +46,79 @@ void main(void)
 	dwCurrentTime =
 		nCountFrame = 0;
 
-	//初期化関数
-	Init();
-
 	do
 	{
-		dwCurrentTime = timeGetTime();
-		if ((dwCurrentTime - dwFPSLastTime) >= 500)	// 0.5秒ごとに実行
+		switch (GetScene())
 		{
-			g_nCountFPS = nCountFrame * 1000 / (dwCurrentTime - dwFPSLastTime);
-			dwFPSLastTime = dwCurrentTime;
-			nCountFrame = 0;
+		//标题界面
+		case TITLESCENE:
+			InitTitle();
+
+			do
+			{
+				dwCurrentTime = timeGetTime();
+				if ((dwCurrentTime - dwFPSLastTime) >= 500)	// 0.5秒ごとに実行
+				{
+					g_nCountFPS = nCountFrame * 1000 / (dwCurrentTime - dwFPSLastTime);
+					dwFPSLastTime = dwCurrentTime;
+					nCountFrame = 0;
+				}
+
+				if ((dwCurrentTime - dwExecLastTime) >= (1000 / 60))
+				{
+					dwExecLastTime = dwCurrentTime;
+
+					UpdateTitle();
+
+					DrawTitle();
+
+					nCountFrame++;
+				}
+			} while (GetScene() == TITLESCENE);
+
+			UnInitTitle();
+
+			break;
+
+		//关卡选择界面
+		case LEVELCHANGESCENE:
+		//游戏界面
+		case GAMESCENE:
+			Init();
+
+			do
+			{
+				dwCurrentTime = timeGetTime();
+				if ((dwCurrentTime - dwFPSLastTime) >= 500)	// 0.5秒ごとに実行
+				{
+					g_nCountFPS = nCountFrame * 1000 / (dwCurrentTime - dwFPSLastTime);
+					dwFPSLastTime = dwCurrentTime;
+					nCountFrame = 0;
+				}
+
+				if ((dwCurrentTime - dwExecLastTime) >= (1000 / 60))
+				{
+					dwExecLastTime = dwCurrentTime;
+
+					Update();
+
+				#ifdef _DEBUG
+					DispFPS();
+				#endif // _DEBUG
+
+					Draw();
+
+					nCountFrame++;
+				}
+			} while (GetScene() == GAMESCENE);
+			break;
+		default:
+			break;
 		}
-
-		if ((dwCurrentTime - dwExecLastTime) >= (1000 / 60))
-		{
-			dwExecLastTime = dwCurrentTime;
-
-			Update();
-
-#ifdef _DEBUG
-			DispFPS();
-#endif // _DEBUG
-
-			Draw();
-
-			nCountFrame++;
-		}
-	} while (!inport(PK_ESC));
+		
+	} while (GetScene() != ENDSCENE);
+	//初期化関数
+	
 
 	Uninit();
 

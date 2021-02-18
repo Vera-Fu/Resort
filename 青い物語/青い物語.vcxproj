@@ -148,6 +148,7 @@
     <ClCompile Include="map.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="road.cpp" />
+    <ClCompile Include="scene.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="title.cpp" />
   </ItemGroup>
@@ -161,6 +162,7 @@
     <ClInclude Include="map.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="road.h" />
+    <ClInclude Include="scene.h" />
     <ClInclude Include="score.h" />
     <ClInclude Include="title.h" />
   </ItemGroup>

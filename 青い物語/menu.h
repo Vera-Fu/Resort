@@ -10,6 +10,7 @@
 
 #include "choose.h"
 #include "customer.h"
+#include "scene.h"
 
 #define logx 118
 #define logy 24
