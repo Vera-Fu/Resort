@@ -16,6 +16,8 @@ int g_index1 = 0;	//第一个菜单的选项索引
 int g_index2 = 0;	//第二个菜单的选项索引
 int g_index3 = 0;	//第三个菜单的选项索引
 
+bool isBuildingshow;
+
 int buildSound = opensound((char*)"sound\\build.mp3");
 int removeSound = opensound((char*)"sound\\remove.mp3");
 int menubuttonSound = opensound((char*)"sound\\button01.mp3");
@@ -27,6 +29,7 @@ MENU g_menu;
 
 void InitMenu(void)
 {
+	isBuildingshow = false;
 	textattr(0x0F);
 	//菜单界面
 	gotoxy(110, 1);
@@ -155,6 +158,7 @@ void UpdateMenu(void)
 					g_menu.pos.y = 3;
 					g_index3 = BUILDING_TYPE_SPA;
 					g_index0 = MENU3;
+					isBuildingshow = true;
 					break;
 				case REMOVE:
 					clearMenu();
@@ -285,6 +289,7 @@ void UpdateMenu(void)
 					g_menu.pos.y = 19;
 					g_index3 = BACK;
 				}
+				isBuildingshow = true;
 			}
 		}
 		else if (inport(PK_DOWN)) {
@@ -301,6 +306,7 @@ void UpdateMenu(void)
 					g_menu.pos.y = 3;
 					g_index3 = BUILDING_TYPE_SPA;
 				}
+				isBuildingshow = true;
 			}
 		}
 		else if (inport(PK_ENTER)) {
@@ -436,64 +442,67 @@ void DrawMenu(void)
 	//显示当前光标所指的建筑的属性
 	if (g_index0 == MENU3)
 	{
-		textattr(0x0F);
-		gotoxy(108, 24);
-		switch (g_index3)
+		if (isBuildingshow)
 		{
-		case BUILDING_TYPE_SPA:
-			printf("建筑名称: 温泉");
-			gotoxy(108, 26);
-			printf("建筑收费: ￥%d", BUILDING_MONEY_SPA);
-			gotoxy(108, 28);
-			printf("建筑描述: ");
-			break;
-		case BUILDING_TYPE_CONVENIENCE:
-			printf("建筑名称: 便利店");
-			gotoxy(108, 26);
-			printf("建筑收费: ￥%d", BUILDING_MONEY_CONVENIENCE);
-			gotoxy(108, 28);
-			printf("建筑描述: ");
-			break;
-		case BUILDING_TYPE_RESTAURANT:
-			printf("建筑名称: 餐馆");
-			gotoxy(108, 26);
-			printf("建筑收费: ￥%d", BUILDING_MONEY_RESTAURANT);
-			gotoxy(108, 28);
-			printf("建筑描述: ");
-			break;
-		case BUILDING_TYPE_MASSAGE:
-			printf("建筑名称: 按摩店");
-			gotoxy(108, 26);
-			printf("建筑收费: ￥%d", BUILDING_MONEY_MASSAGE);
-			gotoxy(108, 28);
-			printf("建筑描述: ");
-			break;
-		case BUILDING_TYPE_SING:
-			printf("建筑名称: 卡拉OK");
-			gotoxy(108, 26);
-			printf("建筑收费: ￥%d", BUILDING_MONEY_SING);
-			gotoxy(108, 28);
-			printf("建筑描述: ");
-			break;
-		case BUILDING_TYPE_POKER:
-			printf("建筑名称: 棋牌室");
-			gotoxy(108, 26);
-			printf("建筑收费: ￥%d", BUILDING_MONEY_POKER);
-			gotoxy(108, 28);
-			printf("建筑描述: ");
-			break;
-		case BUILDING_TYPE_STORE:
-			printf("建筑名称: 特产店");
-			gotoxy(108, 26);
-			printf("建筑收费: ￥%d", BUILDING_MONEY_STORE);
-			gotoxy(108, 28);
-			printf("建筑描述: ");
-			break;
-		default:
-			break;
-		}
+			textattr(0x0F);
+			gotoxy(108, 24);
+			switch (g_index3)
+			{
+			case BUILDING_TYPE_SPA:
+				printf("建筑名称: 温泉");
+				gotoxy(108, 26);
+				printf("建筑收费: ￥%d", BUILDING_MONEY_SPA);
+				gotoxy(108, 28);
+				printf("建筑描述: 疲劳↓ 饥饿↑");
+				break;
+			case BUILDING_TYPE_CONVENIENCE:
+				printf("建筑名称: 便利店");
+				gotoxy(108, 26);
+				printf("建筑收费: ￥%d", BUILDING_MONEY_CONVENIENCE);
+				gotoxy(108, 28);
+				printf("建筑描述: 口渴↓");
+				break;
+			case BUILDING_TYPE_RESTAURANT:
+				printf("建筑名称: 餐馆");
+				gotoxy(108, 26);
+				printf("建筑收费: ￥%d", BUILDING_MONEY_RESTAURANT);
+				gotoxy(108, 28);
+				printf("建筑描述: 饥饿↓");
+				break;
+			case BUILDING_TYPE_MASSAGE:
+				printf("建筑名称: 按摩店");
+				gotoxy(108, 26);
+				printf("建筑收费: ￥%d", BUILDING_MONEY_MASSAGE);
+				gotoxy(108, 28);
+				printf("建筑描述: 疲劳↓");
+				break;
+			case BUILDING_TYPE_SING:
+				printf("建筑名称: 卡拉OK");
+				gotoxy(108, 26);
+				printf("建筑收费: ￥%d", BUILDING_MONEY_SING);
+				gotoxy(108, 28);
+				printf("建筑描述: 无聊↓ 口渴↑");
+				break;
+			case BUILDING_TYPE_POKER:
+				printf("建筑名称: 棋牌室");
+				gotoxy(108, 26);
+				printf("建筑收费: ￥%d", BUILDING_MONEY_POKER);
+				gotoxy(108, 28);
+				printf("建筑描述: 无聊↓");
+				break;
+			case BUILDING_TYPE_STORE:
+				printf("建筑名称: 特产店");
+				gotoxy(108, 26);
+				printf("建筑收费: ￥%d", BUILDING_MONEY_STORE);
+				gotoxy(108, 28);
+				printf("建筑描述: 瞧一瞧看一看！");
+				break;
+			default:
+				break;
+			}
+			isBuildingshow = false;
+		}		
 	}
-
 }
 
 void clearLog(void)

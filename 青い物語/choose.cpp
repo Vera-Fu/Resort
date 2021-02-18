@@ -47,7 +47,7 @@ void UpdateChoose(void)
 			g_choose.isPush = true;
 			if (g_choose.index < GetMaxIndex())
 			{
-				playsound(choosebuttonSound, 0);
+				playsound(choosebuttonSound, 0);	
 				g_choose.index++;
 				SetChoose((g_buliding + g_choose.index)->pos.x + 2, (g_buliding + g_choose.index)->pos.y - 1);
 			}
@@ -107,49 +107,49 @@ void DrawChoose(void)
 			gotoxy(112, 5);
 			printf("建筑收费: ￥%d", BUILDING_MONEY_SPA);
 			gotoxy(112, 7);
-			printf("建筑描述: ");
+			printf("建筑描述: 疲劳↓ 饥饿↑");
 			break;
 		case BUILDING_TYPE_CONVENIENCE:
 			printf("建筑名称: 便利店");
 			gotoxy(112, 5);
 			printf("建筑收费: ￥%d", BUILDING_MONEY_CONVENIENCE);
 			gotoxy(112, 7);
-			printf("建筑描述: ");
+			printf("建筑描述: 口渴↓");
 			break;
 		case BUILDING_TYPE_RESTAURANT:
 			printf("建筑名称: 餐馆");
 			gotoxy(112, 5);
 			printf("建筑收费: ￥%d", BUILDING_MONEY_RESTAURANT);
 			gotoxy(112, 7);
-			printf("建筑描述: ");
+			printf("建筑描述: 饥饿↓");
 			break;
 		case BUILDING_TYPE_MASSAGE:
 			printf("建筑名称: 按摩店");
 			gotoxy(112, 5);
 			printf("建筑收费: ￥%d", BUILDING_MONEY_MASSAGE);
 			gotoxy(112, 7);
-			printf("建筑描述: ");
+			printf("建筑描述: 疲劳↓");
 			break;
 		case BUILDING_TYPE_SING:
 			printf("建筑名称: 卡拉OK");
 			gotoxy(112, 5);
 			printf("建筑收费: ￥%d", BUILDING_MONEY_SING);
 			gotoxy(112, 7);
-			printf("建筑描述: ");
+			printf("建筑描述: 无聊↓ 口渴↑");
 			break;
 		case BUILDING_TYPE_POKER:
 			printf("建筑名称: 棋牌室");
 			gotoxy(112, 5);
 			printf("建筑收费: ￥%d", BUILDING_MONEY_POKER);
 			gotoxy(112, 7);
-			printf("建筑描述: ");
+			printf("建筑描述: 无聊↓");
 			break;
 		case BUILDING_TYPE_STORE:
 			printf("建筑名称: 特产店");
 			gotoxy(112, 5);
 			printf("建筑收费: ￥%d", BUILDING_MONEY_STORE);
 			gotoxy(112, 7);
-			printf("建筑描述: ");
+			printf("建筑描述: 瞧一瞧看一看！");
 			break;
 		default:
 			/*clearMenu();*/

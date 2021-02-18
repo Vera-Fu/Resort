@@ -15,6 +15,8 @@
 #include "level.h"
 #include "score.h"
 
+#include "title.h"
+
 #include "conioex.h"
 
 
@@ -79,6 +81,7 @@ void main(void)
 
 void Init(void)
 {
+	//InitTitle();
 	InitMap();
 	InitBuilding();
 	InitMenu();
@@ -87,6 +90,7 @@ void Init(void)
 	InitLevel();
 	InitChoose();
 	InitScore();
+	
 }
 
 void Uninit(void)
