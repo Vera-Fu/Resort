@@ -58,7 +58,7 @@ void UpdateBuilding(void)
 			g_building[i].money = BUILDING_MONEY_CONVENIENCE;
 			break;
 		case BUILDING_TYPE_RESTAURANT:
-			g_building[i].debuff = NOTHING;
+			g_building[i].debuff = BORING;
 			g_building[i].buff = HUNGRY;
 			g_building[i].money = BUILDING_MONEY_RESTAURANT;
 			break;

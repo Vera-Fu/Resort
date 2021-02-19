@@ -3,6 +3,7 @@
 
 int GetScene(void);
 void SetScene(int scene);
+void ClearScene(void);
 
 enum SCENE
 {

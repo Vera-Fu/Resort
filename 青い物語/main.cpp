@@ -82,6 +82,7 @@ void main(void)
 
 		//关卡选择界面
 		case LEVELCHANGESCENE:
+			break;
 		//游戏界面
 		case GAMESCENE:
 			Init();
@@ -111,7 +112,10 @@ void main(void)
 					nCountFrame++;
 				}
 			} while (GetScene() == GAMESCENE);
-			break;
+
+			Uninit();
+
+			break;		
 		default:
 			break;
 		}
@@ -119,8 +123,7 @@ void main(void)
 	} while (GetScene() != ENDSCENE);
 	//初期化関数
 	
-
-	Uninit();
+	
 
 	// 分解能を戻す
 	timeEndPeriod(1);

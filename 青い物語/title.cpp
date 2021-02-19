@@ -177,6 +177,7 @@ void UnInitTitle(void)
 {
 	closesound(menubuttonSound);
 	closesound(buttonpushSound);
+	ClearScene();
 }
 
 void UpdateTitle(void)

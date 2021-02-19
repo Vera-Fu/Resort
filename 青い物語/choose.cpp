@@ -121,7 +121,7 @@ void DrawChoose(void)
 			gotoxy(112, 5);
 			printf("建筑收费: ￥%d", BUILDING_MONEY_RESTAURANT);
 			gotoxy(112, 7);
-			printf("建筑描述: 饥饿↓");
+			printf("建筑描述: 饥饿↓无聊↑");
 			break;
 		case BUILDING_TYPE_MASSAGE:
 			printf("建筑名称: 按摩店");

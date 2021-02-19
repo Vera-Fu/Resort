@@ -14,9 +14,9 @@ int star = 5;
 bool isStarShow;
 bool isClear;
 
-int starSound = opensound((char*)"sound\\star.mp3");
-int winSound = opensound((char*)"sound\\win.mp3");
-int failSound = opensound((char*)"sound\\fail.mp3");
+int starSound;
+int winSound;
+int failSound;
 
 static unsigned char g_star_data[] = {
 	0,0,1,1,0,0,
@@ -27,11 +27,17 @@ static unsigned char g_star_data[] = {
 
 void InitScore(void)
 {
-	isStarShow = true;
+	starSound = opensound((char*)"sound\\star.mp3");
+	winSound = opensound((char*)"sound\\win.mp3");
+	failSound = opensound((char*)"sound\\fail.mp3");
+	isStarShow = false;
 }
 
 void UnInitScore(void)
 {
+	closesound(starSound);
+	closesound(winSound);
+	closesound(failSound);
 }
 
 void UpdateScore(void)
@@ -67,6 +73,7 @@ void UpdateScore(void)
 		{
 			star = 3;
 		}
+		isStarShow = true;
 	}
 }
 
@@ -80,6 +87,7 @@ void DrawScore(void)
 			clearMenu();
 			msleep(500);
 			playsound(failSound, 0);
+			msleep(1500);
 			isStarShow = false;
 			break;
 		case 1:
@@ -101,10 +109,12 @@ void DrawScore(void)
 			PrintStar(120, 13);
 			msleep(200);
 			playsound(winSound, 0);
+			msleep(1500);
 			break;
 		default:
 			break;
 		}
+		SetScene(TITLESCENE);
 	}
 	
 }

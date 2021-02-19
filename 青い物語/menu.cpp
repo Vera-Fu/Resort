@@ -120,6 +120,7 @@ void InitMenu(void)
 
 void UnInitMenu(void)
 {
+	ClearScene();
 }
 
 void UpdateMenu(void)
@@ -480,7 +481,7 @@ void DrawMenu(void)
 				gotoxy(108, 26);
 				printf("建筑收费: ￥%d", BUILDING_MONEY_RESTAURANT);
 				gotoxy(108, 28);
-				printf("建筑描述: 饥饿↓");
+				printf("建筑描述: 饥饿↓无聊↑");
 				break;
 			case BUILDING_TYPE_MASSAGE:
 				printf("建筑名称: 按摩店");
