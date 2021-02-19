@@ -232,6 +232,7 @@ void UpdateMenu(void)
 				clearLog();
 				playsound(buttonpushSound, 0);
 				g_menu.isPush = true;
+				textattr(0x0F);
 				if (g_index2 == YES) {
 					switch (g_index1)
 					{
@@ -329,6 +330,7 @@ void UpdateMenu(void)
 				playsound(buttonpushSound, 0);
 				g_menu.isPush = true;
 				if ((GetBuilding() + GetChoose()->index)->type != BUILDING_TYPE_NULL) {
+					textattr(0x0F);
 					gotoxy(logx, logy);
 					printf("已有建筑！");
 				}
