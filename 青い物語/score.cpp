@@ -87,7 +87,7 @@ void DrawScore(void)
 			clearMenu();
 			msleep(500);
 			playsound(failSound, 0);
-			msleep(1500);
+			msleep(2000);
 			isStarShow = false;
 			break;
 		case 1:
@@ -109,7 +109,7 @@ void DrawScore(void)
 			PrintStar(120, 13);
 			msleep(200);
 			playsound(winSound, 0);
-			msleep(1500);
+			msleep(2000);
 			break;
 		default:
 			break;

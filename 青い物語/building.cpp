@@ -198,7 +198,7 @@ void DrawBuilding(void)
 			default:
 				break;
 			}
-			//¥Û√≈ªÊ÷∆
+			//•≤©`•»§Ú√Ë§Ø
 			textattr(0xFF);
 			gotoxy(g_building[i].pos.x + 1, g_building[i].pos.y + 3);
 			printf("    ");

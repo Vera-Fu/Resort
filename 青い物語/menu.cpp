@@ -11,10 +11,10 @@
 #define CONIOEX
 #include "conioex.h"
 
-int g_index0;	//值等于1时，绘制第一个菜单；值等于2时，绘制第二个菜单,值等于3时，绘制第三个菜单
-int g_index1;	//第一个菜单的选项索引
-int g_index2;	//第二个菜单的选项索引
-int g_index3;	//第三个菜单的选项索引
+int g_index0;	//メニュー一二三の判定インデックス
+int g_index1;	//メニュー一のインデックス
+int g_index2;	//メニュー二のインデックス
+int g_index3;	//メニュー三のインデックス
 
 bool isBuildingshow;
 
@@ -39,7 +39,7 @@ void InitMenu(void)
 	buttonpushSound = opensound((char*)"sound\\buttonpush.mp3");
 	isBuildingshow = false;
 	textattr(0x0F);
-	//菜单界面
+	//メニューの範囲
 	gotoxy(110, 1);
 	printf("┏");
 	for (int i = 0; i < 25; i++) {
@@ -63,7 +63,7 @@ void InitMenu(void)
 	gotoxy(135, 21);
 	printf("┛");
 
-	//弹幕和建筑属性界面
+	//建築ステータスの範囲
 	gotoxy(105, 22);
 	printf("┏");
 	for (int i = 0; i < 35; i++) {
@@ -87,7 +87,7 @@ void InitMenu(void)
 	gotoxy(140, 30);
 	printf("┛");
 
-	//顾客详情界面
+	//カスタマーの範囲
 	gotoxy(105, 31);
 	printf("┏");
 	for (int i = 0; i < 35; i++) {
@@ -111,9 +111,9 @@ void InitMenu(void)
 	gotoxy(140, 39);
 	printf("┛");
 
-	g_menu.pos.x = 115;
+	g_menu.pos.x = 113;
 	g_menu.pos.y = 3;
-	g_menu.oldpos.x = 115;
+	g_menu.oldpos.x = 113;
 	g_menu.oldpos.y = 3;
 	g_menu.isPush = false;
 }
@@ -126,7 +126,7 @@ void UnInitMenu(void)
 void UpdateMenu(void)
 {
 	g_menu.oldpos.y = g_menu.pos.y;
-	//菜单1的处理
+	//メニュー一の処理
 	if (g_index0 == MENU1)
 	{
 		if (inport(PK_UP)) {
@@ -198,7 +198,7 @@ void UpdateMenu(void)
 		}
 	}
 
-	//菜单2的处理
+	//メニュー二の処理
 	if (g_index0 == MENU2)
 	{
 		if (inport(PK_UP)) {
@@ -238,18 +238,18 @@ void UpdateMenu(void)
 					case REMOVE:
 						if ((GetBuilding() + GetChoose()->index)->type == BUILDING_TYPE_NULL) {
 							gotoxy(logx, logy);
-							printf("这是空地！");
+							printf("空地です！");
 						}
 						else if (!(GetBuilding() + GetChoose()->index)->isRemoveable) {
-							gotoxy(logx, logy);
-							printf("不可拆除！");
+							gotoxy(logx - 2, logy);
+							printf("撤去できない！");
 						}
 
 						else {
 							(GetBuilding() + GetChoose()->index)->type = BUILDING_TYPE_NULL;
 							playsound(removeSound, 0);
 							gotoxy(logx, logy);
-							printf("拆除成功！");
+							printf("撤去成功！");
 						}
 						break;
 					case START:
@@ -330,7 +330,7 @@ void UpdateMenu(void)
 				g_menu.isPush = true;
 				if ((GetBuilding() + GetChoose()->index)->type != BUILDING_TYPE_NULL) {
 					gotoxy(logx, logy);
-					printf("已有建筑！");
+					printf("建築あり！");
 				}
 				else {
 					switch (g_index3) {
@@ -394,23 +394,23 @@ void DrawMenu(void)
 	{
 	case MENU1:
 		textattr(0x0F);
-		gotoxy(121, 3);
-		printf("建造");
+		gotoxy(120, 3);
+		printf("ビルド");
 		gotoxy(121, 8);
-		printf("拆除");
-		gotoxy(119, 13);
-		printf("开始关卡");
-		gotoxy(119, 18);
-		printf("回到标题");
+		printf("撤去");
+		gotoxy(116, 13);
+		printf("レベルスタート");
+		gotoxy(116, 18);
+		printf("タイトルに戻る");
 		break;
 	case MENU2:
 		textattr(0x0F);
 		gotoxy(119, 5);
-		printf("确定吗？");
+		printf("いいか？");
 		gotoxy(121, 10);
-		printf("确定");
-		gotoxy(121, 15);
-		printf("取消");
+		printf("はい");
+		gotoxy(120, 15);
+		printf("いいえ");
 		break;
 	case MENU3:
 		textattr(0x0F);
@@ -444,16 +444,7 @@ void DrawMenu(void)
 	}
 	
 
-	//不可拆除的绘制
-	/*if (!(GetBuilding() + GetChoose().index)->isRemoveable) {
-		printf(" (不可拆除)");
-	}
-	else
-	{
-		printf("           ");
-	}*/
-
-	//显示当前光标所指的建筑的属性
+	//建築のステータスを表示する
 	if (g_index0 == MENU3)
 	{
 		if (isBuildingshow)

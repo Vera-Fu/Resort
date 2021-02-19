@@ -50,7 +50,7 @@ void main(void)
 	{
 		switch (GetScene())
 		{
-		//标题界面
+		//タイトル画面
 		case TITLESCENE:
 			InitTitle();
 
@@ -80,10 +80,10 @@ void main(void)
 
 			break;
 
-		//关卡选择界面
+		//レベル選択画面
 		case LEVELCHANGESCENE:
 			break;
-		//游戏界面
+		//ゲーム画面
 		case GAMESCENE:
 			Init();
 
