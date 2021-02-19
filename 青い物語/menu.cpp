@@ -232,7 +232,8 @@ void UpdateMenu(void)
 				clearLog();
 				playsound(buttonpushSound, 0);
 				g_menu.isPush = true;
-				if (g_index2 == YES) {
+				textattr(0x0F);
+				if (g_index2 == YES) {					
 					switch (g_index1)
 					{
 					case REMOVE:
@@ -244,7 +245,6 @@ void UpdateMenu(void)
 							gotoxy(logx - 2, logy);
 							printf("撤去できない！");
 						}
-
 						else {
 							(GetBuilding() + GetChoose()->index)->type = BUILDING_TYPE_NULL;
 							playsound(removeSound, 0);
@@ -327,8 +327,9 @@ void UpdateMenu(void)
 			if (!g_menu.isPush) {
 				clearLog();
 				playsound(buttonpushSound, 0);
-				g_menu.isPush = true;
+				g_menu.isPush = true;				
 				if ((GetBuilding() + GetChoose()->index)->type != BUILDING_TYPE_NULL) {
+					textattr(0x0F);
 					gotoxy(logx, logy);
 					printf("建築あり！");
 				}
@@ -416,20 +417,20 @@ void DrawMenu(void)
 		textattr(0x0F);
 		gotoxy(121, 3);
 		printf("温泉");
-		gotoxy(120, 5);
-		printf("便利店");
-		gotoxy(121, 7);
-		printf("饭店");
-		gotoxy(120, 9);
-		printf("按摩店");
-		gotoxy(120, 11);
-		printf("卡拉OK");
-		gotoxy(120, 13);
-		printf("棋牌室");
-		gotoxy(120, 15);
-		printf("特产店");
+		gotoxy(119, 5);
+		printf("コンビニ");
+		gotoxy(118, 7);
+		printf("レストラン");
+		gotoxy(118, 9);
+		printf("マッサージ");
+		gotoxy(119, 11);
+		printf("カラオケ");
+		gotoxy(117, 13);
+		printf("ゲームルーム");
+		gotoxy(119, 15);
+		printf("土産物屋");
 		gotoxy(121, 19);
-		printf("返回");
+		printf("戻る");
 		break;
 	default:
 		break;
@@ -454,53 +455,53 @@ void DrawMenu(void)
 			switch (g_index3)
 			{
 			case BUILDING_TYPE_SPA:
-				printf("建筑名称: 温泉");
+				printf("建築名前: 温泉");
 				gotoxy(108, 26);
-				printf("建筑收费: ￥%d", BUILDING_MONEY_SPA);
+				printf("料金: ￥%d", BUILDING_MONEY_SPA);
 				gotoxy(108, 28);
-				printf("建筑描述: 疲劳↓ 饥饿↑");
+				printf("効用: 疲労↓ お腹すく↑");
 				break;
 			case BUILDING_TYPE_CONVENIENCE:
-				printf("建筑名称: 便利店");
+				printf("建築名前: コンビニ");
 				gotoxy(108, 26);
-				printf("建筑收费: ￥%d", BUILDING_MONEY_CONVENIENCE);
+				printf("料金: ￥%d", BUILDING_MONEY_CONVENIENCE);
 				gotoxy(108, 28);
-				printf("建筑描述: 口渴↓");
+				printf("効用: 喉が渇く↓");
 				break;
 			case BUILDING_TYPE_RESTAURANT:
-				printf("建筑名称: 餐馆");
+				printf("建築名前: 餐馆");
 				gotoxy(108, 26);
-				printf("建筑收费: ￥%d", BUILDING_MONEY_RESTAURANT);
+				printf("料金: ￥%d", BUILDING_MONEY_RESTAURANT);
 				gotoxy(108, 28);
-				printf("建筑描述: 饥饿↓无聊↑");
+				printf("効用: お腹すく↓詰まらない↑");
 				break;
 			case BUILDING_TYPE_MASSAGE:
-				printf("建筑名称: 按摩店");
+				printf("建築名前: マッサージ");
 				gotoxy(108, 26);
-				printf("建筑收费: ￥%d", BUILDING_MONEY_MASSAGE);
+				printf("料金: ￥%d", BUILDING_MONEY_MASSAGE);
 				gotoxy(108, 28);
-				printf("建筑描述: 疲劳↓");
+				printf("効用: 疲労↓");
 				break;
 			case BUILDING_TYPE_SING:
-				printf("建筑名称: 卡拉OK");
+				printf("建築名前: カラオケ");
 				gotoxy(108, 26);
-				printf("建筑收费: ￥%d", BUILDING_MONEY_SING);
+				printf("料金: ￥%d", BUILDING_MONEY_SING);
 				gotoxy(108, 28);
-				printf("建筑描述: 无聊↓ 口渴↑");
+				printf("効用: 詰まらない↓ 喉が渇く↑");
 				break;
 			case BUILDING_TYPE_POKER:
-				printf("建筑名称: 棋牌室");
+				printf("建築名前: ゲームルーム");
 				gotoxy(108, 26);
-				printf("建筑收费: ￥%d", BUILDING_MONEY_POKER);
+				printf("料金: ￥%d", BUILDING_MONEY_POKER);
 				gotoxy(108, 28);
-				printf("建筑描述: 无聊↓");
+				printf("効用: 詰まらない↓");
 				break;
 			case BUILDING_TYPE_STORE:
-				printf("建筑名称: 特产店");
+				printf("建築名前: 土産物屋");
 				gotoxy(108, 26);
-				printf("建筑收费: ￥%d", BUILDING_MONEY_STORE);
+				printf("料金: ￥%d", BUILDING_MONEY_STORE);
 				gotoxy(108, 28);
-				printf("建筑描述: 瞧一瞧看一看！");
+				printf("効用: なし");
 				break;
 			default:
 				break;

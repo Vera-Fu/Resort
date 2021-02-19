@@ -107,45 +107,51 @@ void DrawChoose(void)
 			gotoxy(112, 5);
 			printf("料金: ￥%d", BUILDING_MONEY_SPA);
 			gotoxy(112, 7);
-			printf("効用: 疲労↓ お腹すく↑");
+			printf("効用: 疲労↓");
+			gotoxy(118, 9);
+			printf("お腹すく↑");
 			break;
 		case BUILDING_TYPE_CONVENIENCE:
-			printf("建築名前: 便利店");
+			printf("建築名前: コンビニ");
 			gotoxy(112, 5);
 			printf("料金: ￥%d", BUILDING_MONEY_CONVENIENCE);
 			gotoxy(112, 7);
 			printf("効用: 喉が渇く↓");
 			break;
 		case BUILDING_TYPE_RESTAURANT:
-			printf("建築名前: 餐馆");
+			printf("建築名前: レストラン");
 			gotoxy(112, 5);
 			printf("料金: ￥%d", BUILDING_MONEY_RESTAURANT);
 			gotoxy(112, 7);
-			printf("効用: お腹すく↓詰まらない↑");
+			printf("効用: お腹すく↓");
+			gotoxy(118, 9);
+			printf("詰まらない↑");
 			break;
 		case BUILDING_TYPE_MASSAGE:
-			printf("建築名前: 按摩店");
+			printf("建築名前: マッサージ");
 			gotoxy(112, 5);
 			printf("料金: ￥%d", BUILDING_MONEY_MASSAGE);
-			gotoxy(112, 7);
+			gotoxy(11, 7);
 			printf("効用: 疲労↓");
 			break;
 		case BUILDING_TYPE_SING:
-			printf("建築名前: 卡拉OK");
+			printf("建築名前: カラオケ");
 			gotoxy(112, 5);
 			printf("料金: ￥%d", BUILDING_MONEY_SING);
 			gotoxy(112, 7);
-			printf("効用: 詰まらない↓ 喉が渇く↑");
+			printf("効用: 詰まらない↓ ");
+			gotoxy(118, 9);
+			printf("喉が渇く↑");
 			break;
 		case BUILDING_TYPE_POKER:
-			printf("建築名前: 棋牌室");
+			printf("建築名前: ゲームルーム");
 			gotoxy(112, 5);
 			printf("料金: ￥%d", BUILDING_MONEY_POKER);
 			gotoxy(112, 7);
 			printf("効用: 詰まらない↓");
 			break;
 		case BUILDING_TYPE_STORE:
-			printf("建築名前: 特产店");
+			printf("建築名前: 土産物屋");
 			gotoxy(112, 5);
 			printf("料金: ￥%d", BUILDING_MONEY_STORE);
 			gotoxy(112, 7);
