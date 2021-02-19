@@ -250,7 +250,7 @@ void DrawCustomer(void)
 	gotoxy(108, 33);
 	printf("カスタマー");
 	gotoxy(108, 35);
-	printf("持っているお金: ￥%d  ", g_customer.money);
+	printf("持っているお金: ￥%d", g_customer.money);
 	gotoxy(108, 37);
 	printf("ステータス: ");
 	for (int i = 0; i < MAX_STATUS; i++)
@@ -258,7 +258,7 @@ void DrawCustomer(void)
 		switch (g_customer.status[i])
 		{
 		case HUNGRY:
-			printf("お腹すく");
+			printf("お腹すく ");
 			break;
 		case BORING:
 			printf("詰まらない ");
@@ -307,6 +307,8 @@ void GoInto(void)
 
 	msleep(1500);
 	playsound(money, 0);
+	gotoxy(108, 35);
+	printf("持っているお金:            ");
 	gotoxy(108, 37);
-	printf("ステータス: ");
+	printf("ステータス:                ");
 }
