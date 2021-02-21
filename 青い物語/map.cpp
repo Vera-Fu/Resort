@@ -67,9 +67,11 @@ void InitMap(void)
 		gotoxy(MAPWIDTH_MAX, i);
 		printf(" ");
 	}
-
-	if (GetLevelIndex() < 5) {
+	if (GetLevelIndex() < 8) {
 		SetHotel(5, 11);
+	}
+	else {
+		SetHotel(5, 17);
 	}
 	
 

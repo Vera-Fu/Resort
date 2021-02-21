@@ -83,8 +83,8 @@ void UpdateChoose(void)
 void DrawChoose(void)
 {
 	textattr(0x0F);
-	gotoxy(g_choose.oldpos.x - 4, g_choose.oldpos.y - 1);
-	printf("           ");
+	/*gotoxy(g_choose.oldpos.x - 4, g_choose.oldpos.y - 1);
+	printf("           ");*/
 
 	gotoxy(g_choose.oldpos.x, g_choose.oldpos.y);
 	printf("  ");

@@ -14,7 +14,7 @@
 #include "map.h"
 #include "menu.h"
 
-#define SPEED 0.35
+#define SPEED 0.15f
 #define MAX_STATUS 4
 
 void InitCustomer(void);

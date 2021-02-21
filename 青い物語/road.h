@@ -11,7 +11,7 @@
 #include "main.h"
 #include "map.h"
 
-#define MAX_ROAD 10
+#define MAX_ROAD 20
 
 void InitRoad(void);
 void UnInitRoad(void);
