@@ -68,7 +68,10 @@ void InitMap(void)
 		printf(" ");
 	}
 
-	SetHotel(5, 11);
+	if (GetLevelIndex() < 5) {
+		SetHotel(5, 11);
+	}
+	
 
 	//ÂÃ¹ÝÖ÷Ìå
 	textattr(0x44);

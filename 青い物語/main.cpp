@@ -17,6 +17,8 @@
 
 #include "scene.h"
 
+#include "levelchoose.h"
+
 #include "title.h"
 
 #include "conioex.h"
@@ -81,7 +83,33 @@ void main(void)
 			break;
 
 		//关卡选择界面
-		case LEVELCHANGESCENE:
+		case LEVELCHOOSESCENE:
+			InitLevelChoose();
+
+			do
+			{
+				dwCurrentTime = timeGetTime();
+				if ((dwCurrentTime - dwFPSLastTime) >= 500)	// 0.5秒ごとに実行
+				{
+					g_nCountFPS = nCountFrame * 1000 / (dwCurrentTime - dwFPSLastTime);
+					dwFPSLastTime = dwCurrentTime;
+					nCountFrame = 0;
+				}
+
+				if ((dwCurrentTime - dwExecLastTime) >= (1000 / 60))
+				{
+					dwExecLastTime = dwCurrentTime;
+
+					UpdateLevelChoose();
+
+					DrawLevelChoose();
+
+					nCountFrame++;
+				}
+			} while (GetScene() == LEVELCHOOSESCENE);
+
+			UnInitLevelChoose();
+
 			break;
 		//游戏界面
 		case GAMESCENE:

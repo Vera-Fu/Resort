@@ -120,7 +120,10 @@ void InitMenu(void)
 
 void UnInitMenu(void)
 {
-	ClearScene();
+	closesound(buildSound);
+	closesound(removeSound);
+	closesound(menubuttonSound);
+	closesound(buttonpushSound);
 }
 
 void UpdateMenu(void)
@@ -263,10 +266,6 @@ void UpdateMenu(void)
 						GetChoose()->isShow = true;
 						break;
 					case TITLE:
-						closesound(menubuttonSound);
-						closesound(buttonpushSound);
-						closesound(removeSound);
-						closesound(buildSound);
 						SetScene(TITLESCENE);
 						break;
 					default:
@@ -511,7 +510,7 @@ void DrawMenu(void)
 				gotoxy(108, 26);
 				printf("建筑收费: ￥%d", BUILDING_MONEY_STORE);
 				gotoxy(108, 28);
-				printf("建筑描述: 瞧一瞧看一看！");
+				printf("建筑描述: 来瞧一瞧呗！");
 				break;
 			default:
 				break;

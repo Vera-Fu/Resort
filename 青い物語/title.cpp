@@ -17,16 +17,21 @@ static unsigned char g_title_data[] = {
 	0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,
 };
 
-int g_index = STARTGAME;
-bool isPush;
+static int g_index = STARTGAME;
+static bool isPush;
 
 static int menubuttonSound;
 static int buttonpushSound;
+static int bgm1;
+static int bgm2;
 
 void InitTitle(void)
 {
 	menubuttonSound = opensound((char*)"sound\\button01.mp3");
 	buttonpushSound = opensound((char*)"sound\\buttonpush.mp3");
+	bgm1 = opensound((char*)"sound\\bgm1.mp3");
+	playsound(bgm1, 1);
+	setvolume(bgm1, 15);
 	isPush = false;
 	//游戏标题绘制
 	for (int i = 23; i < 123; i++) {
@@ -204,7 +209,7 @@ void UpdateTitle(void)
 		switch (g_index)
 		{
 		case STARTGAME:
-			SetScene(GAMESCENE);
+			SetScene(LEVELCHOOSESCENE);
 			break;
 		case ENDGAME:
 			SetScene(ENDSCENE);
@@ -248,4 +253,9 @@ void DrawTitle(void)
 
 	
 
+}
+
+int GetBgm(void)
+{
+	return bgm1;
 }

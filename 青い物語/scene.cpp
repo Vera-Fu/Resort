@@ -21,7 +21,7 @@ void ClearScene(void)
 	gotoxy(1, 1);
 	for (int i = 0; i < 40; i++)
 	{
-		for (int j = 0; j < 144; j++)
+		for (int j = 0; j < 143; j++)
 		{
 			printf("-");
 		}
@@ -31,7 +31,7 @@ void ClearScene(void)
 	//gotoxy(1, 1);
 	for (int i = 0; i < 40; i++)
 	{
-		for (int j = 0; j < 144; j++)
+		for (int j = 0; j < 143; j++)
 		{
 			printf(" ");
 		}

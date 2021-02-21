@@ -11,6 +11,7 @@
 #include "building.h"
 #include "road.h"
 #include "customer.h"
+#include "levelchoose.h"
 
 void InitLevel(void);
 void UnInitLevel(void);

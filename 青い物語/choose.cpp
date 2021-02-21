@@ -14,7 +14,7 @@ CHOOSE g_choose;
 
 BUILDING* g_buliding = GetBuilding();
 
-int choosebuttonSound = opensound((char*)"sound\\button02.mp3");
+int choosebuttonSound;
 
 void InitChoose(void)
 {
@@ -28,11 +28,13 @@ void InitChoose(void)
 	g_choose.isShow = false;
 
 	SetChoose(g_buliding->pos.x + 2, g_buliding->pos.y - 1);
+
+	choosebuttonSound = opensound((char*)"sound\\button02.mp3");
 }
 
 void UnInitChoose(void)
 {
-
+	closesound(choosebuttonSound);
 }
 
 void UpdateChoose(void)

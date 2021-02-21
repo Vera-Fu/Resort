@@ -38,6 +38,7 @@ void UnInitScore(void)
 	closesound(starSound);
 	closesound(winSound);
 	closesound(failSound);
+	ClearScene();
 }
 
 void UpdateScore(void)
@@ -87,7 +88,7 @@ void DrawScore(void)
 			clearMenu();
 			msleep(500);
 			playsound(failSound, 0);
-			msleep(1500);
+			msleep(3500);
 			isStarShow = false;
 			break;
 		case 1:
@@ -109,12 +110,12 @@ void DrawScore(void)
 			PrintStar(120, 13);
 			msleep(200);
 			playsound(winSound, 0);
-			msleep(1500);
+			msleep(3000);
 			break;
 		default:
 			break;
 		}
-		SetScene(TITLESCENE);
+		SetScene(LEVELCHOOSESCENE);
 	}
 	
 }

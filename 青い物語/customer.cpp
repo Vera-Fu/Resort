@@ -13,10 +13,11 @@
 CUSTOMER g_customer;
 
 int index = 0;
-int money = opensound((char*)"sound\\money.mp3");
+int money;
 
 void InitCustomer(void)
 {
+	money = opensound((char*)"sound\\money.mp3");
 	float g_startCustomerX = GetHotel().pos.x + 2;
 	float g_startCustomerY = GetHotel().pos.y + 5;
 	g_customer.pos.x = g_startCustomerX;
@@ -40,6 +41,7 @@ void InitCustomer(void)
 
 void UnInitCustomer(void)
 {
+	closesound(money);
 }
 
 void UpdateCustomer(void)

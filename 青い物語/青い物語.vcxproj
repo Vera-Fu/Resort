@@ -144,6 +144,7 @@
     <ClCompile Include="choose.cpp" />
     <ClCompile Include="customer.cpp" />
     <ClCompile Include="level.cpp" />
+    <ClCompile Include="levelchoose.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="menu.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="conioex.h" />
     <ClInclude Include="customer.h" />
     <ClInclude Include="level.h" />
+    <ClInclude Include="levelchoose.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="menu.h" />

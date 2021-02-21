@@ -9,6 +9,7 @@
 #define MAP_H_
 
 #include "main.h"
+#include "levelchoose.h"
 
 #define MAPWIDTH_MAX 100
 #define MAPHEIGHT_MAX 40
