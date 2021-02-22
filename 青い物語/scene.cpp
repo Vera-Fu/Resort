@@ -26,7 +26,7 @@ void ClearScene(void)
 			printf("-");
 		}
 		printf("\n");
-		msleep(30);
+		msleep(20);
 	}
 	//gotoxy(1, 1);
 	for (int i = 0; i < 40; i++)
@@ -36,7 +36,7 @@ void ClearScene(void)
 			printf(" ");
 		}
 		printf("\n");
-		msleep(30);
+		msleep(20);
 	}
 	clrscr();
 }

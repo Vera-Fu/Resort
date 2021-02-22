@@ -2,6 +2,7 @@
 #define LEVELCHOOSE_H_
 
 #include "scene.h"
+#include "title.h"
 
 #define MAX_LEVEL 9
 
@@ -21,6 +22,7 @@ typedef struct {
 }LEVELCHOOSE;
 
 void SetLevelChoose(int x, int y);
+LEVELCHOOSE* GetLevelChoose(void);
 
 int GetLevelIndex(void);
 

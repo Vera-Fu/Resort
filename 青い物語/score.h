@@ -9,6 +9,7 @@
 #define SCORE_H_
 
 #include "menu.h"
+#include "levelchoose.h"
 
 void InitScore(void);
 void UnInitScore(void);

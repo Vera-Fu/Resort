@@ -10,7 +10,7 @@
 #define CONIOEX
 #include "conioex.h"
 
-int star = 5;
+int star;
 bool isStarShow;
 bool isClear;
 
@@ -74,6 +74,15 @@ void UpdateScore(void)
 		{
 			star = 3;
 		}
+		if ((GetLevelChoose() + GetLevelIndex() - 1)->star < star)
+		{
+			(GetLevelChoose() + GetLevelIndex() - 1)->star = star;
+			unsigned char level_count = MAX_LEVEL;
+			FILE* fp = fopen("level.bin", "wb");
+			fwrite(&level_count, sizeof(level_count), 1, fp);
+			fwrite(GetLevelChoose(), sizeof(*GetLevelChoose()), level_count, fp);
+			fclose(fp);
+		}	
 		isStarShow = true;
 	}
 }

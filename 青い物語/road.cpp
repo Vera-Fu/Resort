@@ -26,11 +26,6 @@ void InitRoad(void)
 		g_road[i].way = NONE;
 		g_road[i].isUse = false;
 	}
-
-	/*SetRoad(80, MOVERIGHT);
-	SetRoad(25, MOVEDOWN);
-	
-	SetRoad(50, MOVELEFT);*/
 	
 }
 

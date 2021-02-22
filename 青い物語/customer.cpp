@@ -12,11 +12,12 @@
 
 CUSTOMER g_customer;
 
-int index = 0;
+int index;
 int money;
 
 void InitCustomer(void)
 {
+	index = 0;
 	money = opensound((char*)"sound\\money.mp3");
 	float g_startCustomerX = GetHotel().pos.x + 2;
 	float g_startCustomerY = GetHotel().pos.y + 5;
@@ -25,7 +26,7 @@ void InitCustomer(void)
 	g_customer.oldpos.x = g_customer.pos.x;
 	g_customer.oldpos.y = g_customer.pos.y;
 	
-	g_customer.money = 2000;
+	g_customer.money = 0;
 	for (int i = 0; i < MAX_STATUS; i++) {
 		g_customer.status[i] = NOTHING;
 	}
@@ -55,7 +56,7 @@ void UpdateCustomer(void)
 		switch ((GetRoad() + index)->way)
 		{
 		case MOVEUP:
-			if (g_customer.pos.y > (GetRoad() + index)->end_pos.y + 1) {
+			if (g_customer.pos.y > (GetRoad() + index)->end_pos.y + 0.5) {
 				g_customer.pos.y -= g_customer.speed;
 			}
 			else {

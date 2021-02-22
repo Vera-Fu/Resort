@@ -26,11 +26,6 @@ void InitBuilding(void)
 		g_building[i].debuff = NOTHING;
 		g_building[i].money = 0;
 	}
-
-	/*SetBuilding(25, 13, BUILDING_TYPE_NULL, true);
-	SetBuilding(35, 13, BUILDING_TYPE_NULL, true);*/
-	/*SetBuilding(35, 20, BUILDING_TYPE_SPA, false);
-	SetBuilding(50, 20, BUILDING_TYPE_STORE, false);*/
 }
 
 void UnInitBuilding(void)

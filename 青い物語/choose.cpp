@@ -83,8 +83,8 @@ void UpdateChoose(void)
 void DrawChoose(void)
 {
 	textattr(0x0F);
-	/*gotoxy(g_choose.oldpos.x - 4, g_choose.oldpos.y - 1);
-	printf("           ");*/
+	gotoxy(g_choose.oldpos.x - 2, g_choose.oldpos.y - 1);
+	printf("      ");
 
 	gotoxy(g_choose.oldpos.x, g_choose.oldpos.y);
 	printf("  ");
@@ -92,10 +92,44 @@ void DrawChoose(void)
 	gotoxy(g_choose.pos.x, g_choose.pos.y);
 	printf("▼");
 	
-	if (!(g_buliding + g_choose.index)->isRemoveable)
+	//if (!(g_buliding + g_choose.index)->isRemoveable)
+	//{
+	//	gotoxy(g_choose.pos.x - 4, g_choose.pos.y - 1);
+	//	printf("(不可拆除)");
+	//}
+
+	switch ((g_buliding + g_choose.index)->type)
 	{
-		gotoxy(g_choose.pos.x - 4, g_choose.pos.y - 1);
-		printf("(不可拆除)");
+	case BUILDING_TYPE_SPA:
+		gotoxy(g_choose.pos.x - 1, g_choose.pos.y - 1);
+		printf("温泉");
+		break;
+	case BUILDING_TYPE_CONVENIENCE:
+		gotoxy(g_choose.pos.x - 2, g_choose.pos.y - 1);
+		printf("便利店");
+		break;
+	case BUILDING_TYPE_RESTAURANT:
+		gotoxy(g_choose.pos.x - 1, g_choose.pos.y - 1);
+		printf("餐馆");
+		break;
+	case BUILDING_TYPE_MASSAGE:
+		gotoxy(g_choose.pos.x - 2, g_choose.pos.y - 1);
+		printf("按摩店");
+		break;
+	case BUILDING_TYPE_SING:
+		gotoxy(g_choose.pos.x - 2, g_choose.pos.y - 1);
+		printf("卡拉OK");
+		break;
+	case BUILDING_TYPE_POKER:
+		gotoxy(g_choose.pos.x - 2, g_choose.pos.y - 1);
+		printf("棋牌室");
+		break;
+	case BUILDING_TYPE_STORE:
+		gotoxy(g_choose.pos.x - 2, g_choose.pos.y - 1);
+		printf("特产店");
+		break;
+	default:
+		break;
 	}
 
 	//当开始关卡后，显示光标所指的建筑的信息
@@ -151,7 +185,7 @@ void DrawChoose(void)
 			gotoxy(112, 5);
 			printf("建筑收费: ￥%d", BUILDING_MONEY_STORE);
 			gotoxy(112, 7);
-			printf("建筑描述: 瞧一瞧看一看！");
+			printf("建筑描述: 来瞧一瞧呗！");
 			break;
 		default:
 			/*clearMenu();*/

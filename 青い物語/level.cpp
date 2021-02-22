@@ -116,7 +116,7 @@ void InitLevel(void)
 		SetRoad(20, MOVERIGHT);
 		SetRoad(38, MOVEDOWN);
 		SetRoad(50, MOVERIGHT);
-		SetRoad(14, MOVEUP);
+		SetRoad(15, MOVEUP);
 		SetRoad(15, MOVELEFT);
 		SetRoad(6, MOVEUP);
 		SetRoad(65, MOVERIGHT);
@@ -124,8 +124,8 @@ void InitLevel(void)
 		SetRoad(82, MOVERIGHT);
 		SetBuilding(25, 31, BUILDING_TYPE_NULL);
 		SetBuilding(35, 31, BUILDING_TYPE_NULL);
-		SetBuilding(40, 11, BUILDING_TYPE_NULL);
-		SetBuilding(25, 11, BUILDING_TYPE_NULL);
+		SetBuilding(40, 12, BUILDING_TYPE_NULL);
+		SetBuilding(25, 12, BUILDING_TYPE_NULL);
 		SetBuilding(25, 3, BUILDING_TYPE_NULL);
 		SetBuilding(40, 3, BUILDING_TYPE_NULL);
 		SetBuilding(55, 3, BUILDING_TYPE_NULL);
@@ -136,11 +136,11 @@ void InitLevel(void)
 		SetRoad(20, MOVERIGHT);
 		SetRoad(38, MOVEDOWN);
 		SetRoad(50, MOVERIGHT);
-		SetRoad(14, MOVEUP);
+		SetRoad(15, MOVEUP);
 		SetRoad(15, MOVELEFT);
 		SetRoad(6, MOVEUP);
 		SetRoad(70, MOVERIGHT);
-		SetRoad(18, MOVEDOWN);
+		SetRoad(19, MOVEDOWN);
 		SetRoad(55, MOVELEFT);
 		SetRoad(30, MOVEDOWN);
 		SetRoad(75, MOVERIGHT);
@@ -148,13 +148,13 @@ void InitLevel(void)
 		SetRoad(82, MOVERIGHT);
 		SetBuilding(25, 31, BUILDING_TYPE_NULL);
 		SetBuilding(35, 31, BUILDING_TYPE_NULL);
-		SetBuilding(40, 11, BUILDING_TYPE_NULL);
-		SetBuilding(25, 11, BUILDING_TYPE_NULL);
+		SetBuilding(40, 12, BUILDING_TYPE_NULL);
+		SetBuilding(25, 12, BUILDING_TYPE_NULL);
 		SetBuilding(18, 3, BUILDING_TYPE_NULL);
 		SetBuilding(33, 3, BUILDING_TYPE_NULL);
 		SetBuilding(48, 3, BUILDING_TYPE_NULL);
 		SetBuilding(63, 3, BUILDING_TYPE_NULL);
-		SetBuilding(60, 11, BUILDING_TYPE_NULL);
+		SetBuilding(60, 12, BUILDING_TYPE_NULL);
 		SetBuilding(62, 23, BUILDING_TYPE_NULL);
 		break;
 	default:
