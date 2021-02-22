@@ -127,7 +127,7 @@ void UpdateLevelChoose(void)
 			printf("  ");
 			gotoxy(g_levelchoose[g_index].x + 2, g_levelchoose[g_index].y);
 			printf("  ");
-			gotoxy(70, 35);
+			gotoxy(62, 35);
 			printf("                     ");
 			g_index -= 1;
 			if (g_index < 0) {
@@ -148,7 +148,7 @@ void UpdateLevelChoose(void)
 				if (g_levelchoose[g_index - 1].star == 0) {
 					playsound(buttonpushSound, 0);
 					textattr(0x0E);
-					gotoxy(70, 35);
+					gotoxy(62, 35);
 					printf("请先完成之前的关卡！");
 				}
 				else {
