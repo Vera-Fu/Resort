@@ -129,6 +129,11 @@ void UnInitMenu(void)
 void UpdateMenu(void)
 {
 	g_menu.oldpos.y = g_menu.pos.y;
+
+	if (inport(PK_ESC)) {
+		SetScene(LEVELCHOOSESCENE);
+	}
+
 	//菜单1的处理
 	if (g_index0 == MENU1)
 	{

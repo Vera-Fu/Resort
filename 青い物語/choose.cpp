@@ -27,7 +27,7 @@ void InitChoose(void)
 	g_choose.isStart = false;
 	g_choose.isShow = false;
 
-	SetChoose(g_buliding->pos.x + 2, g_buliding->pos.y - 1);
+	SetChoose(g_buliding->pos.x + 2, g_buliding->pos.y - 2);
 
 	choosebuttonSound = opensound((char*)"sound\\button02.mp3");
 }
@@ -51,7 +51,7 @@ void UpdateChoose(void)
 			{
 				playsound(choosebuttonSound, 0);	
 				g_choose.index++;
-				SetChoose((g_buliding + g_choose.index)->pos.x + 2, (g_buliding + g_choose.index)->pos.y - 1);
+				SetChoose((g_buliding + g_choose.index)->pos.x + 2, (g_buliding + g_choose.index)->pos.y - 2);
 			}
 			if (g_choose.isStart)
 			{
@@ -66,7 +66,7 @@ void UpdateChoose(void)
 			if (g_choose.index > 0){
 				playsound(choosebuttonSound, 0);
 				g_choose.index--;
-				SetChoose((g_buliding + g_choose.index)->pos.x + 2, (g_buliding + g_choose.index)->pos.y - 1);
+				SetChoose((g_buliding + g_choose.index)->pos.x + 2, (g_buliding + g_choose.index)->pos.y - 2);
 			}
 			if (g_choose.isStart)
 			{
@@ -83,8 +83,8 @@ void UpdateChoose(void)
 void DrawChoose(void)
 {
 	textattr(0x0F);
-	gotoxy(g_choose.oldpos.x - 2, g_choose.oldpos.y - 1);
-	printf("      ");
+	//gotoxy(g_choose.oldpos.x - 2, g_choose.oldpos.y - 1);
+	//printf("      ");
 
 	gotoxy(g_choose.oldpos.x, g_choose.oldpos.y);
 	printf("  ");
@@ -98,38 +98,41 @@ void DrawChoose(void)
 	//	printf("(不可拆除)");
 	//}
 
-	switch ((g_buliding + g_choose.index)->type)
-	{
-	case BUILDING_TYPE_SPA:
-		gotoxy(g_choose.pos.x - 1, g_choose.pos.y - 1);
-		printf("温泉");
-		break;
-	case BUILDING_TYPE_CONVENIENCE:
-		gotoxy(g_choose.pos.x - 2, g_choose.pos.y - 1);
-		printf("便利店");
-		break;
-	case BUILDING_TYPE_RESTAURANT:
-		gotoxy(g_choose.pos.x - 1, g_choose.pos.y - 1);
-		printf("餐馆");
-		break;
-	case BUILDING_TYPE_MASSAGE:
-		gotoxy(g_choose.pos.x - 2, g_choose.pos.y - 1);
-		printf("按摩店");
-		break;
-	case BUILDING_TYPE_SING:
-		gotoxy(g_choose.pos.x - 2, g_choose.pos.y - 1);
-		printf("卡拉OK");
-		break;
-	case BUILDING_TYPE_POKER:
-		gotoxy(g_choose.pos.x - 2, g_choose.pos.y - 1);
-		printf("棋牌室");
-		break;
-	case BUILDING_TYPE_STORE:
-		gotoxy(g_choose.pos.x - 2, g_choose.pos.y - 1);
-		printf("特产店");
-		break;
-	default:
-		break;
+	for (int i = 0; i < MAX_BUILDING; i++) {
+		gotoxy((g_buliding + i)->pos.x, (g_buliding + i)->pos.y - 1);
+		switch ((g_buliding + i)->type)
+		{
+		case BUILDING_TYPE_NULL:
+			printf("      ");
+			break;
+		case BUILDING_TYPE_SPA:
+			gotoxy((g_buliding + i)->pos.x + 1, (g_buliding + i)->pos.y - 1);
+			printf("温泉");
+			break;
+		case BUILDING_TYPE_CONVENIENCE:
+			printf("便利店");
+			break;
+		case BUILDING_TYPE_RESTAURANT:
+			gotoxy((g_buliding + i)->pos.x + 1, (g_buliding + i)->pos.y - 1);
+			printf("饭店");
+			break;
+		case BUILDING_TYPE_MASSAGE:
+			printf("按摩店");
+			break;
+		case BUILDING_TYPE_SING:
+			printf("卡拉OK");
+			break;
+		case BUILDING_TYPE_POKER:
+			printf("棋牌室");
+			break;
+		case BUILDING_TYPE_STORE:
+			printf("特产店");
+			break;
+		default:
+			break;
+	}
+
+	
 	}
 
 	//当开始关卡后，显示光标所指的建筑的信息
@@ -153,7 +156,7 @@ void DrawChoose(void)
 			printf("建筑描述: 口渴↓");
 			break;
 		case BUILDING_TYPE_RESTAURANT:
-			printf("建筑名称: 餐馆");
+			printf("建筑名称: 饭店");
 			gotoxy(112, 5);
 			printf("建筑收费: ￥%d", BUILDING_MONEY_RESTAURANT);
 			gotoxy(112, 7);

@@ -8,6 +8,7 @@ LEVELCHOOSE g_levelchoose[MAX_LEVEL];
 static int g_index;
 
 static bool isPush;
+static bool isClear;
 
 static int levelchoosebutton;
 static int buttonpushSound;
@@ -16,6 +17,7 @@ void InitLevelChoose(void)
 {
 	g_index = 0;
 	isPush = false;
+	isClear = true;
 	levelchoosebutton = opensound((char*)"sound\\button02.mp3");
 	buttonpushSound = opensound((char*)"sound\\buttonpush.mp3");
 	for (int i = 0; i < MAX_LEVEL; i++)
@@ -47,18 +49,33 @@ void InitLevelChoose(void)
 	
 	textattr(0x0F);
 	gotoxy(68, 5);
-	if (g_levelchoose[8].star == 3)
+	for (int i = 0; i < MAX_LEVEL; i++) {
+		if (g_levelchoose[i].star != 3)
+		{
+			isClear = false;
+		}
+	}
+	if (isClear)
 	{
-		printf("不愧是你");
+		textattr(0x0A);
+		printf("不");
+		textattr(0x0B);
+		printf("愧");
+		textattr(0x0C);
+		printf("是");
+		textattr(0x0D);
+		printf("你");
 	}
 	else
 	{
+		textattr(0x0F);
 		printf("关卡选择");
 	}
 	
 	
 	for (int i = 0; i < MAX_LEVEL; i++)
 	{
+		textattr(0x0F);
 		gotoxy(g_levelchoose[i].x, g_levelchoose[i].y);
 		printf("%d", g_levelchoose[i].index);
 
