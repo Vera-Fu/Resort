@@ -86,7 +86,7 @@ void DrawRoad(void)
 }
 
 
-//从上一条道路的结尾开始延伸其他的道路
+//先の道の最後から、次の道を描く
 void SetRoad(int end,  int way)
 {
 	int g_startRoadX = GetHotel().pos.x;

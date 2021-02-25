@@ -95,7 +95,7 @@ void UpdateCustomer(void)
 		}
 	}
 	
-	//判断顾客是否已经走到尽头
+	//カスタマーは道の最後まで到着するかの判定
 	if (g_customer.pos.x >= 80) {
 		g_customer.isEnd = true;
 	}
@@ -103,19 +103,19 @@ void UpdateCustomer(void)
 	textattr(0x0F);
 	for (int i = 0; i < MAX_BUILDING; i++)
 	{
-		//用于碰撞检测
+		//当たり判定
 		if ((int)g_customer.pos.x == (GetBuilding() + i)->pos.x + 3 && (int)g_customer.pos.y == (GetBuilding() + i)->pos.y + 3) {
 			g_customer.speed = 0;
 			for (int j = 0; j < MAX_STATUS; j++)
 			{
-				//用于判断该建筑是否会给顾客继续追加身上已有的状态，如果会，则不进入
+				//この建築はカスタマーにデバフを追加するかの判定
 				if (g_customer.status[j] == (GetBuilding() + i)->debuff && g_customer.status[j] != NOTHING)
 				{
 					switch ((GetBuilding() + i)->debuff)
 					{
 					case HUNGRY:
 						gotoxy(logx, logy);
-						printf("肚子好饿.");
+						printf("おなか減った.");
 						msleep(750);
 						printf(".");
 						msleep(750);
@@ -125,7 +125,7 @@ void UpdateCustomer(void)
 						break;
 					case BORING:
 						gotoxy(logx, logy);
-						printf("好无聊.");
+						printf("詰まらない.");
 						msleep(750);
 						printf(".");
 						msleep(750);
@@ -135,7 +135,7 @@ void UpdateCustomer(void)
 						break;
 					case TIRED:
 						gotoxy(logx, logy);
-						printf("好累.");
+						printf("疲れた.");
 						msleep(750);
 						printf(".");
 						msleep(750);
@@ -145,7 +145,7 @@ void UpdateCustomer(void)
 						break;
 					case THIRST:
 						gotoxy(logx, logy);
-						printf("口好渴.");
+						printf("喉が渇く.");
 						msleep(750);
 						printf(".");
 						msleep(750);
@@ -166,10 +166,6 @@ void UpdateCustomer(void)
 					g_customer.speed = SPEED;
 					break;
 				}
-				////用于判断该建筑是否会给消除顾客身上已有的状态，如果不会，则不进入
-				//else if (g_customer.status[i] != (GetBuilding() + i)->buff) {
-				//	g_customer.isGoInto = false;
-				//}
 				else {
 					g_customer.isGoInto = true;
 				}	
@@ -183,7 +179,7 @@ void UpdateCustomer(void)
 					g_customer.speed = SPEED;
 				}
 			}
-			//判断是否进入该建筑
+			//この建築に入るかの判定
 			if (g_customer.isGoInto && (GetBuilding() + i)->type != BUILDING_TYPE_NULL) {
 				g_customer.speed = 0;
 				for (int j = 0; j < MAX_STATUS; j++)
@@ -206,7 +202,7 @@ void UpdateCustomer(void)
 						}
 						break;
 					}
-					//状态和金钱处理
+					//ステータスとお金の処理
 					if (g_customer.status[j] == (GetBuilding() + i)->buff && g_customer.money >= (GetBuilding() + i)->money) {
 						msleep(500);
 						if ((GetRoad() + index)->way == MOVERIGHT) {
@@ -253,60 +249,34 @@ void DrawCustomer(void)
 	printf("▼");
 	textattr(0x0F);
 
-	//顾客状态的显示
+	//カスタマーのステータス
 	gotoxy(108, 33);
-	printf("顾客");
+	printf("カスタマー");
 	gotoxy(108, 35);
-	printf("顾客所持有的金钱: ￥%d", g_customer.money);
+	printf("持っているお金: ￥%d", g_customer.money);
 	gotoxy(108, 37);
-	printf("顾客状态: ");
+	printf("ステータス: ");
 	for (int i = 0; i < MAX_STATUS; i++)
 	{
 		switch (g_customer.status[i])
 		{
 		case HUNGRY:
-			printf("饥饿 ");
+			printf("お腹すく ");
 			break;
 		case BORING:
-			printf("无聊 ");
+			printf("詰まらない ");
 			break;
 		case TIRED:
-			printf("疲劳 ");
+			printf("疲労 ");
 			break;
 		case THIRST:
-			printf("口渴 ");
+			printf("喉が渇く ");
 			break;
 		default:
 			break;
 		}
 	}
 
-	//结算界面绘制
-	/*if (g_customer.isEnd)
-	{	
-		
-	}
-	gotoxy(64, 17);
-	printf("┏");
-	for (int i = 0; i < 16; i++)
-	{
-		printf("━");
-	}
-	printf("┓");
-	for (int i = 1; i < 6; i++) {
-		gotoxy(64, 18 + i);
-		printf("┃");
-	}
-	for (int i = 1; i < 8; i++) {
-		gotoxy(80, 18 + i);
-		printf("┃");
-	}
-	gotoxy(64, 23);
-	printf("┗");
-	for (int i = 0; i < 16; i++) {
-		printf("━");
-	}
-	printf("┛");*/
 }
 
 void SetCustomer(int money, int status0, int status1, int status2, int status3)
@@ -341,7 +311,7 @@ void GoInto(void)
 	msleep(1500);
 	playsound(money, 0);
 	gotoxy(108, 35);
-	printf("顾客所持有的金钱: ￥         ");
+	printf("持っているお金:            ");
 	gotoxy(108, 37);
-	printf("顾客状态:                    ");
+	printf("ステータス:                ");
 }

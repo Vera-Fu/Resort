@@ -33,12 +33,12 @@ int GetMaxIndex(void);
 typedef struct {
 	INT2 pos;
 
-	int type;		//建筑物的类型
-	int index;		//建筑物的索引
+	int type;		//建築のタイプ
+	int index;		//建築のインデックス
 
-	int buff;		//可以消去的玩家状态
-	int debuff;		//玩家进入后出来的状态
-	int money;		//需要的金钱
+	int buff;		
+	int debuff;		
+	int money;		
 
 	bool isRemoveable;
 }BUILDING;
@@ -47,7 +47,7 @@ BUILDING* GetBuilding(void);
 
 enum Building
 {
-	BUILDING_TYPE_NONE,		//没有此建筑位
+	BUILDING_TYPE_NONE,		//建築できない
 	BUILDING_TYPE_NULL,		//空地
 	BUILDING_TYPE_SPA,
 	BUILDING_TYPE_CONVENIENCE,

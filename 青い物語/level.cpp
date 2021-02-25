@@ -10,9 +10,9 @@
 void InitLevel(void)
 {
 	//=================================================
-	// 关卡绘制顺序
+	// レベル描く手順
 	// SetHotel() 
-	// SetRoad();	开头必定是moveright，moveright或moveleft以后必接一个moveup或movedown
+	// SetRoad();	moverightスタート，moverightまたはmoveleft後は必ずmoveupまたはmovedown
 	// SetBuilding();
 	// SetCustomer();
 	//=================================================

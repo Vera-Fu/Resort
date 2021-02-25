@@ -57,7 +57,7 @@ static unsigned char g_sandmap_data[] = {
 
 void InitMap(void)
 {
-	//游戏界面
+	//ゲームの範囲
 	textattr(0xFF);	
 	for (int i = 1; i < MAPWIDTH_MAX; i++){
 		gotoxy(i, MAPHEIGHT_MAX);
@@ -75,7 +75,7 @@ void InitMap(void)
 	}
 	
 
-	//旅馆主体
+	//旅館の主体
 	textattr(0x44);
 	for (int i = g_hotel.pos.y; i < g_hotel.pos.y + 6; i++){
 		gotoxy(g_hotel.pos.x, i);
@@ -83,7 +83,7 @@ void InitMap(void)
 			printf(" ");
 		}
 	}
-	//旅馆窗户
+	//旅馆の窓
 	textattr(0x33);
 	gotoxy(g_hotel.pos.x + 1, g_hotel.pos.y + 1);
 	printf("  ");
@@ -94,12 +94,12 @@ void InitMap(void)
 	gotoxy(g_hotel.pos.x + 4, g_hotel.pos.y + 3);
 	printf("  ");
 
-	//旅馆大门
+	//旅馆のゲート
 	textattr(0xFF);
 	gotoxy(g_hotel.pos.x + 2, g_hotel.pos.y + 5);
 	printf("   ");
 	
-	//沙滩	
+	//砂浜	
 	for (int i = 80; i < 90; i++) {
 		for (int j = 1; j < MAPHEIGHT_MAX; j++) {
 			gotoxy(i, j);

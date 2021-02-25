@@ -76,11 +76,11 @@ void InitTitle(void)
 	gotoxy(90, 33);
 	printf("┛");
 
-	//开始游戏与结束游戏
-	gotoxy(69, 27);
-	printf("开始游戏");
-	gotoxy(69, 31);
-	printf("结束游戏");
+	//ゲームスタートとゲーム終了
+	gotoxy(68, 27);
+	printf("ゲーム開始");
+	gotoxy(68, 31);
+	printf("ゲーム終了");
 
 	gotoxy(15, 21);
 	textattr(0x08);
@@ -227,25 +227,25 @@ void DrawTitle(void)
 	switch (g_index)
 	{
 	case STARTGAME:
-		gotoxy(67, 31);
-		printf("  ");
-		gotoxy(77, 31);
-		printf("  ");
-		gotoxy(67, 27);
+		gotoxy(66, 27);
 		printf("◆");
-		gotoxy(77, 27);
+		gotoxy(78, 27);
 		printf("◆");
-
+		gotoxy(66, 31);
+		printf("  ");
+		gotoxy(78, 31);
+		printf("  ");	
 		break;
 	case ENDGAME:
-		gotoxy(67, 27);
-		printf("  ");
-		gotoxy(77, 27);
-		printf("  ");
-		gotoxy(67, 31);
+		gotoxy(66, 31);
 		printf("◆");
-		gotoxy(77, 31);
+		gotoxy(78, 31);
 		printf("◆");
+		gotoxy(66, 27);
+		printf("  ");
+		gotoxy(78, 27);
+		printf("  ");
+		
 		break;
 	default:
 		break;
