@@ -84,7 +84,7 @@ void InitTitle(void)
 
 	gotoxy(15, 21);
 	textattr(0x08);
-	printf("◢■◣");
+	printf("■■■");
 	gotoxy(15, 22);
 	textattr(0x88);
 	printf("      ");
@@ -96,7 +96,7 @@ void InitTitle(void)
 
 	gotoxy(30, 35);
 	textattr(0x0C);
-	printf("◢■◣");
+	printf("■■■");
 	gotoxy(30, 36);
 	textattr(0x44);
 	printf("      ");
@@ -108,7 +108,7 @@ void InitTitle(void)
 
 	gotoxy(45, 21);
 	textattr(0x0F);
-	printf("◢■◣");
+	printf("■■■");
 	gotoxy(45, 22);
 	textattr(0xEE);
 	printf("      ");
@@ -120,7 +120,7 @@ void InitTitle(void)
 
 	gotoxy(60, 35);
 	textattr(0x0C);
-	printf("◢■◣");
+	printf("■■■");
 	gotoxy(60, 36);
 	textattr(0xDD);
 	printf("      ");
@@ -132,7 +132,7 @@ void InitTitle(void)
 
 	gotoxy(75, 21);
 	textattr(0x04);
-	printf("◢■◣");
+	printf("■■■");
 	gotoxy(75, 22);
 	textattr(0x55);
 	printf("      ");
@@ -144,7 +144,7 @@ void InitTitle(void)
 
 	gotoxy(90, 35);
 	textattr(0x07);
-	printf("◢■◣");
+	printf("■■■");
 	gotoxy(90, 36);
 	textattr(0x23);
 	printf("      ");
@@ -156,7 +156,7 @@ void InitTitle(void)
 
 	gotoxy(105, 21);
 	textattr(0x0C);
-	printf("◢■◣");
+	printf("■■■");
 	gotoxy(105, 22);
 	textattr(0x66);
 	printf("      ");
@@ -168,7 +168,7 @@ void InitTitle(void)
 
 	gotoxy(121, 35);
 	textattr(0x0F);
-	printf("◢■◣");
+	printf("■■■");
 	gotoxy(121, 36);
 	textattr(0x77);
 	printf("      ");
@@ -250,8 +250,6 @@ void DrawTitle(void)
 	default:
 		break;
 	}
-	
-
 	
 
 }

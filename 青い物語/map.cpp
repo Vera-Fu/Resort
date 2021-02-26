@@ -116,16 +116,7 @@ void InitMap(void)
 			}
 		}
 	}
-		//データ範囲外だったら空白を表示する
 
-		
-	/*for (int i = 80; i < 90; i++){
-		for (int j = 5; j < 25; j++) {
-
-			gotoxy(i, j);
-			printf(" ");
-		}
-	}*/
 	//海
 	textattr(0xBB);
 	for (int i = 90; i < MAPWIDTH_MAX; i++) {

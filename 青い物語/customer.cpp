@@ -187,7 +187,7 @@ void UpdateCustomer(void)
 					if ((GetBuilding() + i)->type == BUILDING_TYPE_STORE && g_customer.isBuy == true)
 					{
 						gotoxy(logx, logy);
-						printf("已经买过了.");
+						printf("もう買った.");
 						msleep(750);
 						printf(".");
 						msleep(750);
@@ -250,30 +250,33 @@ void DrawCustomer(void)
 	textattr(0x0F);
 
 	//カスタマーのステータス
-	gotoxy(108, 33);
-	printf("カスタマー");
-	gotoxy(108, 35);
+	gotoxy(113, 33);
+	printf("カスタマーのステータス");
+	gotoxy(107, 35);
 	printf("持っているお金: ￥%d", g_customer.money);
-	gotoxy(108, 37);
-	printf("ステータス: ");
+	gotoxy(107, 37);
+	/*printf("ステータス: ");*/
 	for (int i = 0; i < MAX_STATUS; i++)
 	{
 		switch (g_customer.status[i])
 		{
 		case HUNGRY:
-			printf("お腹すく ");
+			printf("お腹すく");
 			break;
 		case BORING:
-			printf("詰まらない ");
+			printf("詰まらない");
 			break;
 		case TIRED:
-			printf("疲労 ");
+			printf("疲労");
 			break;
 		case THIRST:
-			printf("喉が渇く ");
+			printf("喉が渇く");
 			break;
 		default:
 			break;
+		}
+		if (i != MAX_STATUS - 1) {
+			printf(" ");
 		}
 	}
 
@@ -310,8 +313,8 @@ void GoInto(void)
 
 	msleep(1500);
 	playsound(money, 0);
-	gotoxy(108, 35);
+	gotoxy(107, 35);
 	printf("持っているお金:            ");
-	gotoxy(108, 37);
-	printf("ステータス:                ");
+	gotoxy(107, 37);
+	printf("                                ");
 }

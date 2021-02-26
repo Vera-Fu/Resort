@@ -159,7 +159,6 @@ void main(void)
 
 void Init(void)
 {
-	//InitTitle();
 	InitMap();
 	InitBuilding();
 	InitMenu();

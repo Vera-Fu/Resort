@@ -430,8 +430,8 @@ void DrawMenu(void)
 		printf("マッサージ");
 		gotoxy(119, 11);
 		printf("カラオケ");
-		gotoxy(117, 13);
-		printf("ゲームルーム");
+		gotoxy(118, 13);
+		printf("アーケード");
 		gotoxy(119, 15);
 		printf("土産物屋");
 		gotoxy(121, 19);
@@ -474,11 +474,11 @@ void DrawMenu(void)
 				printf("効用: 喉が渇く↓");
 				break;
 			case BUILDING_TYPE_RESTAURANT:
-				printf("建築名前: 餐馆");
+				printf("建築名前: レストラン");
 				gotoxy(108, 26);
 				printf("料金: ￥%d", BUILDING_MONEY_RESTAURANT);
 				gotoxy(108, 28);
-				printf("効用: お腹すく↓詰まらない↑");
+				printf("効用: お腹すく↓ 詰まらない↑");
 				break;
 			case BUILDING_TYPE_MASSAGE:
 				printf("建築名前: マッサージ");
@@ -495,7 +495,7 @@ void DrawMenu(void)
 				printf("効用: 詰まらない↓ 喉が渇く↑");
 				break;
 			case BUILDING_TYPE_POKER:
-				printf("建築名前: ゲームルーム");
+				printf("建築名前: アーケード");
 				gotoxy(108, 26);
 				printf("料金: ￥%d", BUILDING_MONEY_POKER);
 				gotoxy(108, 28);

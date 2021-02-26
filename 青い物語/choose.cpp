@@ -101,10 +101,10 @@ void DrawChoose(void)
 	for (int i = 0; i < MAX_BUILDING; i++) {
 		
 		switch ((g_buliding + i)->type)
-		{
-		gotoxy((g_buliding + i)->pos.x - 3, (g_buliding + i)->pos.y - 1);
+		{	
 		case BUILDING_TYPE_NULL:
-			printf("            ");
+			gotoxy((g_buliding + i)->pos.x - 2, (g_buliding + i)->pos.y - 1);
+			printf("          ");
 			break;
 		case BUILDING_TYPE_SPA:
 			gotoxy((g_buliding + i)->pos.x + 1, (g_buliding + i)->pos.y - 1);
@@ -127,8 +127,8 @@ void DrawChoose(void)
 			printf("カラオケ");
 			break;
 		case BUILDING_TYPE_POKER:
-			gotoxy((g_buliding + i)->pos.x - 3, (g_buliding + i)->pos.y - 1);
-			printf("ゲームルーム");
+			gotoxy((g_buliding + i)->pos.x - 2, (g_buliding + i)->pos.y - 1);
+			printf("アーケード");
 			break;
 		case BUILDING_TYPE_STORE:
 			gotoxy((g_buliding + i)->pos.x - 1, (g_buliding + i)->pos.y - 1);
@@ -136,9 +136,8 @@ void DrawChoose(void)
 			break;
 		default:
 			break;
-	}
+		}
 
-	
 	}
 
 	//レベルスタートの時、建築のステータスを表示する
@@ -189,7 +188,7 @@ void DrawChoose(void)
 			printf("喉が渇く↑");
 			break;
 		case BUILDING_TYPE_POKER:
-			printf("建築名前: ゲームルーム");
+			printf("建築名前: アーケード");
 			gotoxy(112, 5);
 			printf("料金: ￥%d", BUILDING_MONEY_POKER);
 			gotoxy(112, 7);

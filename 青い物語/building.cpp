@@ -96,7 +96,7 @@ void DrawBuilding(void)
 			{
 			case BUILDING_TYPE_NULL:
 				textattr(0x08);
-				printf("¨¡ö¨");
+				printf("¡ö¡ö¡ö");
 				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 1);
 				textattr(0x88);
 				printf("      ");
@@ -108,7 +108,7 @@ void DrawBuilding(void)
 				break;
 			case BUILDING_TYPE_SPA:
 				textattr(0x0C);
-				printf("¨¡ö¨");
+				printf("¡ö¡ö¡ö");
 				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 1);
 				textattr(0x44);
 				printf("      ");
@@ -120,7 +120,7 @@ void DrawBuilding(void)
 				break;
 			case BUILDING_TYPE_CONVENIENCE:
 				textattr(0x0F);
-				printf("¨¡ö¨");
+				printf("¡ö¡ö¡ö");
 				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 1);
 				textattr(0x77);
 				printf("      ");
@@ -132,7 +132,7 @@ void DrawBuilding(void)
 				break;
 			case BUILDING_TYPE_RESTAURANT:
 				textattr(0x0F);
-				printf("¨¡ö¨");
+				printf("¡ö¡ö¡ö");
 				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 1);
 				textattr(0xEE);
 				printf("      ");
@@ -144,7 +144,7 @@ void DrawBuilding(void)
 				break;
 			case BUILDING_TYPE_MASSAGE:
 				textattr(0x0C);
-				printf("¨¡ö¨");
+				printf("¡ö¡ö¡ö");
 				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 1);
 				textattr(0x66);
 				printf("      ");
@@ -156,7 +156,7 @@ void DrawBuilding(void)
 				break;
 			case BUILDING_TYPE_SING:
 				textattr(0x0C);
-				printf("¨¡ö¨");
+				printf("¡ö¡ö¡ö");
 				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 1);
 				textattr(0xDD);
 				printf("      ");
@@ -168,7 +168,7 @@ void DrawBuilding(void)
 				break;
 			case BUILDING_TYPE_POKER:
 				textattr(0x04);
-				printf("¨¡ö¨");
+				printf("¡ö¡ö¡ö");
 				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 1);
 				textattr(0x55);
 				printf("      ");
@@ -180,7 +180,7 @@ void DrawBuilding(void)
 				break;
 			case BUILDING_TYPE_STORE:
 				textattr(0x07);
-				printf("¨¡ö¨");
+				printf("¡ö¡ö¡ö");
 				gotoxy(g_building[i].pos.x, g_building[i].pos.y + 1);
 				textattr(0x22);
 				printf("      ");

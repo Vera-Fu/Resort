@@ -48,7 +48,7 @@ void InitLevelChoose(void)
 	}
 	
 	textattr(0x0F);
-	gotoxy(68, 5);
+	gotoxy(67, 5);
 	for (int i = 0; i < MAX_LEVEL; i++) {
 		if (g_levelchoose[i].star != 3)
 		{
@@ -58,18 +58,20 @@ void InitLevelChoose(void)
 	if (isClear)
 	{
 		textattr(0x0A);
-		printf("不");
+		printf("さ");
 		textattr(0x0B);
-		printf("愧");
+		printf("す");
 		textattr(0x0C);
-		printf("是");
+		printf("が");
 		textattr(0x0D);
-		printf("你");
+		printf("だ");
+		textattr(0x0E);
+		printf("ね");
 	}
 	else
 	{
 		textattr(0x0F);
-		printf("关卡选择");
+		printf("レベル選択");
 	}
 	
 	
@@ -165,8 +167,8 @@ void UpdateLevelChoose(void)
 				if (g_levelchoose[g_index - 1].star == 0) {
 					playsound(buttonpushSound, 0);
 					textattr(0x0E);
-					gotoxy(62, 35);
-					printf("请先完成之前的关卡！");
+					gotoxy(55, 35);
+					printf("この前のレベルを完成してください！");
 				}
 				else {
 					playsound(buttonpushSound, 0);
