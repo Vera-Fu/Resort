@@ -175,7 +175,7 @@ void DrawChoose(void)
 			printf("建築名前: マッサージ");
 			gotoxy(112, 5);
 			printf("料金: ￥%d", BUILDING_MONEY_MASSAGE);
-			gotoxy(11, 7);
+			gotoxy(112, 7);
 			printf("効用: 疲労↓");
 			break;
 		case BUILDING_TYPE_SING:
